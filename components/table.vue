@@ -41,7 +41,10 @@ const people = [{
 <template>
   <div class="p-5">
     <h1>Members List</h1>
-    <UTable :rows="people" />
+    <UCard>
+      <UTable :rows="people" />
+    </UCard>
+ 
   </div>
 
 </template>

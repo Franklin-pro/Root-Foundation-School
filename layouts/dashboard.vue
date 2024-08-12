@@ -35,12 +35,12 @@
             </span>
           </div>
           <ul v-if="dropdownOpenx" class="flex flex-col text-gray-300">
-            <NuxtLink to="/Dashboard/students/babe-class" class="py-1 px-4 hover:bg-gray-800">Babe Class</NuxtLink>
-            <NuxtLink to="/Dashboard/students/middle-class" class="py-1 px-4 hover:bg-gray-800">Middle Class</NuxtLink>
-            <NuxtLink to="/Dashboard/students/top-class" class="py-1 px-4 hover:bg-gray-800">Top Class</NuxtLink>
+            <NuxtLink to="/Dashboard/Students/babe-class" class="py-1 px-4 hover:bg-gray-800">Babe Class</NuxtLink>
+            <NuxtLink to="/Dashboard/Students/middle-class" class="py-1 px-4 hover:bg-gray-800">Middle Class</NuxtLink>
+            <NuxtLink to="/Dashboard/Students/top-class" class="py-1 px-4 hover:bg-gray-800">Top Class</NuxtLink>
           </ul>
         </div>
-        <NuxtLink to="/Dashboard/admin" class="font-semibold text-white flex p-2 items-center gap-4 hover:bg-gray-800"> <UIcon name="i-ic-round-person-2"/>Profile</NuxtLink>
+        <NuxtLink to="/Dashboard/Profile" class="font-semibold text-white flex p-2 items-center gap-4 hover:bg-gray-800"> <UIcon name="i-ic-round-person-2"/>Profile</NuxtLink>
       </div>
 
       <!-- Logout Button -->

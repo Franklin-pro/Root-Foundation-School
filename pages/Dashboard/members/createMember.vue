@@ -31,10 +31,14 @@ const country = ref(countries[0])
 
 <template>
   <div class="py-4">
-    <h1>CREATING NEW USER</h1>
+    <h1 class="font-bold text-2xl text-primary">CREATING NEW USER</h1>
   </div>
   
   <UCard>
+    <div class="flex justify-center items-center">
+      <img src="/assets/iconx.png" alt="" class="w-[100px] rounded-full">
+      <UIcon name="heroicons-camera" class="absolute cursor-pointer text-3xl text-black font-bold"/>
+    </div>
     <UForm :validate="validate" :state="state" class="space-y-4" @submit="onSubmit">
     <UFormGroup label="Email" name="email">
       <UInput v-model="state.email" />

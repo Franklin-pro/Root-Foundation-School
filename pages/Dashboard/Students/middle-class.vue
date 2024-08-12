@@ -3,13 +3,12 @@
 <template>
   <div class="p-5">
     <div class="flex items-center justify-between py-5">
-      <h1 class="font-bold text-2xl text-primary">Top Class List</h1>
-      <UButton>Create New</UButton>
+      <h1 class="font-bold text-2xl text-primary">Middle Class List</h1>
+      <UButton>Add New</UButton>
     </div>
     <UCard>
-      <UTable :rows="people" />
+    <UTable :rows="people" />
     </UCard>
-   
   </div>
 
 </template>
