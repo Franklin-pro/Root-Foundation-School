@@ -1,17 +1,23 @@
 <script setup lang="ts">
 import type { FormError, FormSubmitEvent } from '#ui/types'
+import { ref, reactive } from 'vue'
+import { useRouter } from 'vue-router'
+
 definePageMeta({
   layout:'dashboard'
 })
+
 const state = reactive({
-  email: undefined,
-  username:undefined,
-  course:undefined,
-  password: undefined
+  email: '',
+  username: '',
+  course: '',
+  password: '',
+  role: 'Admin',
+  image: null as File | null,
 })
 
 const validate = (state: any): FormError[] => {
-  const errors = []
+  const errors: FormError[] = []
   if (!state.email) errors.push({ path: 'email', message: 'Required' })
   if (!state.username) errors.push({ path: 'username', message: 'Required' })
   if (!state.course) errors.push({ path: 'course', message: 'Required' })
@@ -19,14 +25,54 @@ const validate = (state: any): FormError[] => {
   return errors
 }
 
-async function onSubmit (event: FormSubmitEvent<any>) {
-  // Do something with data
-  console.log(event.data)
+const onFileChange = (event: Event) => {
+  const target = event.target as HTMLInputElement
+  if (target.files && target.files[0]) {
+    state.image = target.files[0]
+  }
 }
 
-const countries = ['Admin', 'Member']
+const router = useRouter()
 
-const country = ref(countries[0])
+async function onSubmit (event: FormSubmitEvent<any>) {
+  event.preventDefault()
+
+  const errors = validate(state)
+  if (errors.length) {
+    // Handle validation errors
+    console.error(errors)
+    return
+  }
+
+  const formData = new FormData()
+  formData.append('email', state.email)
+  formData.append('username', state.username)
+  formData.append('course', state.course)
+  formData.append('password', state.password)
+  formData.append('role', state.role)
+  if (state.image) {
+    formData.append('image', state.image)
+  }
+
+  try {
+    const response = await fetch('/api/users', {
+      method: 'POST',
+      body: formData
+    })
+    
+    if (!response.ok) {
+      throw new Error('Failed to create user')
+    }
+
+    const result = await response.json()
+    console.log('User created:', result)
+    router.push('/users')  // Redirect after successful creation
+  } catch (error) {
+    console.error('Error:', error)
+  }
+}
+
+const roles = ['Admin', 'Member']
 </script>
 
 <template>
@@ -35,43 +81,47 @@ const country = ref(countries[0])
   </div>
   
   <UCard>
-    <div class="flex justify-center items-center">
-      <img src="/assets/iconx.png" alt="" class="w-[100px] rounded-full">
-      <UIcon name="heroicons-camera" class="absolute cursor-pointer text-3xl text-black font-bold"/>
+    <div class="relative flex justify-center items-center">
+      <div class="relative">
+        <img :src="state.image ? URL.createObjectURL(state.image) : '/assets/iconx.png'" 
+             alt="User Image" 
+             class="w-20 h-20 rounded-full object-cover bg-gray-200">
+        <label for="image-upload" 
+               class="absolute inset-0 flex justify-center items-center text-3xl text-white bg-black bg-opacity-50 rounded-full cursor-pointer opacity-0 hover:opacity-100 transition-opacity duration-300">
+          <UIcon name="heroicons-camera" />
+        </label>
+      </div>
+      <input id="image-upload" type="file" class="hidden" @change="onFileChange" accept="image/*"/>
     </div>
+
     <UForm :validate="validate" :state="state" class="space-y-4" @submit="onSubmit">
-    <UFormGroup label="Email" name="email">
-      <UInput v-model="state.email" />
-    </UFormGroup>
+      <UFormGroup label="Email" name="email">
+        <UInput v-model="state.email" />
+      </UFormGroup>
 
-    <UFormGroup label="UserName" name="username">
-      <UInput v-model="state.username" />
-    </UFormGroup>
+      <UFormGroup label="Username" name="username">
+        <UInput v-model="state.username" />
+      </UFormGroup>
 
-    <UFormGroup label="Course" name="course">
-      <UInput v-model="state.course" />
-    </UFormGroup>
+      <UFormGroup label="Course" name="course">
+        <UInput v-model="state.course" />
+      </UFormGroup>
 
+      <UFormGroup label="Password" name="password">
+        <UInput v-model="state.password" type="password" />
+      </UFormGroup>
 
-    <UFormGroup label="Password" name="password">
-      <UInput v-model="state.password" type="password" />
-    </UFormGroup>
-    <UFormGroup label="Role">
-      <USelect v-model="country" :options="countries" />
-    </UFormGroup>
-  
-    <UButton type="submit">
-      Submit
-    </UButton>
-  </UForm>
+      <UFormGroup label="Role">
+        <USelect v-model="state.role" :options="roles" />
+      </UFormGroup>
+    
+      <UButton type="submit">
+        Submit
+      </UButton>
+    </UForm>
   </UCard>
- 
 </template>
 
-
-
-
-
 <style>
-
+/* Additional styles if needed */
 </style>
