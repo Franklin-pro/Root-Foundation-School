@@ -40,7 +40,7 @@ const people = [{
 
 <template>
   <div class="p-5">
-    <h1>Members List</h1>
+    <h1 class="font-bold text-primary text-2xl py-2">Members List</h1>
     <UCard>
       <UTable :rows="people" />
     </UCard>

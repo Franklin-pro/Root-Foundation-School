@@ -4,10 +4,18 @@
   <div class="p-5">
     <div class="flex items-center justify-between py-5">
       <h1 class="font-bold text-2xl text-primary">Babe Class List</h1>
+      <UInput
+        icon="i-heroicons-magnifying-glass-20-solid"
+        size="sm"
+        color="white"
+        :trailing="false"
+        placeholder="Search..."
+        v-model="searchQuery"
+      />
       <UButton>Add New</UButton>
     </div>
    <UCard>
-    <UTable :rows="people" />
+    <UTable :rows="filterStudent" />
    </UCard>
  
   </div>
@@ -20,6 +28,12 @@
 definePageMeta({
   layout:'dashboard'
 })
+
+const searchQuery = ref('')
+
+
+
+
 const people = [{
   id: 1,
   username: 'Lindsay Walton',
@@ -57,6 +71,17 @@ const people = [{
   email: 'floyd.miles@example.com',
   role: 'Member'
 }]
+
+const filterStudent = computed (()=>{
+  return people.filter(person =>{
+    return(
+      person.username.toLowerCase().includes(searchQuery.value.toLowerCase())||
+    person.course.toLowerCase().includes(searchQuery.value.toLowerCase())||
+    person.email.toLowerCase().includes(searchQuery.value.toLowerCase())
+    )
+    
+  })
+})
 </script>
 
 <style>

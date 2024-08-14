@@ -4,10 +4,18 @@
   <div class="p-5">
     <div class="flex items-center justify-between py-5">
       <h1 class="font-bold text-2xl text-primary">Top Class List</h1>
+      <UInput
+        icon="i-heroicons-magnifying-glass-20-solid"
+        size="sm"
+        color="white"
+        :trailing="false"
+        placeholder="Search..."
+        v-model="searchQuery"
+      />
       <UButton>Add New</UButton>
     </div>
     <UCard>
-    <UTable :rows="people" />
+    <UTable :rows="filteredPeople" />
     </UCard>
   </div>
 
@@ -16,6 +24,17 @@
 
 
 <script lang="ts" setup>
+
+const searchQuery = ref('')
+
+const filteredPeople = computed(()=>{
+  return people.filter(student =>{
+    return (
+      student.username.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
+      student.role.toLowerCase().includes(searchQuery.value.toLowerCase())
+    )
+  })
+})
 definePageMeta({
   layout:'dashboard'
 })
