@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>table of top class</h1>
+    <MembersTableTopTable/>
   </div>
 </template>
 

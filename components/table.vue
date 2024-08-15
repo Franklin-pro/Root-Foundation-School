@@ -39,7 +39,7 @@ const people = [{
 </script>
 
 <template>
-  <div class="p-5">
+  <div class="py-5">
     <h1 class="font-bold text-primary text-2xl py-2">Members List</h1>
     <UCard>
       <UTable :rows="people" />

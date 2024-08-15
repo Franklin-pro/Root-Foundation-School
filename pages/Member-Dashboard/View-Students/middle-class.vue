@@ -1,10 +1,12 @@
 <template>
   <div>
-    <h1>table of middle class</h1>
+    <MembersTableMiddleClass/>
   </div>
 </template>
 
 <script lang="ts" setup>
+
+
 definePageMeta({
   layout:'member'
 })

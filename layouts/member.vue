@@ -1,10 +1,12 @@
 <template>
   <div class="flex flex-col md:flex-row">
     <!-- Sidebar -->
-    <div class="bg-[#1b1b29] md:w-64 w-full md:min-h-screen shadow-xl flex flex-col justify-between">
+    <div class="bg-[#1b1b29] md:w-64 w-full fixed md:h-screen h-screen shadow-xl flex flex-col justify-between">
       <div>
-        <h1 class="p-4 text-white font-bold text-center md:text-left">HVO International</h1>
-    <NuxtLink to="/Member-Dashboard/member" class="bg-green-400 text-white font-bold flex p-2 items-center gap-4"> <UIcon name="i-ic-baseline-dashboard"/>Dashboard</NuxtLink>
+        <h1 class="p-4 text-white font-bold text-center md:text-center">HVO International</h1>
+        <NuxtLink to="/Member-Dashboard/member" class="bg-green-400 text-white font-bold flex p-2 items-center gap-4"> 
+          <UIcon name="i-ic-baseline-dashboard"/>Dashboard
+        </NuxtLink>
 
         <!-- Members Dropdown -->
         <div>
@@ -41,7 +43,9 @@
             <NuxtLink to="/Member-Dashboard/View-Students/top-class" class="py-1 px-4 hover:text-primary">Top Class</NuxtLink>
           </ul>
         </div>
-        <NuxtLink to="/Dashboard/Profile" class="font-semibold text-white flex p-2 items-center gap-4 hover:bg-gray-800"> <UIcon name="i-ic-round-person-2"/>Profile</NuxtLink>
+        <NuxtLink to="/Dashboard/Profile" class="font-semibold text-white flex p-2 items-center gap-4 hover:bg-gray-800"> 
+          <UIcon name="i-ic-round-person-2"/>Profile
+        </NuxtLink>
       </div>
 
       <!-- Logout Button -->
@@ -52,9 +56,9 @@
       </div>
     </div>
 
-    <div class="w-full bg-gray-100 ">
+    <div class="w-full md:ml-64 relative">
       <!-- Header -->
-      <div class="w-full bg-gray-100 shadow-xl p-4 flex justify-between items-center">
+      <div class="w-full bg-white shadow-md sticky top-0 p-4 z-50 flex justify-between items-center">
         <h1 class="text-center md:text-left font-bold text-green-400 text-2xl">Member-Dashboard</h1>
         <div class="flex items-center space-x-4">
           <img src="/assets/admin.jpg" alt="Profile Image" class="h-10 w-10 rounded-full" />
@@ -62,15 +66,24 @@
         </div>
       </div>
 
-      <div class="pt-4 px-4">
+      <div class="pt-4 mb-6 px-4">
         <slot />
       </div>
+
+      <div class="w-full p-1 fixed bottom-0 mb-0 bg-white text-primary shadow-xl">
+  <h1 class="text-center md:text-center font-semibold text-md">
+   HVO &copy; {{ new Date().getFullYear() }} All rights reserved
+  </h1>
+</div>
+
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue'
+
+
 
 const dropdownOpen = ref(false)
 const dropdownOpenx = ref(false)

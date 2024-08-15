@@ -1,8 +1,9 @@
 <template>
   <div class="w-full">
-  <h1 class="pb-5 text-4xl"> {{ alertmessage }} franklin</h1>
+    <h1 class="pb-5 text-xl"><strong class="text-gray-700">{{ alertmessage }}</strong> Franklin</h1>
   <Card/>
   <Table/>
+  <MemberTable/>
   </div>
 </template>
 
@@ -17,13 +18,13 @@
  const current = date.getHours();
 
  if(current < 12){
-  alertmessage.value = "good Morning"
+  alertmessage.value = "Good Morning"
  }else if(current >=12 && current < 18){
-  alertmessage.value = "good afternoon"
+  alertmessage.value = "Good Afternoon"
 //   const voice = new SpeechSynthesisUtterance('good afternoon')
 //  window.speechSynthesis.speak(voice)
  }else{
-  alertmessage.value = "good evening"
+  alertmessage.value = "Good Evening"
  }
  
 </script>
