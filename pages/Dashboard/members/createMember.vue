@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import type { FormError, FormSubmitEvent } from '#ui/types'
-import { ref, reactive } from 'vue'
+import { reactive, computed } from 'vue'
 import { useRouter } from 'vue-router'
+import icons from '../../../assets/iconx.png'
 
 definePageMeta({
-  layout:'dashboard'
+  layout: 'dashboard'
 })
 
 const state = reactive({
@@ -34,12 +35,12 @@ const onFileChange = (event: Event) => {
 
 const router = useRouter()
 
-async function onSubmit (event: FormSubmitEvent<any>) {
+async function onSubmit(event: FormSubmitEvent<any>) {
   event.preventDefault()
 
   const errors = validate(state)
   if (errors.length) {
-    // Handle validation errors
+
     console.error(errors)
     return
   }
@@ -66,13 +67,17 @@ async function onSubmit (event: FormSubmitEvent<any>) {
 
     const result = await response.json()
     console.log('User created:', result)
-    router.push('/users')  // Redirect after successful creation
+    router.push('/users')
   } catch (error) {
     console.error('Error:', error)
   }
 }
 
 const roles = ['Admin', 'Member']
+
+const imagePreview = computed(() => {
+  return state.image ? URL.createObjectURL(state.image) : icons
+})
 </script>
 
 <template>
@@ -83,7 +88,7 @@ const roles = ['Admin', 'Member']
   <UCard>
     <div class="relative flex justify-center items-center">
       <div class="relative">
-        <img :src="state.image ? URL.createObjectURL(state.image) : '/assets/iconx.png'" 
+        <img :src="imagePreview" 
              alt="User Image" 
              class="w-20 h-20 rounded-full object-cover bg-gray-200">
         <label for="image-upload" 
@@ -111,7 +116,7 @@ const roles = ['Admin', 'Member']
         <UInput v-model="state.password" type="password" />
       </UFormGroup>
 
-      <UFormGroup label="Role">
+      <UFormGroup label="Role" name="role">
         <USelect v-model="state.role" :options="roles" />
       </UFormGroup>
     
@@ -122,6 +127,6 @@ const roles = ['Admin', 'Member']
   </UCard>
 </template>
 
-<style>
+<style scoped>
 /* Additional styles if needed */
 </style>
