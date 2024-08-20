@@ -5,28 +5,28 @@ const people = [{
   LastName: 'Kabagire',
   Sex: 'Female',
   Class: 'Middle-Class',
-  Age: '15-9-2019'
+  DateOfBirth: '15-9-2019'
 }, {
   id: 2,
   FirstName: 'Henry',
   LastName: 'Ishimwe',
   Sex: 'Male',
   Class: 'Top-Class',
-  Age: '15-9-2020'
+  DateOfBirth: '15-9-2020'
 }, {
   id: 3,
   FirstName: 'Cook',
   LastName: 'Tom',
   Sex: 'Male',
   Class: 'Babe-Class',
-  Age: '15-9-2022'
+  DateOfBirth: '15-9-2022'
 }, {
   id: 4,
   FirstName: 'Francise',
   LastName: 'Iradukunda',
   Sex: 'Famale',
   Class: 'Top-Class',
-  Age: '15-9-2019'
+  DateOfBirth: '15-9-2019'
 },
  {
   id: 5,
@@ -34,14 +34,14 @@ const people = [{
   LastName: 'Chriss',
   Sex: 'Male',
   Class: 'Middle-Class',
-  Age: '15-9-2018'
+  DateOfBirth: '15-9-2018'
 }, {
   id: 6,
   FirstName: 'Floyd',
   LastName: 'Miles',
   Sex: 'Female',
   Class: 'Babe-Class',
-  Age: '15-9-2022'
+  DateOfBirth: '15-9-2022'
 }]
 </script>
 

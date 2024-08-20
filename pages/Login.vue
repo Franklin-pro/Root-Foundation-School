@@ -21,7 +21,7 @@ async function onSubmit (event: FormSubmitEvent<any>) {
 
 <template>
   <div class="flex bg-[#FCFEFF] justify-center items-center min-h-screen">
-    <UCard class="w-[400px] h-[250px]">
+    <UCard class="w-[400px] ">
     <UForm :validate="validate" :state="state" class="space-y-4" @submit="onSubmit">
     <UFormGroup label="Email" name="email">
       <UInput v-model="state.email" />
@@ -31,7 +31,7 @@ async function onSubmit (event: FormSubmitEvent<any>) {
       <UInput v-model="state.password" type="password" />
     </UFormGroup>
 
-    <UButton type="submit" to="/Dashboard/admin">
+    <UButton type="submit">
    Login
     </UButton>
   </UForm>

@@ -128,5 +128,5 @@ const imagePreview = computed(() => {
 </template>
 
 <style scoped>
-/* Additional styles if needed */
+
 </style>

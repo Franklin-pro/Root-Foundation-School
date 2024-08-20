@@ -1,34 +1,39 @@
 <script setup lang="ts">
 
 const searchQuery = ref('')
+
 const people = [{
   id: 1,
   FirstName: 'Angel',
   LastName: 'Kabagire',
   Sex: 'Female',
   Class: 'Top-Class',
-  Age: '15-9-2019'
+  Report:'Angel.PDF',
+  DateOfBirth: '15-9-2019'
 }, {
   id: 2,
   FirstName: 'Henry',
   LastName: 'Ishimwe',
   Sex: 'Male',
   Class: 'Top-Class',
-  Age: '15-9-2020'
+  Report:'Henry.PDF',
+  DateOfBirth: '15-9-2020'
 }, {
   id: 3,
   FirstName: 'Cook',
   LastName: 'Tom',
   Sex: 'Male',
   Class: 'Top-Class',
-  Age: '15-9-2022'
+  Report:'Cook.PDF',
+  DateOfBirth: '15-9-2022'
 }, {
   id: 4,
   FirstName: 'Francise',
   LastName: 'Iradukunda',
   Sex: 'Famale',
   Class: 'Top-Class',
-  Age: '15-9-2019'
+  Report:'Francise.PDF',
+  DateOfBirth: '15-9-2019'
 },
  {
   id: 5,
@@ -36,40 +41,38 @@ const people = [{
   LastName: 'Chriss',
   Sex: 'Male',
   Class: 'Top-Class',
-  Age: '15-9-2018'
+  Report:'Leonard.PDF',
+  DateOfBirth: '15-9-2018'
 }, {
   id: 6,
   FirstName: 'Floyd',
   LastName: 'Miles',
   Sex: 'Female',
   Class: 'Top-Class',
-  Age: '15-9-2022'
+  Report:'Floyd.PDF',
+  DateOfBirth: '15-9-2022'
 }];
 
 const filteredStudent = computed(()=>{
-  return people.filter(person =>{
+  return people.filter(student =>{
     return (
-      person.FirstName.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-      person.LastName.toLowerCase().includes(searchQuery.value.toLowerCase())
+      student.FirstName.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
+      student.LastName.toLowerCase().includes(searchQuery.value.toLowerCase())
     )
   })
 })
-
-
-
 </script>
 
 <template>
   <div class="p-5">
-    <div class="flex justify-between items-center">
-      <h1 class="font-bold text-primary text-2xl py-2">Top-Class</h1>
+    <div class="flex justify-between items-center py-5">
       <UInput
     icon="i-heroicons-magnifying-glass-20-solid"
     size="sm"
     color="white"
     :trailing="false"
     v-model="searchQuery"
-    placeholder="Search students..."
+    placeholder="Search..."
   />
       <UButton to="/Member-Dashboard/StudentForm/top-class">ADD NEW</UButton>
     </div>

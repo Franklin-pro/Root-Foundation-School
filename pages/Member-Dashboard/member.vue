@@ -1,6 +1,6 @@
 <template>
   <div class="w-full">
-  <h1 class="pb-5 text-xl"><strong class="text-gray-700">{{ alertmessage }}</strong> Programmer</h1>
+  <h1 class="pb-5 text-xl"><strong class="text-gray-500">{{ alertmessage }}</strong> Programmer</h1>
 <MemberCard/>
   <MemberTable/>
   </div>

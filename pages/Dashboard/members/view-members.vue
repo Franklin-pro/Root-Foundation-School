@@ -1,7 +1,7 @@
 <template>
   <div class="p-5">
     <div class="flex items-center justify-between py-5">
-      <h1 class="font-bold text-2xl text-primary">Top Class List</h1>
+      <h1 class="font-bold text-2xl text-primary">Members List</h1>
       <UInput
         icon="i-heroicons-magnifying-glass-20-solid"
         size="sm"
@@ -10,7 +10,7 @@
         placeholder="Search..."
         v-model="searchQuery"
       />
-      <UButton>Create New</UButton>
+      <UButton to="/Dashboard/members/createMember">Create New</UButton>
     </div>
     <UCard>
       <UTable :rows="filteredPeople" />

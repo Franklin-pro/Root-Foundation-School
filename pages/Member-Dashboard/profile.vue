@@ -28,6 +28,10 @@
             <h1>{{ state.username }}</h1>
           </div>
           <div class="flex gap-4 py-4 justify-between">
+            <strong class="text-xl">Course :</strong>
+            <h1>{{ state.course }}</h1>
+          </div>
+          <div class="flex gap-4 py-4 justify-between">
             <strong class="text-xl">Role :</strong>
             <h1>{{ state.role }}</h1>
           </div>
@@ -56,6 +60,7 @@ definePageMeta({
 const state = reactive({
   email: 'franklinprogrammer@gmail.com',
   username: 'Franklin',
+  course: 'English',
   role: 'Admin',
   image: null as File | null,
 })
@@ -80,6 +85,7 @@ const updateProfile = async () => {
   }
   formData.append('email', state.email)
   formData.append('username', state.username)
+  formData.append('username', state.course)
   formData.append('role', state.role)
   
   try {
@@ -99,6 +105,7 @@ const fetchUserData = async () => {
     const response = await axios.get('/api/get-user-profile')
     state.email = response.data.email
     state.username = response.data.username
+    state.username = response.data.course
     state.role = response.data.role
     // Update profile image if needed
   } catch (error) {
