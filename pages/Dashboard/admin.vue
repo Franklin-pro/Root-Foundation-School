@@ -1,6 +1,6 @@
 <template>
   <div class="w-full">
-    <h1 class="pb-5 text-xl"><strong class="text-gray-700">{{ alertmessage }}</strong> Franklin</h1>
+    <h1 class="pb-5 text-xl"><strong class="text-gray-700">{{ alertmessage }}</strong> {{ items.username }}</h1>
   <Card/>
   <Table/>
   <MemberTable/>
@@ -13,6 +13,17 @@
  })
 
  const alertmessage = ref('')
+
+ const memberStore = useMemberStore()
+const items = ref({ username: '' })
+
+onMounted(async () => {
+  await memberStore.fetchMembers()
+  const member = memberStore.members[0] || {}
+  items.value = {
+    username: member.userName || ''
+  }
+})
 
  const date = new Date()
  const current = date.getHours();

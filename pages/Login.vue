@@ -31,7 +31,7 @@ async function onSubmit (event: FormSubmitEvent<any>) {
       <UInput v-model="state.password" type="password" />
     </UFormGroup>
 
-    <UButton type="submit" to="/Dashboard/admin">
+    <UButton type="submit">
    Login
     </UButton>
   </UForm>

@@ -56,8 +56,8 @@
       <div class="w-full bg-white shadow-md sticky top-0 z-50 p-4 flex justify-between items-center">
         <h1 class="text-center md:text-left font-bold text-green-400 text-2xl">Dashboard</h1>
         <div class="flex items-center space-x-4">
-          <img src="/assets/admin.jpg" alt="Profile Image" class="h-10 w-10 rounded-full" />
-          <span class=" font-semibold text-green-400 hidden md:inline">Franklin Programmer</span>
+          <img :src="items.image.url" alt="Profile Image" class="h-10 w-10 rounded-full" />
+          <span class=" font-semibold text-green-400 hidden md:inline">{{ items.username }}</span>
         </div>
       </div>
 
@@ -78,6 +78,17 @@ import { ref } from 'vue'
 
 const dropdownOpen = ref(false)
 const dropdownOpenx = ref(false)
+const memberStore = useMemberStore()
+const items = ref({ image: '', username: '' })
+
+onMounted(async () => {
+  await memberStore.fetchMembers()
+  const member = memberStore.members[0] || {}
+  items.value = {
+    image: member.memberImage || '',
+    username: member.userName || ''
+  }
+})
 
 const toggleDropdown = () => {
   dropdownOpen.value = !dropdownOpen.value

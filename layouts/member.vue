@@ -11,7 +11,7 @@
         <!-- Members Dropdown -->
         <div>
           <div @click="toggleDropdown" class="cursor-pointer duration-500 py-2">
-            <span class="font-semibold py-1 px-2 flex items-center justify-between w-full  hover:bg-gray-300">
+            <span class="font-semibold py-1 px-2 flex items-center justify-between w-full hover:bg-gray-300">
               <span class="flex items-center gap-4">
                 <UIcon name="heroicons-user-group" /> Create Students
               </span>
@@ -65,11 +65,9 @@
         </NuxtLink>
       </div>
 
-      <!-- Logout Button -->
       <div class="p-4 flex flex-col gap-4">
-
         <button @click="toggleTheme" class="p-2 bg-gray-200 dark:bg-gray-800 rounded">
-           change Theme
+           Change Theme
         </button>
         <button @click="logout" class="w-full bg-red-600 text-white py-2 rounded hover:bg-red-700">
           Logout
@@ -79,11 +77,11 @@
 
     <div class="w-full md:ml-64 relative">
       <!-- Header -->
-      <div class="w-full  shadow-md sticky top-0 p-4 z-50 flex justify-between items-center">
+      <div class="w-full shadow-md bg-white sticky top-0 p-4 z-50 flex justify-between items-center">
         <h1 class="text-center md:text-left font-bold text-green-400 text-2xl">Member-Dashboard</h1>
         <div class="flex items-center space-x-4">
-          <img src="/assets/admin.jpg" alt="Profile Image" class="h-10 w-10 rounded-full" />
-          <span class=" font-semibold text-green-400 hidden md:inline">MemberShip</span>
+          <img :src="items.image.url" alt="Profile Image" class="h-10 w-10 rounded-full" />
+          <span class="font-semibold text-green-400 hidden md:inline">{{ items.username }}</span>
         </div>
       </div>
 
@@ -96,16 +94,28 @@
           HVO &copy; {{ new Date().getFullYear() }} All rights reserved
         </h1>
       </div>
-
     </div>
   </div>
 </template>
 
-<script lang="ts" setup>
-import { ref } from 'vue'
+<script setup>
+import { ref, onMounted } from 'vue'
+import { useMemberStore } from '~/stores/members'
+// import { useColorMode } from '@nuxtjs/color-mode'
 
 const dropdownOpen = ref(false)
 const dropdownOpenx = ref(false)
+const memberStore = useMemberStore()
+const items = ref({ image: '', username: '' })
+
+onMounted(async () => {
+  await memberStore.fetchMembers()
+  const member = memberStore.members[0] || {}
+  items.value = {
+    image: member.memberImage || '',
+    username: member.userName || ''
+  }
+})
 
 const toggleDropdown = () => {
   dropdownOpen.value = !dropdownOpen.value
@@ -116,17 +126,11 @@ const toggleDrop = () => {
 }
 
 const toggleTheme = () => {
-  const currentTheme = useColorMode().value;
-  useColorMode().value = currentTheme === 'light' ? 'dark' : 'light';
+  const currentTheme = useColorMode().value
+  useColorMode().value = currentTheme === 'light' ? 'dark' : 'light'
 }
-
 
 const logout = () => {
   console.log('Logout clicked')
-  // Implement the logout logic here
 }
 </script>
-
-<style scoped>
-/* Optionally add any scoped styles here */
-</style>
