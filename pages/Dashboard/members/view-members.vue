@@ -12,73 +12,111 @@
       />
       <UButton to="/Dashboard/members/createMember">Create New</UButton>
     </div>
+    <div class="flex gap-4" :class="{ 'flex-col': !showForm, 'flex-row': showForm }">
+   <div :class="showForm ? 'w-1/2' : 'w-full'">
     <UCard>
-      <UTable :rows="filteredPeople" />
+      <UTable :columns="columns" :rows="filteredMembers">
+        <template #memberImage-data="{ row }">
+        <img :src="row.memberImage.url" alt="Product Image" class="h-10 w-10 object-cover rounded-full"/>
+      </template>
+
+      <template #actions-data="{ row }">
+              <UDropdown :items="items(row)">
+                <UButton color="gray" variant="ghost" icon="i-heroicons-ellipsis-horizontal-20-solid" />
+              </UDropdown>
+            </template>
+      </UTable>
     </UCard>
+   </div>
+
+    <div v-if="showForm" class="w-1/2 px-4">
+         <UpdateMember :member="selectedMember" v-if="selectedMember" @close="closeCard"/>
+    </div>
+  </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
+import { useMemberStore } from '../../../stores/members'; 
+import type { Member } from '~/type';
 
 definePageMeta({
   layout: 'dashboard'
 });
-
-const searchQuery = ref('');
-
-const people = [
-  {
-    id: 1,
-    username: 'Lindsay Walton',
-    course: 'Front-end Developer',
-    email: 'lindsay.walton@example.com',
-    role: 'Member'
-  },
-  {
-    id: 2,
-    username: 'Courtney Henry',
-    course: 'Designer',
-    email: 'courtney.henry@example.com',
-    role: 'Admin'
-  },
-  {
-    id: 3,
-    username: 'Tom Cook',
-    course: 'Director of Product',
-    email: 'tom.cook@example.com',
-    role: 'Member'
-  },
-  {
-    id: 4,
-    username: 'Whitney Francis',
-    course: 'Copywriter',
-    email: 'whitney.francis@example.com',
-    role: 'Admin'
-  },
-  {
-    id: 5,
-    username: 'Leonard Krasner',
-    course: 'Senior Designer',
-    email: 'leonard.krasner@example.com',
-    role: 'Admin'
-  },
-  {
-    id: 6,
-    username: 'Floyd Miles',
-    course: 'Principal Designer',
-    email: 'floyd.miles@example.com',
-    role: 'Member'
-  }
+const items = (row: any) => [
+  [
+    {
+      label: 'Edit member',
+      icon: 'i-heroicons-pencil-square-20-solid',
+      click: () => {
+        selectedMember.value = row;
+        showForm.value = true;
+      }
+    },
+    {
+      label: 'Delete member',
+      icon: 'i-heroicons-trash',
+      click: async () => {
+        try {
+          const confirmation = confirm('Are you sure you want to delete this member?');
+          if (confirmation) {
+            const voice = new SpeechSynthesisUtterance('member already deleted')
+            window.speechSynthesis.speak(voice)
+            await memberStore.deleteMember(row._id);
+          window.location.reload();
+          }
+        } catch (error) {
+          console.error('Error deleting member:', error);
+          alert('Failed to delete member.');
+        }
+      }
+    },
+    {
+      label: 'View Details',
+      icon: 'i-heroicons-eye-20-solid',
+      click: () => {
+        // router.push(`/Dashboard/members/details/${row._id}`);
+      }
+    }
+  ]
 ];
 
-const filteredPeople = computed(() => {
-  return people.filter(person => {
+const columns = [
+{ key: 'memberImage', label: 'User Image' },
+  { key: 'userName', label: 'User Name' },
+  { key: 'email', label: 'Email Address' },
+  { key: 'course', label: 'Course' },
+  { key: 'role', label: 'Role' },
+  { key: 'actions', label: 'action' }
+];
+
+const searchQuery = ref('');
+const showForm = ref(false);
+const selectedMember = ref<Member | null>(null); // Define selectedMember
+const memberStore = useMemberStore(); 
+
+const selectMember = (member: Member) => {
+  selectedMember.value = member;
+};
+function closeCard() {
+  showForm.value = false; 
+  selectedMember.value = null; 
+}
+
+onMounted(async () => {
+  await memberStore.fetchMembers(); 
+});
+
+
+const filteredMembers = computed(() => {
+  if (!memberStore.members) return [];
+  return memberStore.members.filter(member => {
     return (
-      person.username.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-      person.course.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-      person.email.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-      person.role.toLowerCase().includes(searchQuery.value.toLowerCase())
+      member.userName.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
+      member.course.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
+      member.email.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
+      member.role.toLowerCase().includes(searchQuery.value.toLowerCase())
     );
   });
 });

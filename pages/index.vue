@@ -1,9 +1,8 @@
 <template>
   <div>
-    <div class="p-4">
-      <h1>Hello World</h1>
-
-      <Login/>
+    <div class="">
+      <Home />
+      <Login />
     </div>
   </div>
 </template>
@@ -12,6 +11,4 @@
 
 </script>
 
-<style>
-
-</style>
+<style></style>

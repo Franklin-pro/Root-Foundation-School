@@ -3,7 +3,7 @@
     <!-- Sidebar -->
     <div class="sidebar md:w-64 w-full fixed md:h-screen h-screen shadow-xl flex flex-col justify-between">
       <div>
-        <h1 class="p-4 text-primary font-bold text-center md:text-center">HVO International</h1>
+        <h1 class="p-4 text-primary font-bold text-center md:text-center">Root Foundation</h1>
         <NuxtLink to="/Member-Dashboard/member" class="bg-green-400 font-bold flex p-2 items-center gap-4">
           <UIcon name="i-ic-baseline-dashboard" />Dashboard
         </NuxtLink>
@@ -11,7 +11,7 @@
         <!-- Members Dropdown -->
         <div>
           <div @click="toggleDropdown" class="cursor-pointer duration-500 py-2">
-            <span class="font-semibold py-1 px-2 flex items-center justify-between w-full  hover:bg-gray-800">
+            <span class="font-semibold py-1 px-2 flex items-center justify-between w-full  hover:bg-gray-300">
               <span class="flex items-center gap-4">
                 <UIcon name="heroicons-user-group" /> Create Students
               </span>
@@ -38,7 +38,7 @@
         <!-- Students Dropdown -->
         <div>
           <div @click="toggleDrop" class="cursor-pointer duration-300 py-2">
-            <span class="font-semibold py-1 px-2 flex items-center justify-between w-full hover:bg-gray-800">
+            <span class="font-semibold py-1 px-2 flex items-center justify-between w-full hover:bg-gray-300">
               <span class="flex items-center gap-4">
                 <UIcon name="i-ic-baseline-people-alt" />View Students
               </span>
@@ -60,7 +60,7 @@
           </ul>
         </div>
         <NuxtLink to="/Member-Dashboard/profile"
-          class="font-semibold flex p-2 items-center gap-4 hover:bg-gray-800">
+          class="font-semibold flex p-2 items-center gap-4 hover:bg-gray-300">
           <UIcon name="i-ic-round-person-2" />Profile
         </NuxtLink>
       </div>

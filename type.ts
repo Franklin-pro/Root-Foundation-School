@@ -1,38 +1,50 @@
-export interface Create {
-    fullName:  string;
-    password:string;
+export interface CreateMemberData {
     email: string;
-    phoneNumber:string;
-    houseNumber:string;
-    streetNumber:string;
-    city:string;
-    address:string;
-    
+    username: string;
+    course: string;
+    password: string;
+    role: string;
+    image?: File | null; // Optional field for file upload
+  }
+  
+  export interface CreateMember {
+    data: CreateMemberData;
+  }
+  export interface MemberFormState {
+    email: string;
+    userName: string;
+    course: string;
+    password: string;
+    role: string;
+    memberImage: File | null;
+  }
+ // ~/type.ts
+
+ export interface DropdownItem {
+  label: string;
+  icon: string;
+  click: () => void;
 }
-export interface Login {
-    // message:String;
-    email:  string;
-    password:string;
-   
+export interface UpdateMember {
+  _id: string;
+  userName: string;
+  email: string;
+  course: string;
+  role: string;
+  memberImage?: File | string; // Adjust this based on how the image is handled
 }
 
-export interface User {
-    id:        number;
-    fullName:  string;
-    email:     string;
-    firstName: string;
-    lastName:  string;
-    gender:    string;
-    image:     string;
-    token:     string;
-    role:String;
-    user:any;
-    message:String;
-    data:any,
-    password:string;
-    phoneNumber:string;
-    houseNumber:string;
-    streetNumber:string;
-    city:string;
-    address:string;
+export interface Member extends UpdateMember {
+  id:string;
 }
+
+  export interface Member {
+    _id:string;
+    id: string;
+    email: string;
+    userName: string;
+    course: string;
+    role: string;
+    memberImage?: string; // Assuming image is a URL or similar
+  }
+  
