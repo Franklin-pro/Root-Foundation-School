@@ -1,81 +1,61 @@
-<script setup lang="ts">
-import type { FormError, FormSubmitEvent } from '#ui/types'
-import { reactive, computed } from 'vue'
-import { useRouter } from 'vue-router'
+<script lang="ts" setup>
+import { reactive, computed } from 'vue';
+import { useRouter } from 'vue-router';
+import { useMemberStore } from '~/stores/members';
+import icons from '~/assets/iconx.png';
+import type { FormError, FormSubmitEvent } from '#ui/types';
+import type {  StudentFormState } from '~/type';
+
+const state = reactive<StudentFormState>({
+  firstName: '',
+  lastName: '',
+  age: '',
+  grade: '',
+  sex: '',
+  studentReport: null,
+});
 
 definePageMeta({
-  layout: 'member'
-})
+  layout: 'dashboard',
+});
 
-const state = reactive({
-  firstname: '',
-  lastname: '',
-  dateOfBirth: '',
-  class: 'babe-class',
-  sex: 'Male',
-  attachment: null as File | null,
-})
-
-const validate = (state: any): FormError[] => {
-  const errors: FormError[] = []
-  if (!state.firstname) errors.push({ path: 'firstname', message: 'Required' })
-  if (!state.lastname) errors.push({ path: 'lastname', message: 'Required' })
-  if (!state.dateOfBirth) errors.push({ path: 'dateOfBirth', message: 'Required' })
-  return errors
-}
+const validate = (state: StudentFormState): FormError[] => {
+  const errors: FormError[] = [];
+  if (!state.firstName) errors.push({ path: 'firstName', message: 'Required' });
+  if (!state.lastName) errors.push({ path: 'lastName', message: 'Required' });
+  if (!state.age) errors.push({ path: 'age', message: 'Required' });
+  if (!state.grade) errors.push({ path: 'grade', message: 'Required' });
+  if (!state.sex) errors.push({ path: 'sex', message: 'Required' });
+  return errors;
+};
 
 const onFileChange = (event: Event) => {
-  const target = event.target as HTMLInputElement
+  const target = event.target as HTMLInputElement;
   if (target.files && target.files[0]) {
-    state.attachment = target.files[0]
+    state.studentReport = target.files[0];
   }
-}
+};
 
-const router = useRouter()
+// const router = useRouter();
+const studentStore =useStudentStore();
 
 async function onSubmit(event: FormSubmitEvent<any>) {
-  event.preventDefault()
+  event.preventDefault();
 
-  const errors = validate(state)
+  const errors = validate(state);
   if (errors.length) {
-    console.error(errors)
-    return
+    console.error(errors);
+    return;
   }
 
-  const formData = new FormData()
-  formData.append('firstname', state.firstname)
-  formData.append('lastname', state.lastname)
-  formData.append('dateOfBirth', state.dateOfBirth)
-  formData.append('class', state.class)
-  formData.append('sex', state.sex)
-  if (state.attachment) {
-    formData.append('attachment', state.attachment)
-  }
-
-  try {
-    const response = await fetch('/api/users', {
-      method: 'POST',
-      body: formData
-    })
-    
-    if (!response.ok) {
-      throw new Error('Failed to upload student')
-    }
-
-    const result = await response.json()
-    console.log('User created:', result)
-    router.push('/users')
-  } catch (error) {
-    console.error('Error:', error)
-  }
+  await studentStore.createStudent(state);
 }
 
-const roles = ['babe-class', 'middle-class', 'top-class']
-const sexes = ['Male', 'Female']
+const grade = ['Admin', 'Member'];
 
 const attachmentName = computed(() => {
-  return state.attachment ? state.attachment.name : 'No file selected'
-})
+  return state.studentReport ? URL.createObjectURL(state.studentReport) : icons;
+});
 </script>
 
 <template>
@@ -89,28 +69,28 @@ const attachmentName = computed(() => {
         <span class="text-lg font-medium">Upload Report</span>
         <span class="text-gray-500">{{ attachmentName }}</span>
       </label>
-      <input id="file-upload" type="file" class="hidden" @change="onFileChange" />
+      <input id="file-upload" name="studentReport" type="file" class="hidden" @change="onFileChange" />
     </div>
 
     <UForm :validate="validate" :state="state" class="space-y-4" @submit="onSubmit">
       <UFormGroup label="FirstName" name="firstname">
-        <UInput v-model="state.firstname" placeholder="FirstName" />
+        <UInput v-model="state.firstName" placeholder="FirstName" />
       </UFormGroup>
 
       <UFormGroup label="LastName" name="lastname">
-        <UInput v-model="state.lastname" placeholder="LastName" />
+        <UInput v-model="state.lastName" placeholder="LastName" />
       </UFormGroup>
 
       <UFormGroup label="Date of Birth" name="dateOfBirth">
-        <UInput v-model="state.dateOfBirth" type="date" />
+        <UInput v-model="state.age" type="text" />
       </UFormGroup>
 
       <UFormGroup label="Sex" name="sex">
-        <USelect v-model="state.sex" :options="sexes" />
+        <UInput v-model="state.sex" type="text" />
       </UFormGroup>
 
       <UFormGroup label="Class" name="class">
-        <USelect v-model="state.class" :options="roles" />
+        <UInput v-model="state.grade"/>
       </UFormGroup>
     
       <UButton type="submit">

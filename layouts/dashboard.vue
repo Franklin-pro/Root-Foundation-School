@@ -100,7 +100,6 @@ const toggleDrop = () => {
 
 const logout = () => {
   console.log('Logout clicked')
-  // Implement the logout logic here
 }
 </script>
 

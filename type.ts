@@ -18,6 +18,36 @@ export interface CreateMemberData {
     role: string;
     memberImage: File | null;
   }
+  export interface StudentFormState {
+    firstName: string;
+    lastName: string;
+    age: string;
+    sex: string;
+    grade: string;
+    studentReport: File | null;
+  }
+  export interface createStudent {
+    data: StudentFormState;
+  }
+  export interface Students {
+    _id:string;
+    id: string;
+    firstName: string;
+    lastName: string;
+    age: string;
+    sex: string;
+    grade: string;
+    studentReport?: string; // Assuming image is a URL or similar
+  }
+export interface UpdateStudent{
+  firstName: string;
+  lastName: string;
+  age: string;
+  sex: string;
+  grade: string;
+  StudentReport: File | null;
+}
+
  // ~/type.ts
 
  export interface DropdownItem {
@@ -45,6 +75,7 @@ export interface Member extends UpdateMember {
     userName: string;
     course: string;
     role: string;
+    url:string;
     memberImage?: string; // Assuming image is a URL or similar
   }
   
