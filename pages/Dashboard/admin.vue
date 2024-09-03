@@ -1,45 +1,66 @@
 <template>
   <div class="w-full">
-    <h1 class="pb-5 text-xl"><strong class="text-gray-700">{{ alertmessage }}</strong> {{ items.username }}</h1>
-  <Card/>
-  <Table/>
-  <MemberTable/>
+    <h1 class="pb-5 text-4xl">
+      <strong class="text-gray-600 text-2xl">{{ alertmessage }}</strong> {{ userName }}
+    </h1>
+    <Card />
+    <Table />
+    <MemberTable />
   </div>
 </template>
 
 <script lang="ts" setup>
- definePageMeta({
-  layout:'dashboard'
- })
+import { ref, computed, onMounted } from 'vue'
+import { useMemberStore } from '~/stores/members'
+import defaultImage from '../../assets/icons.png'
 
- const alertmessage = ref('')
 
- const memberStore = useMemberStore()
-const items = ref({ username: '' })
-
-onMounted(async () => {
-  await memberStore.fetchMembers()
-  const member = memberStore.members[0] || {}
-  items.value = {
-    username: member.userName || ''
-  }
+definePageMeta({
+  layout: 'dashboard'
 })
 
- const date = new Date()
- const current = date.getHours();
+const memberStore = useMemberStore()
 
- if(current < 12){
+const alertmessage = ref('')
+
+const isClient = typeof window !== 'undefined'
+
+const userName = computed(() => {
+  if (isClient) {
+    const user = JSON.parse(localStorage.getItem("user") || '{}')
+    return user ? user.userName : ''
+  }
+  return ''
+})
+
+const date = new Date()
+const current = date.getHours()
+
+if (current < 12) {
   alertmessage.value = "Good Morning"
- }else if(current >=12 && current < 18){
+  // Uncomment the following lines if speech synthesis is needed
+  // const voice = new SpeechSynthesisUtterance('Good Morning')
+  // window.speechSynthesis.speak(voice)
+} else if (current >= 12 && current < 18) {
   alertmessage.value = "Good Afternoon"
-//   const voice = new SpeechSynthesisUtterance('good afternoon')
-//  window.speechSynthesis.speak(voice)
- }else{
+  // Uncomment the following lines if speech synthesis is needed
+  // const voice = new SpeechSynthesisUtterance('Good Afternoon ' + userName.value)
+  // window.speechSynthesis.speak(voice)
+} else {
   alertmessage.value = "Good Evening"
- }
- 
+  // Uncomment the following lines if speech synthesis is needed
+  // const voice = new SpeechSynthesisUtterance('Good Evening')
+  // window.speechSynthesis.speak(voice)
+}
+
+// Fetch members when the component is mounted
+onMounted(() => {
+  if (isClient) {
+    memberStore.fetchMembers()
+  }
+})
 </script>
 
-<style>
+<style scoped>
 
 </style>

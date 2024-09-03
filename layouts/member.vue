@@ -1,7 +1,8 @@
 <template>
+ 
   <div class="flex flex-col md:flex-row">
     <!-- Sidebar -->
-    <div class="sidebar md:w-64 w-full fixed md:h-screen h-screen shadow-xl flex flex-col justify-between">
+      <div class="sidebar md:w-64 w-full fixed md:h-screen h-screen shadow-xl flex flex-col justify-between">
       <div>
         <h1 class="p-4 text-primary font-bold text-center md:text-center">Root Foundation</h1>
         <NuxtLink to="/Member-Dashboard/member" class="bg-green-400 font-bold flex p-2 items-center gap-4">
@@ -75,25 +76,29 @@
       </div>
     </div>
 
+
     <div class="w-full md:ml-64 relative">
-      <!-- Header -->
-      <div class="w-full shadow-md bg-white sticky top-0 p-4 z-50 flex justify-between items-center">
+<UCard class="rounded-none">
+  <div class="w-full sticky top-0 z-50 flex justify-between items-center">
         <h1 class="text-center md:text-left font-bold text-green-400 text-2xl">Member-Dashboard</h1>
         <div class="flex items-center space-x-4">
           <img :src="items.image.url" alt="Profile Image" class="h-10 w-10 rounded-full" />
           <span class="font-semibold text-green-400 hidden md:inline">{{ items.username }}</span>
         </div>
       </div>
+</UCard>
+ 
 
       <div class="pt-4 mb-6 px-4">
         <slot />
       </div>
 
-      <div class="w-full p-1 fixed bottom-0 mb-0 bg-white text-primary shadow-xl">
-        <h1 class="text-center md:text-center font-semibold text-md">
-          HVO &copy; {{ new Date().getFullYear() }} All rights reserved
-        </h1>
-      </div>
+      <UCard>
+  <h1 class="text-center md:text-center font-semibold text-md">
+   HVO &copy; {{ new Date().getFullYear() }} All rights reserved
+  </h1>
+
+      </UCard>
     </div>
   </div>
 </template>

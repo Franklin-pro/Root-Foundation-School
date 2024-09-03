@@ -16,7 +16,7 @@ const state = reactive<StudentFormState>({
 });
 
 definePageMeta({
-  layout: 'dashboard',
+  layout: 'member',
 });
 
 const validate = (state: StudentFormState): FormError[] => {
@@ -60,10 +60,10 @@ const attachmentName = computed(() => {
 
 <template>
   <div class="py-4">
-    <h1 class="font-bold text-2xl text-primary">CREATING NEW Student (Babe-Class)</h1>
+    <h1 class="font-light text-2xl text-primary">CREATING NEW Student</h1>
   </div>
-  
-  <UCard>
+  <div class="flex justify-center">
+    <UCard class="w-[50%] ">
     <div class="relative flex flex-col items-center space-y-4">
       <label for="file-upload" class="flex flex-col items-center cursor-pointer">
         <span class="text-lg font-medium">Upload Report</span>
@@ -93,11 +93,13 @@ const attachmentName = computed(() => {
         <UInput v-model="state.grade"/>
       </UFormGroup>
     
-      <UButton type="submit">
+      <UButton type="submit" class="px-8">
         Submit
       </UButton>
     </UForm>
   </UCard>
+  </div>
+
 </template>
 
 <style scoped>

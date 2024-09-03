@@ -67,10 +67,11 @@ const props = defineProps<{ member: Member | null }>();
 const emit = defineEmits<{ (e: 'close'): void }>();
 
 const member = ref<Member>({
-  id: '', // Add this if it's required
+  id: '', 
   _id: '',
   userName: '',
   role: '',
+  url:'',
   course: '',
   email: '',
   memberImage:''

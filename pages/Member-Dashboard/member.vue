@@ -1,8 +1,8 @@
 <template>
   <div class="w-full">
-  <h1 class="pb-5 text-xl"><strong class="text-gray-500">{{ alertmessage }}</strong> {{ items.username }}</h1>
+  <h1 class="pb-5 text-4xl"><strong class="text-gray-300 text-3xl">{{ alertmessage }}</strong> {{ items.username }}</h1>
 <MemberCard/>
-  <MemberTable/>
+<MembersTableBabeClass/>
   </div>
 </template>
 

@@ -4,7 +4,7 @@
       <UCard class="w-full flex flex-col">
         <div class="flex justify-between items-center">
           <div>
-            <h1 class="font-semibold text-xl text-gray-500">{{ item.text }}</h1>
+            <h1 class="font-semibold text-xl">{{ item.text }}</h1>
             <h2 class="font-bold text-2xl">{{ item.number }}</h2>
           </div>
           <div>

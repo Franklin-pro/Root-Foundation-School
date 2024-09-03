@@ -1,14 +1,13 @@
 import { defineStore } from 'pinia';
 import { useRouter } from 'vue-router';
 import axios from 'axios';
-import type { StudentFormState,Students, UpdateStudent } from '~/type';
+import type { StudentFormState, Students, UpdateStudent } from '~/type';
 
 interface ApiResponse<T> {
   message: string;
   data: T;
-  datas:T;
+  datas: T;
 }
-
 
 export const useStudentStore = defineStore('students', () => {
   const members = ref<Students[]>([]);
@@ -16,7 +15,7 @@ export const useStudentStore = defineStore('students', () => {
 
   const fetchStudent = async () => {
     try {
-      const response = await axios.get<ApiResponse<Students[]>>('http://localhost:3030/v1/student/view');
+      const response = await axios.get<ApiResponse<Students[]>>('https://root-foundation.onrender.com/v1/student/view');
       members.value = response.data.datas;
     } catch (error) {
       console.error('Failed to fetch members', error);
@@ -35,7 +34,7 @@ export const useStudentStore = defineStore('students', () => {
       formData.append('sex', data.sex);
       formData.append('grade', data.grade);
 
-      const response = await axios.post<ApiResponse<Students>>('http://localhost:3030/v1/student', formData, {
+      const response = await axios.post<ApiResponse<Students>>('https://root-foundation.onrender.com/v1/student', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -49,28 +48,30 @@ export const useStudentStore = defineStore('students', () => {
     }
   };
   
-  const updateMember = async (id: string, data: UpdateStudent) => {
+  const updateStudent = async (id: string, data: UpdateStudent) => {
     try {
-      const response = await axios.put<ApiResponse<Students>>(`http://localhost:3030/v1/student${id}`, data);
-      const index = members.value.findIndex(member => member.id === id);
+      const response = await axios.put<ApiResponse<Students>>(`https://root-foundation.onrender.com/v1/student/${id}`, data);
+      const index = members.value.findIndex(student => student._id === id);
       if (index !== -1) {
-        members.value[index] = response.data.data;
+        members.value[index] = { ...members.value[index], ...response.data.data };
       }
-      alert(response.data.message);
+      const voice = new SpeechSynthesisUtterance(response.data.message)
+      window.speechSynthesis.speak(voice)
+      window.location.reload();
     } catch (error) {
-      console.error('Failed to update member', error);
+      console.error('Failed to update student', error);
     }
   };
 
-  const deleteMember = async (id: string) => {
+  const deleteStudent = async (id: string) => {
     try {
-      const response = await axios.delete<ApiResponse<null>>(`https://root-foundation.onrender.com/v1/member/${id}`);
-      members.value = members.value.filter(member => member.id !== id);
+      const response = await axios.delete<ApiResponse<null>>(`https://root-foundation.onrender.com/v1/student/${id}`);
+      members.value = members.value.filter(member => member._id !== id);
       alert(response.data.message);
     } catch (error) {
       console.error('Failed to delete member', error);
     }
   };
 
-  return { members, fetchStudent, createStudent, updateMember, deleteMember };
+  return { members, fetchStudent, createStudent, updateStudent, deleteStudent };
 });

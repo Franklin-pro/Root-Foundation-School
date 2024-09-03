@@ -1,38 +1,6 @@
 <template>
-  <div class="p-5">
-    <div class="flex items-center justify-between py-5">
-      <h1 class="font-bold text-2xl text-primary">Members List</h1>
-      <UInput
-        icon="i-heroicons-magnifying-glass-20-solid"
-        size="sm"
-        color="white"
-        :trailing="false"
-        placeholder="Search..."
-        v-model="searchQuery"
-      />
-      <UButton to="/Dashboard/members/createMember">Create New</UButton>
-    </div>
-    <div class="flex gap-4" :class="{ 'flex-col': !showForm, 'flex-row': showForm }">
-   <div :class="showForm ? 'w-1/2' : 'w-full'">
-    <UCard>
-      <UTable :columns="columns" :rows="filteredMembers">
-        <template #memberImage-data="{ row }">
-        <img :src="row.memberImage.url" alt="Product Image" class="h-10 w-10 object-cover rounded-full"/>
-      </template>
-
-      <template #actions-data="{ row }">
-              <UDropdown :items="items(row)">
-                <UButton color="gray" variant="ghost" icon="i-heroicons-ellipsis-horizontal-20-solid" />
-              </UDropdown>
-            </template>
-      </UTable>
-    </UCard>
-   </div>
-
-    <div v-if="showForm" class="w-1/2 px-4">
-         <UpdateMember :member="selectedMember" v-if="selectedMember" @close="closeCard"/>
-    </div>
-  </div>
+  <div>
+<MemberTable/>
   </div>
 </template>
 

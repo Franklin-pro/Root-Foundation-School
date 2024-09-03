@@ -17,99 +17,65 @@
               </div>
               <input id="image-upload" type="file" class="hidden" @change="onFileChange" accept="image/*"/>
             </div>
-            <h1 class="py-2 font-semibold text-primary text-xl">{{ state.username }}</h1>
+            <h1 class="py-2 font-semibold text-primary text-xl">{{ currentMember?.userName }}</h1>
           </div>
           <div class="flex gap-4 py-4 justify-between">
             <strong class="text-xl">Email Address :</strong>
-            <h1>{{ state.email }}</h1>
+            <h1>{{ currentMember?.email }}</h1>
           </div>
           <div class="flex gap-4 py-4 justify-between">
             <strong class="text-xl">UserName :</strong>
-            <h1>{{ state.username }}</h1>
-          </div>
-          <div class="flex gap-4 py-4 justify-between">
-            <strong class="text-xl">Course :</strong>
-            <h1>{{ state.course }}</h1>
+            <h1>{{ currentMember?.userName }}</h1>
           </div>
           <div class="flex gap-4 py-4 justify-between">
             <strong class="text-xl">Role :</strong>
-            <h1>{{ state.role }}</h1>
-          </div>
-
-          <div class="py-4">
-            <UButton @click="showModal = true">Update Profile <UIcon name="i-heroicons-pencil-20-solid"/></UButton>
+            <h1>{{ currentMember?.role }}</h1>
           </div>
         </UCard>
       </div>
     </div>
-
-    <Modal on @onUpdate="fetchUserData"/>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { reactive, computed, ref } from 'vue'
-import axios from 'axios'
-import icons from '../../assets/admin.jpg'
-import Modal from '../../components/Modal.vue'
+import { onMounted, computed, ref } from 'vue';
+import { useMemberStore } from '~/stores/members';
+import icons from '~/assets/admin.jpg';
+import type { Member } from '~/type';
+import { useRoute } from 'vue-router'; 
 
 definePageMeta({
   layout: 'dashboard'
 })
 
-const state = reactive({
-  email: 'franklinprogrammer@gmail.com',
-  username: 'Franklin',
-  course: 'English',
-  role: 'Admin',
-  image: null as File | null,
-})
+const route = useRoute();
+const memberStore = useMemberStore();
+const id = route.params.id as string;
 
-const showModal = ref(false)
+const currentMember = computed(() => memberStore.currentMember); 
+const imagePreview = computed(() => {
+  if (currentMember.value?.memberImage) {
+    if (typeof currentMember.value.memberImage === 'string') {
+      return currentMember.value.memberImage;
+    } else {
+      return URL.createObjectURL(currentMember.value.memberImage);
+    }
+  }
+  return icons;
+});
 
 const onFileChange = (event: Event) => {
-  const target = event.target as HTMLInputElement
+  const target = event.target as HTMLInputElement;
   if (target.files && target.files[0]) {
-    state.image = target.files[0]
-  }
-}
+    const file = target.files[0];
 
-const imagePreview = computed(() => {
-  return state.image ? URL.createObjectURL(state.image) : icons
-})
+    const imageUrl = URL.createObjectURL(file);
+    currentMember.value!.memberImage = imageUrl; 
+   
+  }
+};
 
-const updateProfile = async () => {
-  const formData = new FormData()
-  if (state.image) {
-    formData.append('image', state.image)
-  }
-  formData.append('email', state.email)
-  formData.append('username', state.username)
-  formData.append('username', state.course)
-  formData.append('role', state.role)
-  
-  try {
-    const response = await axios.post('/api/update-profile', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    })
-    console.log('Profile updated successfully:', response.data)
-  } catch (error) {
-    console.error('Error updating profile:', error)
-  }
-}
-
-const fetchUserData = async () => {
-  try {
-    const response = await axios.get('/api/get-user-profile')
-    state.email = response.data.email
-    state.username = response.data.username
-    state.username = response.data.course
-    state.role = response.data.role
-    // Update profile image if needed
-  } catch (error) {
-    console.error('Error fetching user data:', error)
-  }
-}
+onMounted(async () => {
+  await memberStore.fetchMember(id);
+});
 </script>

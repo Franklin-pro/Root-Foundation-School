@@ -18,6 +18,24 @@ export interface CreateMemberData {
     role: string;
     memberImage: File | null;
   }
+  export interface Login {
+    email: string;
+    password: string;
+    userName: string;
+  }
+  export interface UserInfo {
+    email: string;
+    userName: string;
+    role: string;
+    memberImage: string;
+  }
+  
+  export interface User {
+    id: string;
+    email: string;
+    username: string;
+    role: string; // Adjust as per your application's role definition
+  }
   export interface StudentFormState {
     firstName: string;
     lastName: string;
@@ -40,12 +58,14 @@ export interface CreateMemberData {
     studentReport?: string; // Assuming image is a URL or similar
   }
 export interface UpdateStudent{
+  _id:string,
+  id:string,
   firstName: string;
   lastName: string;
   age: string;
   sex: string;
   grade: string;
-  StudentReport: File | null;
+  studentReport: File | null;
 }
 
  // ~/type.ts

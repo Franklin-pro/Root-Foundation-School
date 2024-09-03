@@ -1,18 +1,42 @@
 import { defineStore } from 'pinia';
 import { useRouter } from 'vue-router';
 import axios from 'axios';
-import type { MemberFormState, Member, UpdateMember } from '~/type';
+import type { MemberFormState, Member, Login, User, UpdateMember } from '~/type';
 
 interface ApiResponse<T> {
   message: string;
   data: T;
-  datas:T;
+  datas: T;
 }
-
 
 export const useMemberStore = defineStore('members', () => {
   const members = ref<Member[]>([]);
+  
+  const currentMember = ref<Member | null>(null); // Store for the currently fetched member
   const router = useRouter();
+  const user = ref<Member | null>(null);
+  const token = ref<string | null>(null);
+
+  const setToken = (data: string | null) => {
+    token.value = data;
+    if (data) {
+      localStorage.setItem('token', data);
+    } else {
+      localStorage.removeItem('token');
+    }
+  };
+
+  const setUser = (data: Member | null) => {
+    user.value = data;
+    if (data) {
+      localStorage.setItem('user', JSON.stringify(data));
+    } else {
+      localStorage.removeItem('user');
+    }
+  };
+  const setCurrentMember = (member: Member) => {
+    currentMember.value = member;
+  };
 
   const fetchMembers = async () => {
     try {
@@ -23,6 +47,18 @@ export const useMemberStore = defineStore('members', () => {
     }
   };
 
+  const fetchMember = async (id: string): Promise<Member> => {
+    try {
+      const response = await axios.get<ApiResponse<Member>>(`http://localhost:3030/v1/member/${id}`);
+      console.log('test',response.data.datas)
+      return response.data.datas; 
+    } catch (error) {
+      console.error('Failed to fetch member', error);
+      throw error; 
+    }
+  };
+  
+  
   const createMember = async (data: MemberFormState) => {
     try {
       const formData = new FormData();
@@ -48,7 +84,7 @@ export const useMemberStore = defineStore('members', () => {
       console.error('Failed to create member:', error);
     }
   };
-  
+
   const updateMember = async (id: string, data: UpdateMember) => {
     try {
       const response = await axios.put<ApiResponse<Member>>(`https://root-foundation.onrender.com/v1/member/${id}`, data);
@@ -62,6 +98,8 @@ export const useMemberStore = defineStore('members', () => {
     }
   };
 
+
+
   const deleteMember = async (id: string) => {
     try {
       const response = await axios.delete<ApiResponse<null>>(`https://root-foundation.onrender.com/v1/member/${id}`);
@@ -72,5 +110,50 @@ export const useMemberStore = defineStore('members', () => {
     }
   };
 
-  return { members, fetchMembers, createMember, updateMember, deleteMember };
+  const login = async (data: Login) => {
+    const validatePassword = (password: string) => password.length >= 8;
+
+    if (!validatePassword(data.password)) {
+      alert('Password must be at least 8 characters long.');
+      return;
+    }
+
+    try {
+      const response = await fetch('http://localhost:3030/v1/member/login', {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const result = await response.json();
+
+      if (result.token) {
+        setToken(result.token);
+        
+        if (result.data?.user) {
+          setUser(result.data.user);
+
+          alert('Login successful');
+
+          const redirectPath = result.data.user.role === 'admin' ? '/Dashboard/admin/' : '/member-dashboard/member';
+          await router.replace(redirectPath);
+          return result.data.user;
+        } else {
+          throw new Error('User data not found in response');
+        }
+      } else {
+        throw new Error('Token not found in response');
+      }
+    } catch (error) {
+      alert('Login failed. Please check your credentials and try again.');
+    }
+  };
+
+
+  return { members, user, token, currentMember, fetchMembers, fetchMember, login, createMember, updateMember, deleteMember };
 });

@@ -1,16 +1,22 @@
 <template>
   <div class="flex flex-col md:flex-row">
     <!-- Sidebar -->
-    <div class="bg-[#1b1b29] md:w-64 w-full fixed md:h-screen h-screen shadow-xl flex flex-col justify-between">
+    <div class="sidebar md:w-64 w-full fixed md:h-screen h-screen shadow-xl flex flex-col justify-between">
       <div>
-        <h1 class="p-4 text-white font-bold text-center md:text-left">HVO International</h1>
-    <NuxtLink to="/Dashboard/admin" class="bg-green-400 text-white font-bold flex p-2 items-center gap-4"> <UIcon name="i-ic-baseline-dashboard"/>Dashboard</NuxtLink>
+        <h1 class="p-4 text-primary font-bold text-center md:text-left">HVO International</h1>
+
+        <!-- Dashboard Link -->
+        <NuxtLink to="/Dashboard/admin" class="bg-green-400 text-white font-bold flex p-2 items-center gap-4">
+          <UIcon name="i-ic-baseline-dashboard"/> Dashboard
+        </NuxtLink>
 
         <!-- Members Dropdown -->
         <div>
           <div @click="toggleDropdown" class="cursor-pointer py-2">
-            <span class="font-semibold py-1 px-2 flex items-center justify-between w-full text-white hover:bg-gray-800">
-              <span class="flex items-center gap-4"> <UIcon name="heroicons-user-group"/> Members</span>
+            <span class="font-semibold py-1 px-2 flex items-center justify-between w-full hover:bg-gray-200">
+              <span class="flex items-center gap-4">
+                <UIcon name="heroicons-user-group"/> Members
+              </span>
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transform transition-transform" :class="{'rotate-180': dropdownOpen}" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 011.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
               </svg>
@@ -18,7 +24,7 @@
           </div>
 
           <!-- Dropdown Links -->
-          <ul v-if="dropdownOpen" class="flex flex-col text-gray-300">
+          <ul v-if="dropdownOpen" class="flex flex-col">
             <NuxtLink to="/Dashboard/members/createMember" class="py-1 px-4 hover:text-primary">Create Members</NuxtLink>
             <NuxtLink to="/Dashboard/members/view-members" class="py-1 px-4 hover:text-primary">View Members</NuxtLink>
           </ul>
@@ -27,69 +33,107 @@
         <!-- Students Dropdown -->
         <div>
           <div @click="toggleDrop" class="cursor-pointer py-2">
-            <span class="font-semibold py-1 px-2 flex items-center justify-between w-full text-white hover:bg-gray-800">
-              <span class="flex items-center gap-4"> <UIcon name="i-ic-baseline-people-alt"/> Students</span>
+            <span class="font-semibold py-1 px-2 flex items-center justify-between w-full hover:bg-gray-200">
+              <span class="flex items-center gap-4">
+                <UIcon name="i-ic-baseline-people-alt"/> Students
+              </span>
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transform transition-transform" :class="{'rotate-180': dropdownOpenx}" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 011.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
               </svg>
             </span>
           </div>
-          <ul v-if="dropdownOpenx" class="flex flex-col text-gray-300">
+          <ul v-if="dropdownOpenx" class="flex flex-col">
             <NuxtLink to="/Dashboard/Students/babe-class" class="py-1 px-4 hover:text-primary">Babe Class</NuxtLink>
             <NuxtLink to="/Dashboard/Students/middle-class" class="py-1 px-4 hover:text-primary">Middle Class</NuxtLink>
             <NuxtLink to="/Dashboard/Students/top-class" class="py-1 px-4 hover:text-primary">Top Class</NuxtLink>
           </ul>
         </div>
-        <NuxtLink to="/Dashboard/Profile" class="font-semibold text-white flex p-2 items-center gap-4 hover:bg-gray-800"> <UIcon name="i-ic-round-person-2"/>Profile</NuxtLink>
+
+        <!-- Profile Link -->
+        <NuxtLink
+          :to="`/Dashboard/Profile/${memberId}`"
+          class="font-semibold flex p-2 items-center gap-4 hover:bg-gray-200"
+        >
+          <UIcon name="i-ic-round-person-2"/> Profile
+        </NuxtLink>
       </div>
 
-      <!-- Logout Button -->
-      <div class="p-4">
+      <div class="p-4 flex flex-col gap-4">
+        <button @click="toggleTheme" class="p-2 bg-gray-200 dark:bg-gray-800 rounded">
+           Change Theme
+        </button>
         <button @click="logout" class="w-full bg-red-600 text-white py-2 rounded hover:bg-red-700">
           Logout
         </button>
       </div>
     </div>
 
-    <div class="w-full md:ml-64 relative ">
-      <!-- Header -->
-      <div class="w-full bg-white shadow-md sticky top-0 z-50 p-4 flex justify-between items-center">
-        <h1 class="text-center md:text-left font-bold text-green-400 text-2xl">Dashboard</h1>
-        <div class="flex items-center space-x-4">
-          <img :src="items.image.url" alt="Profile Image" class="h-10 w-10 rounded-full" />
-          <span class=" font-semibold text-green-400 hidden md:inline">{{ items.username }}</span>
+    <!-- Main Content Area -->
+    <div class="w-full md:ml-64 relative">
+      <UCard class="rounded-none">
+        <div class="w-full sticky top-0 z-50 flex justify-between items-center">
+          <h1 class="text-center md:text-left font-bold text-green-400 text-2xl">Dashboard</h1>
+          <div>
+            <div class="flex items-center gap-4">
+              <img :src="memberImage || defaultImage" alt="Profile Image" class="h-10 w-10 rounded-full" />
+              <span class="font-semibold text-green-400 hidden md:inline">{{ userName }}</span>
+            </div>
+          </div>
         </div>
-      </div>
+      </UCard>
 
       <div class="pt-4 px-4 mb-6">
         <slot />
       </div>
-      <div class="w-full p-1 fixed bottom-0 mb-0 bg-white text-primary shadow-xl">
-  <h1 class="text-center md:text-center font-semibold text-md">
-   HVO &copy; {{ new Date().getFullYear() }} All rights reserved
-  </h1>
-</div>
+
+      <div class="w-full bg-white fixed bottom-0 mb-0 text-primary shadow-xl">
+        <h1 class="text-center md:text-center font-semibold text-md">
+          HVO &copy; {{ new Date().getFullYear() }} All rights reserved
+        </h1>
+      </div>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { ref, onMounted, computed } from 'vue'
+import { useColorMode } from '@vueuse/core'
+import { useMemberStore } from '@/stores/members'
+import type { Member } from '~/type'
+import defaultImage from '../assets/icons.png'
 
+// Reactive references for dropdowns
 const dropdownOpen = ref(false)
 const dropdownOpenx = ref(false)
-const memberStore = useMemberStore()
-const items = ref({ image: '', username: '' })
 
-onMounted(async () => {
-  await memberStore.fetchMembers()
-  const member = memberStore.members[0] || {}
-  items.value = {
-    image: member.memberImage || '',
-    username: member.userName || ''
+// Use the member store
+const memberStore = useMemberStore()
+
+// Reactive references for memberId
+const memberId = ref<string>('')
+
+// Check if running on client-side
+const isClient = typeof window !== 'undefined'
+
+// Compute the username from the local storage
+const userName = computed(() => {
+  if (isClient) {
+    const user = JSON.parse(localStorage.getItem("user") || '{}')
+    return user ? user.userName : ''
   }
+  return ''
 })
 
+// Compute the member image
+const memberImage = computed(() => {
+  if (isClient) {
+    const user = JSON.parse(localStorage.getItem("user") || '{}')
+    return user ? user.memberImage?.url : ''
+  }
+  return ''
+})
+
+// Toggle dropdown visibility
 const toggleDropdown = () => {
   dropdownOpen.value = !dropdownOpen.value
 }
@@ -98,11 +142,36 @@ const toggleDrop = () => {
   dropdownOpenx.value = !dropdownOpenx.value
 }
 
+// Toggle between light and dark themes
+const toggleTheme = () => {
+  const colorMode = useColorMode()
+  colorMode.value = colorMode.value === 'dark' ? 'light' : 'dark'
+}
+
+// Logout functionality
 const logout = () => {
   console.log('Logout clicked')
+  // Implement logout functionality here
 }
+
+// Fetch member data on component mount
+onMounted(() => {
+  if (isClient) {
+    const userInfo = JSON.parse(localStorage.getItem("user") || '{}')
+    console.log('User Info:', userInfo) // Debug statement
+    memberId.value = userInfo._id || ''
+    
+    memberStore.fetchMember(memberId.value)
+      .then(() => {
+        // Optionally handle the fetched member data
+      })
+      .catch(error => {
+        console.error('Failed to fetch members', error)
+      })
+  }
+})
 </script>
 
 <style scoped>
-
+/* Add custom styles here */
 </style>
