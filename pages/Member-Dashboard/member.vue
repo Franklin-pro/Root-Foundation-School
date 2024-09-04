@@ -8,7 +8,8 @@
 
 <script lang="ts" setup>
  definePageMeta({
-  layout:'member'
+  layout:'member',
+  middleware:'auth'
  })
 
  const alertmessage = ref('')

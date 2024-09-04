@@ -1,14 +1,16 @@
 <template>
   <div class='sticky top-0 shadow-xl bg-transparent z-50 w-full px-4 py-3'>
-  <div class="flex justify-around items-center">
-    <div class="text-2xl text-primary">
-ROOT-FOUND
+  <div class="flex justify-between items-center">
+    <div class="flex items-center gap-6">
+      <div class="text-xl font-bold text-primary">
+        ROOT-FOUND
+      </div>
+<div v-for="item in items" class="flex items-center gap-2 text-muted-color hover:text-primary">
+  <UIcon :name="item.icon"/>
+     <NuxtLink to="/">{{ item.label }}</NuxtLink> 
     </div>
-    <div class="flex gap-4 text-xl text-gray-600">
-<NuxtLink to="/" class="hover:text-primary" :active-class="'text-primary'">Home</NuxtLink>
-<NuxtLink to="/" class="hover:text-primary">About Us</NuxtLink>
-<NuxtLink to="/" class="hover:text-primary">Contact Us</NuxtLink>
     </div>
+  
     <div class="flex items-center gap-4">
       <UButton to="/Login" color="gray" class="bg-transparent border-none">Sign-In</UButton>
       <UButton icon="i-heroicons-sun" color="gray" class="rounded-full p-3"/>
@@ -18,21 +20,27 @@ ROOT-FOUND
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref } from 'vue';
 
-const isScrolled = ref(false);
+const items = ref([
+  {
+    label: "Home",
+    icon: "i-heroicons-home",
+  },
+  {
+    label: "About Us",
+    icon: "i-heroicons-book-open",
+  },
+  {
+    label: "Contact Us",
+    icon: "i-heroicons-chat-bubble-left-ellipsis",
+  },
 
-const handleScroll = () => {
-  isScrolled.value = window.scrollY > 50;
-};
-
-onMounted(() => {
-  window.addEventListener('scroll', handleScroll);
-});
-
-onUnmounted(() => {
-  window.removeEventListener('scroll', handleScroll);
-});
+  {
+    label: "Blogs",
+    icon: "i-heroicons-bookmark",
+  },
+]);
 </script>
 
 <style scoped>

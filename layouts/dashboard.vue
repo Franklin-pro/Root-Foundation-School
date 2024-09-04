@@ -124,7 +124,7 @@ const userName = computed(() => {
   return ''
 })
 
-// Compute the member image
+
 const memberImage = computed(() => {
   if (isClient) {
     const user = JSON.parse(localStorage.getItem("user") || '{}')
@@ -133,7 +133,7 @@ const memberImage = computed(() => {
   return ''
 })
 
-// Toggle dropdown visibility
+
 const toggleDropdown = () => {
   dropdownOpen.value = !dropdownOpen.value
 }
@@ -142,28 +142,25 @@ const toggleDrop = () => {
   dropdownOpenx.value = !dropdownOpenx.value
 }
 
-// Toggle between light and dark themes
+
 const toggleTheme = () => {
   const colorMode = useColorMode()
-  colorMode.value = colorMode.value === 'dark' ? 'light' : 'dark'
+  colorMode.value = colorMode.value === 'light' ? 'dark' : 'light'
 }
 
-// Logout functionality
+
 const logout = () => {
   console.log('Logout clicked')
-  // Implement logout functionality here
 }
 
-// Fetch member data on component mount
 onMounted(() => {
   if (isClient) {
     const userInfo = JSON.parse(localStorage.getItem("user") || '{}')
-    console.log('User Info:', userInfo) // Debug statement
+    console.log('User Info:', userInfo) 
     memberId.value = userInfo._id || ''
     
     memberStore.fetchMember(memberId.value)
       .then(() => {
-        // Optionally handle the fetched member data
       })
       .catch(error => {
         console.error('Failed to fetch members', error)
@@ -173,5 +170,5 @@ onMounted(() => {
 </script>
 
 <style scoped>
-/* Add custom styles here */
+
 </style>

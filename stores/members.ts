@@ -40,7 +40,7 @@ export const useMemberStore = defineStore('members', () => {
 
   const fetchMembers = async () => {
     try {
-      const response = await axios.get<ApiResponse<Member[]>>('https://root-foundation.onrender.com/v1/member');
+      const response = await axios.get<ApiResponse<Member[]>>('http://localhost:3030/v1/member');
       members.value = response.data.datas;
     } catch (error) {
       console.error('Failed to fetch members', error);
@@ -71,7 +71,7 @@ export const useMemberStore = defineStore('members', () => {
       formData.append('password', data.password);
       formData.append('role', data.role);
 
-      const response = await axios.post<ApiResponse<Member>>('https://root-foundation.onrender.com/v1/member', formData, {
+      const response = await axios.post<ApiResponse<Member>>('http://localhost:3030/v1/member/', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -87,7 +87,7 @@ export const useMemberStore = defineStore('members', () => {
 
   const updateMember = async (id: string, data: UpdateMember) => {
     try {
-      const response = await axios.put<ApiResponse<Member>>(`https://root-foundation.onrender.com/v1/member/${id}`, data);
+      const response = await axios.put<ApiResponse<Member>>(`http://localhost:3030/v1/member/${id}`, data);
       const index = members.value.findIndex(member => member.id === id);
       if (index !== -1) {
         members.value[index] = response.data.data;
@@ -102,7 +102,7 @@ export const useMemberStore = defineStore('members', () => {
 
   const deleteMember = async (id: string) => {
     try {
-      const response = await axios.delete<ApiResponse<null>>(`https://root-foundation.onrender.com/v1/member/${id}`);
+      const response = await axios.delete<ApiResponse<null>>(`http://localhost:3030/v1/member/${id}`);
       members.value = members.value.filter(member => member.id !== id);
       alert(response.data.message);
     } catch (error) {

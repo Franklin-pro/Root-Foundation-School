@@ -1,10 +1,10 @@
 <template>
   <div class="w-full">
-    <h1 class="pb-5 text-4xl">
-      <strong class="text-gray-600 text-2xl">{{ alertmessage }}</strong> {{ userName }}
+    <h1 class="pb-5 text-3xl flex items-center gap-4">
+      <strong class="text-primary uppercase font-light text-2xl">{{ alertmessage }},</strong><span class="text-orange-400"> {{ userName }}</span>
     </h1>
     <Card />
-    <Table />
+    <!-- <Table /> -->
     <MemberTable />
   </div>
 </template>
@@ -16,7 +16,8 @@ import defaultImage from '../../assets/icons.png'
 
 
 definePageMeta({
-  layout: 'dashboard'
+  layout: 'dashboard',
+  middleware:'auth'
 })
 
 const memberStore = useMemberStore()

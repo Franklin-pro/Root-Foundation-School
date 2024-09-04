@@ -10,7 +10,7 @@
         placeholder="Search..."
         v-model="searchQuery"
       />
-      <UButton to="/Dashboard/members/createMember">Create New</UButton>
+      <UButton color="orange" to="/Dashboard/members/createMember">Create New</UButton>
     </div>
     <div class="flex gap-4" :class="{ 'flex-col': !showForm, 'flex-row': showForm }">
    <div :class="showForm ? 'w-1/2' : 'w-full'">
