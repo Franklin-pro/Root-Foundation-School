@@ -1,21 +1,44 @@
 <template>
-  <div class='sticky top-0 shadow-xl bg-transparent z-50 w-full px-4 py-3'>
-  <div class="flex justify-between items-center">
-    <div class="flex items-center gap-6">
-      <div class="text-xl font-bold text-primary">
-        ROOT-FOUND
+  <div>
+    <header class="pb-6 bg-white shadow-2xl lg:pb-0">
+      <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <nav class="flex items-center justify-between h-16 lg:h-20">
+          <div class="flex-shrink-0">
+            <h1 class="text-xl font-extrabold text-blue-600">ROOT FOUNDATION</h1>
+          </div>
+          <div class="hidden lg:flex lg:items-center lg:ml-auto lg:space-x-10">
+            <div v-for="item in items" class="flow-root">
+              <div class="flex flex-col px-6 -my-2 space-y-1">
+                <a href="/" title=""
+                  class="inline-flex py-2 text-base font-medium text-black transition-all duration-200 hover:text-blue-600 focus:text-blue-600">
+                  {{ item.label }} </a>
+              </div>
+            </div>
+          </div>
+          <a href="/login" title=""
+            class="items-center justify-center hidden px-4 py-3 ml-10 text-base font-semibold text-white transition-all duration-200 bg-blue-600 border border-transparent rounded-md lg:inline-flex hover:bg-blue-700 focus:bg-blue-700"
+            role="button">Sign-In</a>
+        </nav>
+        <nav class="pt-4 pb-6 bg-white border border-gray-200 rounded-md shadow-md lg:hidden">
+          <div v-for="item in items" class="flow-root">
+            <div class="flex flex-col px-6 -my-2 space-y-1">
+              <a href="#" title=""
+                class="inline-flex py-2 text-base font-medium text-black transition-all duration-200 hover:text-blue-600 focus:text-blue-600">
+                {{ item.label }} </a>
+
+            </div>
+          </div>
+
+
+          <div class="px-6 mt-6">
+            <a href="#" title=""
+              class="inline-flex justify-center px-4 py-3 text-base font-semibold text-white transition-all duration-200 bg-blue-600 border border-transparent rounded-md tems-center hover:bg-blue-700 focus:bg-blue-700"
+              role="button"> Sign-In </a>
+          </div>
+        </nav>
       </div>
-<div v-for="item in items" class="flex items-center gap-2 text-muted-color hover:text-primary">
-  <UIcon :name="item.icon"/>
-     <NuxtLink to="/">{{ item.label }}</NuxtLink> 
-    </div>
-    </div>
-  
-    <div class="flex items-center gap-4">
-      <UButton to="/Login" color="gray" class="bg-transparent border-none">Sign-In</UButton>
-      <UButton icon="i-heroicons-sun" color="gray" class="rounded-full p-3"/>
-    </div>
-  </div>
+    </header>
+
   </div>
 </template>
 
@@ -44,11 +67,13 @@ const items = ref([
 </script>
 
 <style scoped>
-body, html {
+body,
+html {
   margin: 0;
   padding: 0;
   height: 100%;
 }
+
 .navbar {
   width: 100%;
   position: sticky;
@@ -56,10 +81,12 @@ body, html {
   transition: background-color 0.3s ease;
   padding: 1rem;
   background-color: transparent;
-  z-index: 1000; /* Ensure the navbar stays on top */
+  z-index: 1000;
+  /* Ensure the navbar stays on top */
 }
+
 .navbar.scrolled {
   background-color: black;
-  color: white; 
+  color: white;
 }
 </style>

@@ -4,8 +4,8 @@
     <!-- Sidebar -->
       <div class="sidebar md:w-64 w-full fixed md:h-screen h-screen shadow-xl flex flex-col justify-between">
       <div>
-        <h1 class="p-4 text-primary font-bold text-center md:text-center">Root Foundation</h1>
-        <NuxtLink to="/Member-Dashboard/member" class="bg-green-400 font-bold flex p-2 items-center gap-4">
+        <h1 class="p-4 text-blue-600 font-extrabold text-center md:text-center">Root Foundation</h1>
+        <NuxtLink to="/Member-Dashboard/member" class="bg-blue-400 font-bold flex p-2 items-center gap-4">
           <UIcon name="i-ic-baseline-dashboard" />Dashboard
         </NuxtLink>
 
@@ -27,11 +27,7 @@
 
           <!-- Dropdown Links -->
           <ul v-if="dropdownOpen" class="flex flex-col">
-            <NuxtLink to="/Member-Dashboard/StudentForm/babe-class" class="py-1 px-4 hover:text-primary">Babe-Class
-            </NuxtLink>
-            <NuxtLink to="/Member-Dashboard/StudentForm/middle-class" class="py-1 px-4 hover:text-primary">Middle-Class
-            </NuxtLink>
-            <NuxtLink to="/Member-Dashboard/StudentForm/top-class" class="py-1 px-4 hover:text-primary">Top-Class
+            <NuxtLink to="/Member-Dashboard/StudentForm/babe-class" class="py-1 px-4 hover:text-blue-400">Create new Student
             </NuxtLink>
           </ul>
         </div>
@@ -52,17 +48,15 @@
             </span>
           </div>
           <ul v-if="dropdownOpenx" class="flex flex-col">
-            <NuxtLink to="/Member-Dashboard/View-Students/babe-class" class="py-1 px-4 hover:text-primary">Babe Class
-            </NuxtLink>
-            <NuxtLink to="/Member-Dashboard/View-Students/middle-class" class="py-1 px-4 hover:text-primary">Middle
-              Class</NuxtLink>
-            <NuxtLink to="/Member-Dashboard/View-Students/top-class" class="py-1 px-4 hover:text-primary">Top Class
+            <NuxtLink to="/Member-Dashboard/View-Students/babe-class" class="py-1 px-4 hover:text-blue-400">Student List
             </NuxtLink>
           </ul>
         </div>
-        <NuxtLink to="/Member-Dashboard/profile"
-          class="font-semibold flex p-2 items-center gap-4 hover:bg-gray-300">
-          <UIcon name="i-ic-round-person-2" />Profile
+        <NuxtLink
+          :to="`/member-dashboard/Profile/${memberId}`"
+          class="font-semibold flex p-2 items-center gap-4 hover:bg-blue-200"
+        >
+          <UIcon name="i-ic-round-person-2"/> Profile
         </NuxtLink>
       </div>
 
@@ -80,10 +74,10 @@
     <div class="w-full md:ml-64 relative">
 <UCard class="rounded-none">
   <div class="w-full sticky top-0 z-50 flex justify-between items-center">
-        <h1 class="text-center md:text-left font-bold text-green-400 text-2xl">Member-Dashboard</h1>
+        <h1 class="text-center md:text-left font-extrabold text-blue-600 text-2xl">Member-Dashboard</h1>
         <div class="flex items-center space-x-4">
-          <img :src="items.image.url" alt="Profile Image" class="h-10 w-10 rounded-full" />
-          <span class="font-semibold text-green-400 hidden md:inline">{{ items.username }}</span>
+          <img :src="memberImage" alt="Profile Image" class="h-10 w-10 rounded-full" />
+          <span class="font-semibold text-blue-400 hidden md:inline">{{ userName }}</span>
         </div>
       </div>
 </UCard>
@@ -93,34 +87,48 @@
         <slot />
       </div>
 
-      <UCard>
-  <h1 class="text-center md:text-center font-semibold text-md">
+   <div class="bg-gray-200 p-2">
+    <h1 class="text-center md:text-center font-semibold text-md">
    HVO &copy; {{ new Date().getFullYear() }} All rights reserved
   </h1>
-
-      </UCard>
+   </div>
+ 
     </div>
   </div>
 </template>
 
-<script setup>
-import { ref, onMounted } from 'vue'
-import { useMemberStore } from '~/stores/members'
-// import { useColorMode } from '@nuxtjs/color-mode'
+<script lang="ts" setup>
+import { ref, onMounted, computed } from 'vue'
+import { useColorMode } from '@vueuse/core'
+import { useMemberStore } from '@/stores/members'
+import type { Member } from '~/type'
+import defaultImage from '../assets/icons.png'
 
 const dropdownOpen = ref(false)
 const dropdownOpenx = ref(false)
-const memberStore = useMemberStore()
-const items = ref({ image: '', username: '' })
 
-onMounted(async () => {
-  await memberStore.fetchMembers()
-  const member = memberStore.members[0] || {}
-  items.value = {
-    image: member.memberImage || '',
-    username: member.userName || ''
+const memberStore = useMemberStore()
+const memberId = ref<string>('')
+
+const isClient = typeof window !== 'undefined'
+
+const userName = computed(() => {
+  if (isClient) {
+    const user = JSON.parse(localStorage.getItem("user") || '{}')
+    return user ? user.userName : ''
   }
+  return ''
 })
+
+
+const memberImage = computed(() => {
+  if (isClient) {
+    const user = JSON.parse(localStorage.getItem("user") || '{}')
+    return user ? user.memberImage?.url : ''
+  }
+  return ''
+})
+
 
 const toggleDropdown = () => {
   dropdownOpen.value = !dropdownOpen.value
@@ -130,12 +138,29 @@ const toggleDrop = () => {
   dropdownOpenx.value = !dropdownOpenx.value
 }
 
+
 const toggleTheme = () => {
-  const currentTheme = useColorMode().value
-  useColorMode().value = currentTheme === 'light' ? 'dark' : 'light'
+  const colorMode = useColorMode()
+  colorMode.value = colorMode.value === 'light' ? 'dark' : 'light'
 }
+
 
 const logout = () => {
   console.log('Logout clicked')
 }
+
+onMounted(() => {
+  if (isClient) {
+    const userInfo = JSON.parse(localStorage.getItem("user") || '{}')
+    console.log('User Info:', userInfo) 
+    memberId.value = userInfo._id || ''
+    
+    memberStore.fetchMember(memberId.value)
+      .then(() => {
+      })
+      .catch(error => {
+        console.error('Failed to fetch members', error)
+      })
+  }
+})
 </script>

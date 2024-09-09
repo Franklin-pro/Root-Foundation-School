@@ -12,7 +12,7 @@ interface ApiResponse<T> {
 export const useMemberStore = defineStore('members', () => {
   const members = ref<Member[]>([]);
   
-  const currentMember = ref<Member | null>(null); // Store for the currently fetched member
+  const currentMember = ref<Member | null>(null); 
   const router = useRouter();
   const user = ref<Member | null>(null);
   const token = ref<string | null>(null);
@@ -40,7 +40,7 @@ export const useMemberStore = defineStore('members', () => {
 
   const fetchMembers = async () => {
     try {
-      const response = await axios.get<ApiResponse<Member[]>>('http://localhost:3030/v1/member');
+      const response = await axios.get<ApiResponse<Member[]>>('https://root-found-bn.onrender.com/v1/member');
       members.value = response.data.datas;
     } catch (error) {
       console.error('Failed to fetch members', error);
@@ -49,8 +49,8 @@ export const useMemberStore = defineStore('members', () => {
 
   const fetchMember = async (id: string): Promise<Member> => {
     try {
-      const response = await axios.get<ApiResponse<Member>>(`http://localhost:3030/v1/member/${id}`);
-      console.log('test',response.data.datas)
+      const response = await axios.get<ApiResponse<Member>>(`https://root-found-bn.onrender.com/v1/member/${id}`);
+     
       return response.data.datas; 
     } catch (error) {
       console.error('Failed to fetch member', error);
@@ -71,7 +71,7 @@ export const useMemberStore = defineStore('members', () => {
       formData.append('password', data.password);
       formData.append('role', data.role);
 
-      const response = await axios.post<ApiResponse<Member>>('http://localhost:3030/v1/member/', formData, {
+      const response = await axios.post<ApiResponse<Member>>('https://root-found-bn.onrender.com/v1/member/', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -87,7 +87,7 @@ export const useMemberStore = defineStore('members', () => {
 
   const updateMember = async (id: string, data: UpdateMember) => {
     try {
-      const response = await axios.put<ApiResponse<Member>>(`http://localhost:3030/v1/member/${id}`, data);
+      const response = await axios.put<ApiResponse<Member>>(`https://root-found-bn.onrender.com/v1/member/${id}`, data);
       const index = members.value.findIndex(member => member.id === id);
       if (index !== -1) {
         members.value[index] = response.data.data;
@@ -102,7 +102,7 @@ export const useMemberStore = defineStore('members', () => {
 
   const deleteMember = async (id: string) => {
     try {
-      const response = await axios.delete<ApiResponse<null>>(`http://localhost:3030/v1/member/${id}`);
+      const response = await axios.delete<ApiResponse<null>>(`https://root-found-bn.onrender.com/v1/member/${id}`);
       members.value = members.value.filter(member => member.id !== id);
       alert(response.data.message);
     } catch (error) {
@@ -119,7 +119,7 @@ export const useMemberStore = defineStore('members', () => {
     }
 
     try {
-      const response = await fetch('http://localhost:3030/v1/member/login', {
+      const response = await fetch('https://root-found-bn.onrender.com/v1/member/login', {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {
@@ -138,7 +138,7 @@ export const useMemberStore = defineStore('members', () => {
         if (result.data?.user) {
           setUser(result.data.user);
 
-          alert('Login successful');
+          alert('Login successful ✔️');
 
           const redirectPath = result.data.user.role === 'admin' ? '/Dashboard/admin/' : '/member-dashboard/member';
           await router.replace(redirectPath);
@@ -150,7 +150,7 @@ export const useMemberStore = defineStore('members', () => {
         throw new Error('Token not found in response');
       }
     } catch (error) {
-      alert('Login failed. Please check your credentials and try again.');
+      alert('Login failed. Please check your credentials and try again. ❌');
     }
   };
 

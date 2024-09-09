@@ -1,7 +1,7 @@
 <template>
   <div class="w-full">
     <h1 class="pb-5 text-3xl flex items-center gap-4">
-      <strong class="text-primary uppercase font-light text-2xl">{{ alertmessage }},</strong><span class="text-orange-400"> {{ userName }}</span>
+      <strong class="text-primary uppercase font-light text-2xl">{{ alertmessage }},</strong><span class="text-orange-400 font-extrabold"> {{ userName }}</span>
     </h1>
     <Card />
     <!-- <Table /> -->

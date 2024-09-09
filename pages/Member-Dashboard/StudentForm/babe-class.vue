@@ -60,7 +60,7 @@ const attachmentName = computed(() => {
 
 <template>
   <div class="py-4">
-    <h1 class="font-light text-2xl text-primary">CREATING NEW Student</h1>
+    <h1 class="font-extrabold text-2xl text-blue-600">CREATING NEW Student</h1>
   </div>
   <div class="flex justify-center">
     <UCard class="w-[50%] ">
@@ -93,7 +93,7 @@ const attachmentName = computed(() => {
         <UInput v-model="state.grade"/>
       </UFormGroup>
     
-      <UButton type="submit" class="px-8">
+      <UButton type="submit" class="px-8 bg-blue-500 hover:bg-blue-400">
         Submit
       </UButton>
     </UForm>
@@ -103,5 +103,5 @@ const attachmentName = computed(() => {
 </template>
 
 <style scoped>
-/* Additional styles if needed */
+
 </style>

@@ -10,13 +10,13 @@ interface ApiResponse<T> {
 }
 
 export const useStudentStore = defineStore('students', () => {
-  const members = ref<Students[]>([]);
+  const students = ref<Students[]>([]);
   const router = useRouter();
 
   const fetchStudent = async () => {
     try {
-      const response = await axios.get<ApiResponse<Students[]>>('https://root-foundation.onrender.com/v1/student/view');
-      members.value = response.data.datas;
+      const response = await axios.get<ApiResponse<Students[]>>('https://root-found-bn.onrender.com/v1/student/view');
+      students.value = response.data.datas;
     } catch (error) {
       console.error('Failed to fetch members', error);
     }
@@ -34,13 +34,13 @@ export const useStudentStore = defineStore('students', () => {
       formData.append('sex', data.sex);
       formData.append('grade', data.grade);
 
-      const response = await axios.post<ApiResponse<Students>>('https://root-foundation.onrender.com/v1/student', formData, {
+      const response = await axios.post<ApiResponse<Students>>('https://root-found-bn.onrender.com/v1/student', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
 
-      members.value.push(response.data.data);
+      students.value.push(response.data.data);
       alert(response.data.message);
       router.push('/Member-Dashboard/View-Students');
     } catch (error) {
@@ -50,10 +50,10 @@ export const useStudentStore = defineStore('students', () => {
   
   const updateStudent = async (id: string, data: UpdateStudent) => {
     try {
-      const response = await axios.put<ApiResponse<Students>>(`https://root-foundation.onrender.com/v1/student/${id}`, data);
-      const index = members.value.findIndex(student => student._id === id);
+      const response = await axios.put<ApiResponse<Students>>(`https://root-found-bn.onrender.com/v1/student/${id}`, data);
+      const index = students.value.findIndex(student => student._id === id);
       if (index !== -1) {
-        members.value[index] = { ...members.value[index], ...response.data.data };
+        students.value[index] = { ...students.value[index], ...response.data.data };
       }
       const voice = new SpeechSynthesisUtterance(response.data.message)
       window.speechSynthesis.speak(voice)
@@ -65,13 +65,13 @@ export const useStudentStore = defineStore('students', () => {
 
   const deleteStudent = async (id: string) => {
     try {
-      const response = await axios.delete<ApiResponse<null>>(`https://root-foundation.onrender.com/v1/student/${id}`);
-      members.value = members.value.filter(member => member._id !== id);
+      const response = await axios.delete<ApiResponse<null>>(`https://root-found-bn.onrender.com/v1/student/${id}`);
+    students.value = students.value.filter(member => member._id !== id);
       alert(response.data.message);
     } catch (error) {
       console.error('Failed to delete member', error);
     }
   };
 
-  return { members, fetchStudent, createStudent, updateStudent, deleteStudent };
+  return { students, fetchStudent, createStudent, updateStudent, deleteStudent };
 });

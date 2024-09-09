@@ -5,11 +5,11 @@
         <div class="flex justify-between items-center">
           <div>
             <h1 class="font-semibold text-xl">{{ item.text }}</h1>
-            <h2 class="font-bold text-2xl">{{ item.number }}</h2>
+            <h2 class="font-extrabold text-blue-500 text-2xl">{{ item.number }}</h2>
           </div>
           <div>
             <NuxtLink :to="item.path">
-              <UIcon name="i-heroicons-eye-20-solid" class="hover:text-primary" />
+              <UIcon name="i-heroicons-eye-20-solid" class="hover:text-blue-400" />
             </NuxtLink>
           </div>
         </div>

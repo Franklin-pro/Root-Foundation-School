@@ -3,7 +3,7 @@
     <!-- Sidebar -->
     <div class="sidebar md:w-64 w-full fixed md:h-screen h-screen shadow-xl flex flex-col justify-between">
       <div>
-        <h1 class="p-4 text-primary font-bold text-center md:text-left">HVO International</h1>
+        <h1 class="p-4 text-primary font-bold text-center md:text-left"> ROOT FOUND</h1>
 
         <!-- Dashboard Link -->
         <NuxtLink to="/Dashboard/admin" class="bg-green-400 text-white font-bold flex p-2 items-center gap-4">
@@ -43,9 +43,7 @@
             </span>
           </div>
           <ul v-if="dropdownOpenx" class="flex flex-col">
-            <NuxtLink to="/Dashboard/Students/babe-class" class="py-1 px-4 hover:text-primary">Babe Class</NuxtLink>
-            <NuxtLink to="/Dashboard/Students/middle-class" class="py-1 px-4 hover:text-primary">Middle Class</NuxtLink>
-            <NuxtLink to="/Dashboard/Students/top-class" class="py-1 px-4 hover:text-primary">Top Class</NuxtLink>
+            <NuxtLink to="/Dashboard/Students/babe-class" class="py-1 px-4 hover:text-primary">Student List</NuxtLink>
           </ul>
         </div>
 
@@ -102,20 +100,14 @@ import { useMemberStore } from '@/stores/members'
 import type { Member } from '~/type'
 import defaultImage from '../assets/icons.png'
 
-// Reactive references for dropdowns
 const dropdownOpen = ref(false)
 const dropdownOpenx = ref(false)
 
-// Use the member store
 const memberStore = useMemberStore()
-
-// Reactive references for memberId
 const memberId = ref<string>('')
 
-// Check if running on client-side
 const isClient = typeof window !== 'undefined'
 
-// Compute the username from the local storage
 const userName = computed(() => {
   if (isClient) {
     const user = JSON.parse(localStorage.getItem("user") || '{}')
