@@ -3,7 +3,8 @@
     <header class="pb-6 bg-white shadow-2xl lg:pb-0">
       <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <nav class="flex items-center justify-between h-16 lg:h-20">
-          <div class="flex-shrink-0">
+          <div class="flex-shrink-0 flex items-center">
+            <img src="../../assets/logox.png" alt="logo" class="w-[50px] h-[50px] object-cover">
             <h1 class="text-xl font-extrabold text-blue-600">ROOT FOUNDATION</h1>
           </div>
           <div class="hidden lg:flex lg:items-center lg:ml-auto lg:space-x-10">
