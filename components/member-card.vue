@@ -9,7 +9,7 @@
           </div>
           <div>
             <NuxtLink :to="item.path">
-              <UIcon name="i-heroicons-eye-20-solid" class="hover:text-blue-400" />
+              <UIcon name="i-heroicons-eye-20-solid" class="hover:text-blue-400"  />
             </NuxtLink>
           </div>
         </div>
@@ -29,19 +29,18 @@ const items = ref([]);
 onMounted(async () => {
   await member.fetchMembers();
   await student.fetchStudent();
-  const studentCount = student.members.length;
+  const studentCount = student.students.length;
   const memberCount = member.members.length; 
 
   items.value = [
     {
       text: "Members",
       number: memberCount,
-      path: "/Dashboard/members/view-members"
     },
     {
       text: "Students",
       number: studentCount,
-      path: "/Dashboard/Students/babe-class"
+      path: "/Member-Dashboard/View-Students/students"
     },
   ];
 });

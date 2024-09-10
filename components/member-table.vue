@@ -123,7 +123,7 @@ function closeCard() {
 
 
 const currentPage = ref(1);
-const itemsPerPage = ref(10); 
+const itemsPerPage = ref(5); 
 
 
 const totalPages = computed(() => {

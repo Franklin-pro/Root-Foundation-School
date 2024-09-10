@@ -36,7 +36,7 @@
 import { onMounted, computed, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { useMemberStore } from '~/stores/members'
-import defaultImage from '~/assets/icons.png'
+import defaultImage from '~/assets/icons.png'  
 
 
 definePageMeta({

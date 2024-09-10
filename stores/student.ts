@@ -42,7 +42,7 @@ export const useStudentStore = defineStore('students', () => {
 
       students.value.push(response.data.data);
       alert(response.data.message);
-      router.push('/Member-Dashboard/View-Students');
+      router.push('/Member-Dashboard/View-Students/students');
     } catch (error) {
       console.error('Failed to create member:', error);
     }

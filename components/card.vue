@@ -30,7 +30,7 @@ onMounted(async () => {
   await member.fetchMembers();
   await student.fetchStudent();
   const memberCount = member.members.length; 
-  const studentCount = student.members.length;
+  const studentCount = student.students.length;
 
   items.value = [
     {
@@ -41,7 +41,7 @@ onMounted(async () => {
     {
       text: "Students",
       number: studentCount,
-      path: "/Dashboard/Students/babe-class"
+      path: "/Dashboard/Students/students"
     },
     // {
     //   text: "Middle-Class",

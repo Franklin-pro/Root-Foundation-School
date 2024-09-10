@@ -115,7 +115,7 @@ const searchQuery = ref('');
 
 
 const currentPage = ref(1);
-const itemsPerPage = ref(10); 
+const itemsPerPage = ref(5); 
 
 const showForm = ref(false);
 const selectedStudent = ref<Students | null>(null);

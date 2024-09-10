@@ -5,7 +5,7 @@
       <div class="sidebar md:w-64 w-full fixed md:h-screen h-screen shadow-xl flex flex-col justify-between">
       <div>
         <h1 class="p-4 text-blue-600 font-extrabold text-center md:text-center">Root Foundation</h1>
-        <NuxtLink to="/Member-Dashboard/member" class="bg-blue-400 font-bold flex p-2 items-center gap-4">
+        <NuxtLink to="/Member-Dashboard/member" class="bg-blue-400 text-white font-bold flex p-2 items-center gap-4">
           <UIcon name="i-ic-baseline-dashboard" />Dashboard
         </NuxtLink>
 
@@ -27,7 +27,7 @@
 
           <!-- Dropdown Links -->
           <ul v-if="dropdownOpen" class="flex flex-col">
-            <NuxtLink to="/Member-Dashboard/StudentForm/babe-class" class="py-1 px-4 hover:text-blue-400">Create new Student
+            <NuxtLink to="/Member-Dashboard/StudentForm/students" class="py-1 px-4 hover:text-blue-400">Create new Student
             </NuxtLink>
           </ul>
         </div>
@@ -48,7 +48,7 @@
             </span>
           </div>
           <ul v-if="dropdownOpenx" class="flex flex-col">
-            <NuxtLink to="/Member-Dashboard/View-Students/babe-class" class="py-1 px-4 hover:text-blue-400">Student List
+            <NuxtLink to="/Member-Dashboard/View-Students/students" class="py-1 px-4 hover:text-blue-400">Student List
             </NuxtLink>
           </ul>
         </div>
@@ -71,27 +71,27 @@
     </div>
 
 
-    <div class="w-full md:ml-64 relative">
-<UCard class="rounded-none">
-  <div class="w-full sticky top-0 z-50 flex justify-between items-center">
+    <div class="w-full md:ml-64 bg-gray-50 relative">
+<!-- <UCard class="rounded-none"> -->
+  <div class="w-full sticky top-0 z-50 flex bg-white shadow-green-100 shadow-md p-3 justify-between items-center">
         <h1 class="text-center md:text-left font-extrabold text-blue-600 text-2xl">Member-Dashboard</h1>
         <div class="flex items-center space-x-4">
           <img :src="memberImage" alt="Profile Image" class="h-10 w-10 rounded-full" />
           <span class="font-semibold text-blue-400 hidden md:inline">{{ userName }}</span>
         </div>
       </div>
-</UCard>
+<!-- </UCard> -->
  
 
-      <div class="pt-4 mb-6 px-4">
+      <div class="pt-4 mb-6 min-h-screen px-4">
         <slot />
       </div>
 
-   <div class="bg-gray-200 p-2">
-    <h1 class="text-center md:text-center font-semibold text-md">
-   HVO &copy; {{ new Date().getFullYear() }} All rights reserved
-  </h1>
-   </div>
+      <div class="w-full bg-gray-100 p-3 sticky bottom-0 mb-0 text-primary shadow-xl">
+        <h1 class="text-center md:text-center font-semibold text-md">
+         &copy; {{ new Date().getFullYear() }} All rights reserved
+        </h1>
+      </div>
  
     </div>
   </div>

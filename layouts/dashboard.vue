@@ -43,7 +43,7 @@
             </span>
           </div>
           <ul v-if="dropdownOpenx" class="flex flex-col">
-            <NuxtLink to="/Dashboard/Students/babe-class" class="py-1 px-4 hover:text-primary">Student List</NuxtLink>
+            <NuxtLink to="/Dashboard/Students/students" class="py-1 px-4 hover:text-primary">Student List</NuxtLink>
           </ul>
         </div>
 
@@ -68,8 +68,7 @@
 
     <!-- Main Content Area -->
     <div class="w-full md:ml-64 relative">
-      <UCard class="rounded-none">
-        <div class="w-full sticky top-0 z-50 flex justify-between items-center">
+        <div class="w-full sticky top-0 z-50 bg-white shadow-green-200 shadow-md p-4 flex justify-between items-center">
           <h1 class="text-center md:text-left font-bold text-green-400 text-2xl">Dashboard</h1>
           <div>
             <div class="flex items-center gap-4">
@@ -78,15 +77,14 @@
             </div>
           </div>
         </div>
-      </UCard>
 
       <div class="pt-4 px-4 mb-6">
         <slot />
       </div>
 
-      <div class="w-full bg-white fixed bottom-0 mb-0 text-primary shadow-xl">
+      <div class="w-full bg-gray-100 p-3 sticky bottom-0 mb-0 text-primary shadow-xl">
         <h1 class="text-center md:text-center font-semibold text-md">
-          HVO &copy; {{ new Date().getFullYear() }} All rights reserved
+         &copy; {{ new Date().getFullYear() }} All rights reserved
         </h1>
       </div>
     </div>

@@ -4,7 +4,6 @@
       <strong class="text-primary uppercase font-light text-2xl">{{ alertmessage }},</strong><span class="text-orange-400 font-extrabold"> {{ userName }}</span>
     </h1>
     <Card />
-    <!-- <Table /> -->
     <MemberTable />
   </div>
 </template>
