@@ -68,7 +68,7 @@
 
     <!-- Main Content Area -->
     <div class="w-full md:ml-64 relative">
-        <div :class="colorMode === 'dark' ? 'bg-gray-600 text-white' : 'bg-gray-100 text-black'" class="w-full sticky top-0 z-50 bg-white shadow-md p-4 flex justify-between items-center">
+        <div :class="colorMode === 'dark' ? 'bg-gray-600 text-white' : 'bg-gray-100 text-black'" class="w-full sticky top-0 z-50  shadow-md p-4 flex justify-between items-center">
           <h1 class="text-center md:text-left font-bold text-green-400 text-2xl">Dashboard</h1>
           <div>
             <div class="flex items-center gap-4">
