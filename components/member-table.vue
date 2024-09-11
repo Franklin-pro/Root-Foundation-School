@@ -10,9 +10,14 @@
         placeholder="Search..."
         v-model="searchQuery"
       />
-      <button class=" w-[20%] bg-orange-500 text-white py-2 rounded hover:bg-orange-600">
-         <a href="/Dashboard/members/createMember">Create New</a>
+      
+        <button class=" w-[20%] bg-orange-500 text-white py-2 rounded hover:bg-orange-600">
+          <UTooltip text="create new member">
+            <a href="/Dashboard/members/createMember">Create New</a>
+          </UTooltip>
+
         </button>
+
     </div>
 
     <div class="flex gap-4" :class="{ 'flex-col': !showForm, 'flex-row': showForm }">

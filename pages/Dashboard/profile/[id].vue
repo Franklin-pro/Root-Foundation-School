@@ -6,12 +6,16 @@
     <div class="flex items-center justify-center w-full">
       <div class="w-[50%]">
         <UCard>
-          <div class="flex justify-center flex-col items-center">
+          <div class=" flex justify-center flex-col items-center">
             <div class="relative flex justify-center items-center">
-              <img :src="userInfo.memberImage.url" 
+              <UChip position="bottom-right" size="2xl" class="absolute bottom-3 right-3" >
+              </UChip>
+                <img :src="userInfo.memberImage.url" 
                    alt="User Image" 
                    class="w-20 h-20 rounded-full object-cover bg-gray-200">
+                  
             </div>
+
             <h1 class="py-2 font-semibold text-orange-400 text-xl">{{ userInfo.userName }}</h1>
           </div>
           <div class="flex gap-4 mb-3 p-4 border border-gray-500 rounded-xl justify-between">

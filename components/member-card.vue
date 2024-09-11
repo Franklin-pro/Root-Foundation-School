@@ -8,9 +8,12 @@
             <h2 class="font-extrabold text-blue-500 text-2xl">{{ item.number }}</h2>
           </div>
           <div>
-            <NuxtLink :to="item.path">
+            <UTooltip :text="item.view">
+              <NuxtLink :to="item.path">
               <UIcon name="i-heroicons-eye-20-solid" class="hover:text-blue-400"  />
             </NuxtLink>
+            </UTooltip>
+
           </div>
         </div>
       </UCard>
@@ -36,11 +39,12 @@ onMounted(async () => {
     {
       text: "Members",
       number: memberCount,
-      path:"you don't have access"
+      view:"you don't have access"
     },
     {
       text: "Students",
       number: studentCount,
+      view:'view students',
       path: "/Member-Dashboard/View-Students/students"
     },
   ];

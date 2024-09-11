@@ -57,7 +57,6 @@ export const useStudentStore = defineStore('students', () => {
       }
       const voice = new SpeechSynthesisUtterance(response.data.message)
       window.speechSynthesis.speak(voice)
-      window.location.reload();
     } catch (error) {
       console.error('Failed to update student', error);
     }
