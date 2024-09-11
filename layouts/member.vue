@@ -77,7 +77,7 @@
         <h1 class="text-center md:text-left font-extrabold text-blue-500 text-xl">Member</h1>
         <div class="flex items-center gap-4">
             <NuxtLink :to="`/member-dashboard/Profile/${memberId}`" class=" relative flex items-center gap-4">
-              <UChip position="bottom-right" class="absolute top-2 right-1">
+              <UChip position="bottom-right" class="absolute z-50 top-2 right-1">
               </UChip>
               <UTooltip text="profile setting">
                 <img :src="memberImage || defaultImage" alt="Profile Image"

@@ -12,10 +12,11 @@
       />
       
       </UTooltip>
-
-      <button class=" w-[20%] bg-orange-500 text-white py-2 rounded hover:bg-orange-600">
+      <UTooltip text="add new student" class=" w-[20%] flex justify-center bg-orange-500 text-white py-2 rounded hover:bg-orange-600">
+        <button>
          <a href="/Member-Dashboard/StudentForm/students">Add New</a>
         </button>
+      </UTooltip>
     </div>
     <div class="flex gap-4" :class="{ 'flex-col': !showForm, 'flex-row': showForm }">
       <div :class="showForm ? 'w-1/2' : 'w-full'">

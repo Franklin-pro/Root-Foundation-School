@@ -8,6 +8,8 @@
         <UCard>
           <div class="flex justify-center flex-col items-center">
             <div class="relative flex justify-center items-center">
+              <UChip position="bottom-right" size="2xl" class="absolute bottom-3 right-3" >
+              </UChip>
               <img :src="userInfo.memberImage.url" 
                    :alt="userInfo.userName" 
                    class="w-20 h-20 rounded-full object-cover bg-gray-200">
