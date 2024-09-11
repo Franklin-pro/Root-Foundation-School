@@ -4,7 +4,7 @@
     <!-- Sidebar -->
       <div class="sidebar md:w-64 w-full fixed md:h-screen h-screen shadow-xl flex flex-col justify-between" :class="colorMode === 'dark' ? 'bg-gray-600' : 'bg-gray-50'">
       <div>
-        <h1 class="p-4 text-blue-600 font-extrabold text-center md:text-center">Root Foundation</h1>
+        <h1 class="p-4 text-blue-600 font-extrabold text-3xl text-center md:text-center">ROOT FOUND</h1>
         <NuxtLink to="/Member-Dashboard/member" class="bg-blue-400 text-white font-bold flex p-2 items-center gap-4">
           <UIcon name="i-ic-baseline-dashboard" />Dashboard
         </NuxtLink>
@@ -61,9 +61,6 @@
       </div>
 
       <div class="p-4 flex flex-col gap-4">
-        <button @click="toggleTheme" class="p-2 bg-gray-200 dark:bg-gray-800 rounded">
-           Change Theme
-        </button>
         <button @click="logout" class="w-full bg-orange-500 text-white py-2 rounded hover:bg-orange-600">
           Logout
         </button>
@@ -77,11 +74,26 @@
     'w-full sticky top-0 z-50 flex shadow-sm p-3 justify-between items-center'
   "
   :class="colorMode === 'dark' ? 'bg-gray-600 text-white' : 'bg-gray-50 text-black'">
-        <h1 class="text-center md:text-left font-extrabold text-blue-500 text-2xl">Member-Dashboard</h1>
-        <div class="flex items-center space-x-4">
-          <img :src="memberImage" alt="Profile Image" class="h-10 w-10 rounded-full" />
-          <span class="font-semibold text-blue-400 hidden md:inline">{{ userName }}</span>
-        </div>
+        <h1 class="text-center md:text-left font-extrabold text-blue-500 text-xl">Member</h1>
+        <div class="flex items-center gap-4">
+            <NuxtLink :to="`/member-dashboard/Profile/${memberId}`" class=" relative flex items-center gap-4">
+              <UChip position="bottom-right" class="absolute top-2 right-1">
+              </UChip>
+              <UTooltip text="profile setting">
+                <img :src="memberImage || defaultImage" alt="Profile Image"
+                  class="h-10 w-10 border border-gray-500 object-contain rounded-full" />
+              </UTooltip>
+
+            </NuxtLink>
+            <UTooltip text="change theme">
+
+              <button @click="toggleTheme"
+                class="p-3 flex items-center border border-gray-200 dark:bg-gray-800 rounded-full">
+                <UIcon :name="colorMode === 'dark' ? 'i-heroicons-moon' : 'i-heroicons-sun'" class="text-xl " />
+              </button>
+            </UTooltip>
+
+          </div>
       </div>
 <!-- </UCard> -->
  

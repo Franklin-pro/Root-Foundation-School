@@ -1,7 +1,8 @@
 <template>
   <div class="p-5">
     <div class="flex justify-between items-center py-5">
-      <UInput
+      <UTooltip text="search student ...">
+        <UInput
         icon="i-heroicons-magnifying-glass-20-solid"
         size="sm"
         color="white"
@@ -10,6 +11,8 @@
         placeholder="Search..."
       />
       
+      </UTooltip>
+
       <button class=" w-[20%] bg-orange-500 text-white py-2 rounded hover:bg-orange-600">
          <a href="/Member-Dashboard/StudentForm/students">Add New</a>
         </button>

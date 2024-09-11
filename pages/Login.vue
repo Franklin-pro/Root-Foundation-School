@@ -25,7 +25,7 @@
                 </div>
                 <div class="mt-2.5">
                   <UFormGroup name="password">
-                    <UInput v-model="state.password" size="lg" type="password" />
+                    <UInput v-model="state.password" size="lg" type="password"  />
                   </UFormGroup>
                 </div>
               </div>
