@@ -18,6 +18,23 @@ export interface CreateMemberData {
     role: string;
     memberImage: File | null;
   }
+  export interface Message {
+    _id:string;
+    id: string;
+    fullName: string;
+    email: string;
+    phoneNumber: string;
+    companyName: string;
+    message: string;
+  }
+  
+ export interface MessageFormState {
+    fullName: string;
+    email: string;
+    phoneNumber: string;
+    companyName: string;
+    message: string;
+  }
   export interface Login {
     email: string;
     password: string;
