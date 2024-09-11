@@ -98,7 +98,9 @@ const imagePreview = computed(() => {
           <UInput v-model="state.role" />
         </UFormGroup>
 
-        <UButton type="submit">Submit</UButton>
+        <button type="submit" class=" w-[50%] bg-orange-500 text-white py-2 rounded hover:bg-orange-600">
+         Create Member
+        </button>
       </UForm>
     </UCard>
   </div>

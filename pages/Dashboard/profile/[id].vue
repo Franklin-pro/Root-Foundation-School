@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <h1 class="font-light pb-5 text-3xl text-primary"><span class="text-orange-400 font-semibold">{{ userInfo.userName }}</span> Profile Setting</h1>
+      <h1 class="font-black pb-5 text-3xl text-primary"> Profile Setting</h1>
     </div>
     <div class="flex items-center justify-center w-full">
       <div class="w-[50%]">
@@ -67,7 +67,7 @@ const userInfo = computed<UserInfo>(() => {
     email: member.email,
     userName: member.userName,
     role: member.role,
-    memberImage: { url: member.memberImage ? member.memberImage : defaultImage }
+    memberImage:  member.memberImage ? member.memberImage :{ url: defaultImage }
   } : {
     email: '',
     userName: '',

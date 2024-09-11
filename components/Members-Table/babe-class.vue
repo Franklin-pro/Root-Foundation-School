@@ -9,14 +9,17 @@
         v-model="searchQuery"
         placeholder="Search..."
       />
-      <UButton class="bg-blue-500 hover:bg-blue-400" :to="`/Member-Dashboard/StudentForm/babe-class`">ADD NEW</UButton>
+      
+      <button class=" w-[20%] bg-orange-500 text-white py-2 rounded hover:bg-orange-600">
+         <a href="/Member-Dashboard/StudentForm/students">Add New</a>
+        </button>
     </div>
     <div class="flex gap-4" :class="{ 'flex-col': !showForm, 'flex-row': showForm }">
       <div :class="showForm ? 'w-1/2' : 'w-full'">
         <UCard>
           <UTable :rows="paginatedMembers" :columns="columns">
             <template #studentReport-data="{ row }">
-              <a v-if="row.studentReport" :href="row.studentReport.url" target="_blank" class="text-blue-500 hover:underline">
+              <a v-if="row.studentReport" :href="row.studentReport.url" target="_blank" class="text-orange-500 hover:underline">
                 {{ row.firstName }} Report
               </a>
               <span v-else>No Report</span>
@@ -37,12 +40,14 @@
                 :disabled="currentPage === 1"
                 class="px-4 py-2 bg-gray-300 rounded-md"
                 icon="i-heroicons-chevron-left"
+                color="orange"
               />
               <UButton
                 @click="nextPage"
                 :disabled="currentPage === totalPages"
                 class="px-4 py-2 bg-gray-300 rounded-md"
                 icon="i-heroicons-chevron-right"
+                color="orange"
               />
             </div>
           </div>

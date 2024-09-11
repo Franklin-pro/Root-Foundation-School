@@ -60,7 +60,7 @@
         <button @click="toggleTheme" class="p-2 bg-gray-200 dark:bg-gray-800 rounded">
            Change Theme
         </button>
-        <button @click="logout" class="w-full bg-red-600 text-white py-2 rounded hover:bg-red-700">
+        <button @click="logout" class="w-full bg-orange-500 text-white py-2 rounded hover:bg-orange-600">
           Logout
         </button>
       </div>

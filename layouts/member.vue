@@ -64,7 +64,7 @@
         <button @click="toggleTheme" class="p-2 bg-gray-200 dark:bg-gray-800 rounded">
            Change Theme
         </button>
-        <button @click="logout" class="w-full bg-red-600 text-white py-2 rounded hover:bg-red-700">
+        <button @click="logout" class="w-full bg-orange-500 text-white py-2 rounded hover:bg-orange-600">
           Logout
         </button>
       </div>
@@ -74,10 +74,10 @@
     <div class="w-full md:ml-64 relative">
 <!-- <UCard class="rounded-none"> -->
   <div   class="
-    'w-full sticky top-0 z-50 flex shadow-md p-3 justify-between items-center'
+    'w-full sticky top-0 z-50 flex shadow-sm p-3 justify-between items-center'
   "
-  :class="colorMode === 'dark' ? 'bg-gray-600 text-white' : 'bg-white text-black'">
-        <h1 class="text-center md:text-left font-extrabold text-blue-600 text-2xl">Member-Dashboard</h1>
+  :class="colorMode === 'dark' ? 'bg-gray-600 text-white' : 'bg-gray-50 text-black'">
+        <h1 class="text-center md:text-left font-extrabold text-blue-500 text-2xl">Member-Dashboard</h1>
         <div class="flex items-center space-x-4">
           <img :src="memberImage" alt="Profile Image" class="h-10 w-10 rounded-full" />
           <span class="font-semibold text-blue-400 hidden md:inline">{{ userName }}</span>
@@ -90,7 +90,7 @@
         <slot />
       </div>
 
-      <div class="w-full p-3 sticky bottom-0 mb-0 text-primary shadow-xl" :class="colorMode === 'dark' ? 'bg-gray-600' : 'bg-gray-50'">
+      <div class="w-full p-3 sticky bottom-0 mb-0  shadow-xl" :class="colorMode === 'dark' ? 'bg-gray-600' : 'bg-gray-50'">
         <h1 class="text-center md:text-center font-semibold text-md">
          &copy; {{ new Date().getFullYear() }} All rights reserved
         </h1>

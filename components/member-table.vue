@@ -10,7 +10,9 @@
         placeholder="Search..."
         v-model="searchQuery"
       />
-      <UButton color="orange" to="/Dashboard/members/createMember">Create New</UButton>
+      <button class=" w-[20%] bg-orange-500 text-white py-2 rounded hover:bg-orange-600">
+         <a href="/Dashboard/members/createMember">Create New</a>
+        </button>
     </div>
 
     <div class="flex gap-4" :class="{ 'flex-col': !showForm, 'flex-row': showForm }">
@@ -37,6 +39,7 @@
             :disabled="currentPage === 1"
             class="px-4 py-2 bg-gray-300 rounded-md"
             icon="i-heroicons-chevron-left"
+            color="orange"
           />
 
           <UButton
@@ -44,6 +47,7 @@
             :disabled="currentPage === totalPages"
             class="px-4 py-2 bg-gray-300 rounded-md"
           icon="i-heroicons-chevron-right"
+          color="orange"
           />
             </div>
         </div>

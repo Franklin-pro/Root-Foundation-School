@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="font-bold text-2xl text-blue-600 px-3">Root-Foundation Students</h1>
+    <h1 class="text-2xl font-black text-blue-500 px-3">Root-Foundation Students</h1>
     <MembersTableBabeClass/>
   </div>
 </template>

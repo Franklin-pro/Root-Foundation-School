@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <h1 class="font-light pb-5 text-3xl text-primary"><span class="text-orange-400 font-semibold">{{ userInfo.userName }}</span> Profile Setting</h1>
+      <h1 class="font-black capitalize pb-5 text-3xl text-blue-500"> Profile Setting</h1>
     </div>
     <div class="flex items-center justify-center w-full">
       <div class="w-[50%]">
@@ -9,21 +9,21 @@
           <div class="flex justify-center flex-col items-center">
             <div class="relative flex justify-center items-center">
               <img :src="userInfo.memberImage.url" 
-                   alt="User Image" 
+                   :alt="userInfo.userName" 
                    class="w-20 h-20 rounded-full object-cover bg-gray-200">
             </div>
             <h1 class="py-2 font-semibold text-orange-400 text-xl">{{ userInfo.userName }}</h1>
           </div>
-          <div class="flex gap-4 mb-3 p-4 bg-gray-100 rounded-xl justify-between">
-            <div class="text-xl font-semibold text-primary">Email Address:</div>
+          <div class="flex gap-4 mb-3 p-4 border border-gray-500 rounded-xl justify-between">
+            <div class="text-xl font-semibold text-blue-500">Email Address:</div>
             <div class="text-xl font-light">{{ userInfo.email }}</div>
           </div>
-          <div class="flex gap-4 mb-4 p-4 bg-gray-100 rounded-xl justify-between">
-            <div class="text-xl font-semibold text-primary">Username:</div>
+          <div class="flex gap-4 mb-4 p-4 border border-gray-500 rounded-xl justify-between">
+            <div class="text-xl font-semibold text-blue-500">Username:</div>
             <div class="text-xl font-light">{{ userInfo.userName }}</div>
           </div>
-          <div class="flex mb-4 gap-4 bg-gray-100 rounded-xl p-4 justify-between">
-            <div class="text-xl font-semibold text-primary">Role:</div>
+          <div class="flex mb-4 gap-4 border border-gray-500 rounded-xl p-4 justify-between">
+            <div class="text-xl font-semibold text-blue-500">Role:</div>
             <div class="text-xl font-light">{{ userInfo.role }}</div>
           </div>
         </UCard>
@@ -58,14 +58,13 @@ interface UserInfo {
   role: string
   memberImage: MemberImage
 }
-
 const userInfo = computed<UserInfo>(() => {
   const member = memberStore.members.find(member => member._id === memberId.value)
   return member ? {
     email: member.email,
     userName: member.userName,
     role: member.role,
-    memberImage: { url: member.memberImage ? member.memberImage : defaultImage }
+    memberImage: member.memberImage ? member.memberImage :  defaultImage 
   } : {
     email: '',
     userName: '',
@@ -73,6 +72,7 @@ const userInfo = computed<UserInfo>(() => {
     memberImage: { url: defaultImage }
   }
 })
+
 
 
 onMounted(() => {

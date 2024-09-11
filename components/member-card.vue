@@ -36,6 +36,7 @@ onMounted(async () => {
     {
       text: "Members",
       number: memberCount,
+      path:"you don't have access"
     },
     {
       text: "Students",
