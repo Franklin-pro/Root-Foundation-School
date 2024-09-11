@@ -14,15 +14,15 @@
             </div>
             <h1 class="py-2 font-semibold text-orange-400 text-xl">{{ userInfo.userName }}</h1>
           </div>
-          <div class="flex gap-4 mb-3 p-4 bg-gray-100 rounded-xl justify-between">
+          <div class="flex gap-4 mb-3 p-4 border border-gray-500 rounded-xl justify-between">
             <div class="text-xl font-semibold text-primary">Email Address:</div>
             <div class="text-xl font-light">{{ userInfo.email }}</div>
           </div>
-          <div class="flex gap-4 mb-4 p-4 bg-gray-100 rounded-xl justify-between">
+          <div class="flex gap-4 mb-4 p-4 border border-gray-500 rounded-xl justify-between">
             <div class="text-xl font-semibold text-primary">Username:</div>
             <div class="text-xl font-light">{{ userInfo.userName }}</div>
           </div>
-          <div class="flex mb-4 gap-4 bg-gray-100 rounded-xl p-4 justify-between">
+          <div class="flex mb-4 gap-4 border border-gray-500 rounded-xl p-4 justify-between">
             <div class="text-xl font-semibold text-primary">Role:</div>
             <div class="text-xl font-light">{{ userInfo.role }}</div>
           </div>
@@ -58,6 +58,8 @@ interface UserInfo {
   role: string
   memberImage: MemberImage
 }
+const colorMode = useColorMode()
+colorMode.value= 'light' ? 'dark' :'light'
 
 const userInfo = computed<UserInfo>(() => {
   const member = memberStore.members.find(member => member._id === memberId.value)

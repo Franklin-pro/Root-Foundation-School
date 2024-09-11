@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col md:flex-row">
     <!-- Sidebar -->
-    <div class="sidebar md:w-64 w-full fixed md:h-screen h-screen shadow-xl flex flex-col justify-between">
+    <div :class="colorMode === 'dark' ? 'bg-gray-600 text-white' : 'bg-gray-100 text-black'" class="sidebar md:w-64 w-full fixed md:h-screen h-screen shadow-xl flex flex-col justify-between">
       <div>
         <h1 class="p-4 text-primary font-bold text-center md:text-left"> ROOT FOUND</h1>
 
@@ -68,7 +68,7 @@
 
     <!-- Main Content Area -->
     <div class="w-full md:ml-64 relative">
-        <div class="w-full sticky top-0 z-50 bg-white shadow-green-200 shadow-md p-4 flex justify-between items-center">
+        <div :class="colorMode === 'dark' ? 'bg-gray-600 text-white' : 'bg-gray-100 text-black'" class="w-full sticky top-0 z-50 bg-white shadow-md p-4 flex justify-between items-center">
           <h1 class="text-center md:text-left font-bold text-green-400 text-2xl">Dashboard</h1>
           <div>
             <div class="flex items-center gap-4">
@@ -78,11 +78,11 @@
           </div>
         </div>
 
-      <div class="pt-4 px-4 mb-6">
+      <div class="pt-4 px-4 min-h-screen mb-6">
         <slot />
       </div>
 
-      <div class="w-full bg-gray-100 p-3 sticky bottom-0 mb-0 text-primary shadow-xl">
+      <div :class="colorMode === 'dark' ? 'bg-gray-600 text-white' : 'bg-gray-100 text-black'" class="w-full bg-gray-100 p-3 sticky bottom-0 mb-0 text-primary shadow-xl">
         <h1 class="text-center md:text-center font-semibold text-md">
          &copy; {{ new Date().getFullYear() }} All rights reserved
         </h1>
@@ -133,14 +133,15 @@ const toggleDrop = () => {
 }
 
 
+const colorMode = useColorMode()
+
 const toggleTheme = () => {
-  const colorMode = useColorMode()
   colorMode.value = colorMode.value === 'light' ? 'dark' : 'light'
 }
 
 
 const logout = () => {
-  console.log('Logout clicked')
+  memberStore.logout()
 }
 
 onMounted(() => {

@@ -154,6 +154,10 @@ export const useMemberStore = defineStore('members', () => {
     }
   };
 
-
-  return { members, user, token, currentMember, fetchMembers, fetchMember, login, createMember, updateMember, deleteMember };
+const logout = async ()=>{
+setUser(null)
+setToken(null)
+await router.push('/login')
+}
+  return { members, user, token, currentMember, fetchMembers, fetchMember, login, createMember,logout, updateMember, deleteMember };
 });

@@ -2,7 +2,7 @@
  
   <div class="flex flex-col md:flex-row">
     <!-- Sidebar -->
-      <div class="sidebar md:w-64 w-full fixed md:h-screen h-screen shadow-xl flex flex-col justify-between">
+      <div class="sidebar md:w-64 w-full fixed md:h-screen h-screen shadow-xl flex flex-col justify-between" :class="colorMode === 'dark' ? 'bg-gray-600' : 'bg-gray-50'">
       <div>
         <h1 class="p-4 text-blue-600 font-extrabold text-center md:text-center">Root Foundation</h1>
         <NuxtLink to="/Member-Dashboard/member" class="bg-blue-400 text-white font-bold flex p-2 items-center gap-4">
@@ -71,9 +71,12 @@
     </div>
 
 
-    <div class="w-full md:ml-64 bg-gray-50 relative">
+    <div class="w-full md:ml-64 relative">
 <!-- <UCard class="rounded-none"> -->
-  <div class="w-full sticky top-0 z-50 flex bg-white shadow-green-100 shadow-md p-3 justify-between items-center">
+  <div   class="
+    'w-full sticky top-0 z-50 flex shadow-md p-3 justify-between items-center'
+  "
+  :class="colorMode === 'dark' ? 'bg-gray-600 text-white' : 'bg-white text-black'">
         <h1 class="text-center md:text-left font-extrabold text-blue-600 text-2xl">Member-Dashboard</h1>
         <div class="flex items-center space-x-4">
           <img :src="memberImage" alt="Profile Image" class="h-10 w-10 rounded-full" />
@@ -87,7 +90,7 @@
         <slot />
       </div>
 
-      <div class="w-full bg-gray-100 p-3 sticky bottom-0 mb-0 text-primary shadow-xl">
+      <div class="w-full p-3 sticky bottom-0 mb-0 text-primary shadow-xl" :class="colorMode === 'dark' ? 'bg-gray-600' : 'bg-gray-50'">
         <h1 class="text-center md:text-center font-semibold text-md">
          &copy; {{ new Date().getFullYear() }} All rights reserved
         </h1>
@@ -138,15 +141,16 @@ const toggleDrop = () => {
   dropdownOpenx.value = !dropdownOpenx.value
 }
 
+const colorMode = useColorMode()
 
 const toggleTheme = () => {
-  const colorMode = useColorMode()
   colorMode.value = colorMode.value === 'light' ? 'dark' : 'light'
 }
 
 
+
 const logout = () => {
-  console.log('Logout clicked')
+ memberStore.logout()
 }
 
 onMounted(() => {
