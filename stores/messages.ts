@@ -39,7 +39,6 @@ export const useMessageStore = defineStore('messages', () => {
       const response = await axios.post<ApiResponse<Message>>('http://localhost:3030/v1/messages', data);
       messages.value.push(response.data.datas);
       alert(response.data.message);
-      // router.push('/Dashboard/messages/view-messages');
     } catch (error) {
       console.error('Failed to create message', error);
     }

@@ -24,7 +24,7 @@ export interface CreateMemberData {
     fullName: string;
     email: string;
     phoneNumber: string;
-    companyName: string;
+    campanyName: string;
     message: string;
   }
   
@@ -32,7 +32,7 @@ export interface CreateMemberData {
     fullName: string;
     email: string;
     phoneNumber: string;
-    companyName: string;
+    campanyName: string;
     message: string;
   }
   export interface Login {

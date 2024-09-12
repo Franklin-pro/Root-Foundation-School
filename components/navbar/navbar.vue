@@ -1,6 +1,6 @@
 <template>
   <div>
-    <header class="pb-6 bg-white shadow-2xl lg:pb-0">
+    <header class="pb-6 bg-white shadow-xl w-full sticky top-0 z-50 lg:pb-0">
       <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <nav class="flex items-center justify-between h-16 lg:h-20">
           <div class="flex-shrink-0 flex items-center">

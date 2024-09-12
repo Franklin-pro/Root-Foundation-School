@@ -1,25 +1,29 @@
 <template>
-  <div>
-    <section class="py-10 bg-gray-100 sm:py-16 lg:py-24">
+
+<section class="py-10 bg-gray-100 sm:py-16 lg:py-24">
     <div class="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
         <div class="max-w-2xl mx-auto text-center">
-            <h2 class="text-3xl font-bold leading-tight text-blue-600 sm:text-4xl lg:text-5xl">Contact us</h2>
+            <h2 class="text-3xl font-bold leading-tight text-gray-900 sm:text-4xl lg:text-5xl">Contact us</h2>
             <p class="max-w-xl mx-auto mt-4 text-base leading-relaxed text-gray-500">Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis.</p>
         </div>
 
         <div class="max-w-5xl mx-auto mt-12 sm:mt-16">
             <div class="grid grid-cols-1 gap-6 px-8 text-center md:px-0 md:grid-cols-3">
-                <div v-for="item in items" :key="item.id">
-                    <div class="overflow-hidden bg-white rounded-xl">
+                <div class="overflow-hidden bg-white rounded-xl">
                     <div class="p-6">
-                     <UIcon class="flex-shrink-0 w-10 h-10 mx-auto text-gray-400" :name="item.icon"/>
-                        <p class="mt-6 text-lg font-medium text-gray-900">{{ item.phoneNumber }}</p>
-                        <p class="mt-1 text-lg font-medium text-gray-900">{{ item.email }}</p>
+                        <svg class="flex-shrink-0 w-10 h-10 mx-auto text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="1"
+                                d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                            />
+                        </svg>
+                        <p class="mt-6 text-lg font-medium text-gray-900">+1-316-555-0116</p>
+                        <p class="mt-1 text-lg font-medium text-gray-900">+1-446-526-0117</p>
                     </div>
                 </div>
-                </div>
-        
-<!-- 
+
                 <div class="overflow-hidden bg-white rounded-xl">
                     <div class="p-6">
                         <svg class="flex-shrink-0 w-10 h-10 mx-auto text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -38,47 +42,47 @@
                         </svg>
                         <p class="mt-6 text-lg font-medium leading-relaxed text-gray-900">8502 Preston Rd. Ingle, Maine 98380, USA</p>
                     </div>
-                </div> -->
+                </div>
             </div>
 
             <div class="mt-6 overflow-hidden bg-white rounded-xl">
                 <div class="px-6 py-12 sm:p-12">
                     <h3 class="text-3xl font-semibold text-center text-gray-900">Send us a message</h3>
 
-                    <form action="#" method="POST" class="mt-14">
+                    <form @submit.prevent="onSubmit" class="mt-14">
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-4">
                             <div>
-                                <label for="" class="text-base font-medium text-gray-900"> Your Names </label>
+                                <label for="" class="text-base font-medium text-gray-900"> Your name </label>
                                 <div class="mt-2.5 relative">
-                                    <input type="text" name="" id="" placeholder="Enter your full name" class="block w-full px-4 py-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600" />
+                                    <input type="text" name="" id="" placeholder="Full Name" v-model="state.fullName" class="block w-full px-4 py-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600" />
                                 </div>
                             </div>
 
                             <div>
-                                <label for="" class="text-base font-medium text-gray-900"> Email Address </label>
+                                <label for="" class="text-base font-medium text-gray-900"> Email address </label>
                                 <div class="mt-2.5 relative">
-                                    <input type="email" name="" id="" placeholder="Enter your Email Address" class="block w-full px-4 py-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600" />
+                                    <input type="email" name="" id="" placeholder="Email Address" v-model="state.email" class="block w-full px-4 py-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600" />
                                 </div>
                             </div>
 
                             <div>
-                                <label for="" class="text-base font-medium text-gray-900"> Phone Number </label>
+                                <label for="" class="text-base font-medium text-gray-900"> Phone number </label>
                                 <div class="mt-2.5 relative">
-                                    <input type="tel" name="" id="" placeholder="Enter your Phone Number" class="block w-full px-4 py-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600" />
+                                    <input type="tel" name="" id="" placeholder="Phone Number" v-model="state.phoneNumber" class="block w-full px-4 py-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600" />
                                 </div>
                             </div>
 
                             <div>
-                                <label for="" class="text-base font-medium text-gray-900"> Company / Parent Name </label>
+                                <label for="" class="text-base font-medium text-gray-900"> Company name </label>
                                 <div class="mt-2.5 relative">
-                                    <input type="text" name="" id="" placeholder="Enter your Campany / Parent Name" class="block w-full px-4 py-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600" />
+                                    <input type="text" name="" id="" placeholder="Company Name" v-model="state.campanyName" class="block w-full px-4 py-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600" />
                                 </div>
                             </div>
 
                             <div class="sm:col-span-2">
                                 <label for="" class="text-base font-medium text-gray-900"> Message </label>
                                 <div class="mt-2.5 relative">
-                                    <textarea name="" id="" placeholder="" class="block w-full px-4 py-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md resize-y focus:outline-none focus:border-blue-600 caret-blue-600" rows="4"></textarea>
+                                    <textarea name="" id=""placeholder="Message..." v-model="state.message" class="block w-full px-4 py-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md resize-y focus:outline-none focus:border-blue-600 caret-blue-600" rows="4"></textarea>
                                 </div>
                             </div>
 
@@ -95,28 +99,51 @@
     </div>
 </section>
 
-  </div>
-</template>
+  
+  </template>
+  
+  <script setup lang="ts">
+  import { reactive } from 'vue';
+  import { useMessageStore } from '~/stores/messages';
+  import type { MessageFormState } from '~/type';
+  
+  // State for the form
+  const state = reactive<MessageFormState>({
+    fullName: '',
+    email: '',
+    phoneNumber: '',
+    campanyName: '',
+    message: '',
+  });
+  
+  // Pinia store for messages
+  const messageStore = useMessageStore();
+  
+// Validate function
+const validate = (state: MessageFormState): boolean => {
+  return (
+    state.fullName.trim() !== '' &&
+    state.email.trim() !== '' &&
+    state.phoneNumber.trim() !== '' &&
+    state.campanyName.trim() !== '' &&
+    state.message.trim() !== ''
+  );
+};
 
-<script lang="ts" setup>
-const items = [
-    {
-        id:1,
-       icon:"i-heroicons-phone",
-       phoneNumber: "+250 783 446 449",
-    },
-    {
-        id:2,
-       icon:"i-heroicons-envelope",
-       email:"root.foundation@gmail.com"
-    },
-    {id:3,
-       icon:"i-heroicons-map-pin",
-       phoneNumber: "P.O.BOX 1234, kk 616 street",
-    },
-]
-</script>
-
-<style>
-
-</style>
+  
+  // Submit handler
+  const onSubmit = async () => {
+    if (!validate(state)) {
+      alert('Please fill in all fields.');
+      return;
+    }
+  
+    try {
+      await messageStore.createMessage(state);
+      alert('Message sent successfully!');
+    } catch (error) {
+      console.error('Error sending message:', error);
+    }
+  };
+  </script>
+  
