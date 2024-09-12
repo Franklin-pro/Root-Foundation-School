@@ -12,10 +12,9 @@
             <div class="space-y-5">
               <div>
                 <label for="" class="text-base font-medium text-gray-900"> Email address </label>
-                <div class="mt-2.5">
-                  <UFormGroup name="email">
-                    <UInput v-model="state.email" size="lg" />
-                  </UFormGroup>
+                <div class="mt-2.5 relative">
+                  <input type="email" name="" id="" placeholder="Enter Email" v-model="state.email"
+                    class="block w-full px-4 py-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600" />
                 </div>
               </div>
 
@@ -23,21 +22,17 @@
                 <div class="flex items-center justify-between">
                   <label for="" class="text-base font-medium text-gray-900"> Password </label>
                 </div>
-                <div class="mt-2.5">
-                  <UFormGroup name="password">
-                    <UInput v-model="state.password" size="lg" type="password"  />
-                  </UFormGroup>
+                <div class="mt-2.5 relative">
+                  <input type="password" name="" id="" placeholder="Enter Password" v-model="state.password"
+                    class="block w-full px-4 py-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600" />
                 </div>
               </div>
 
               <div>
-                <UButton
-                  type="submit"
-                  :loading="isLoading"
-                  :disabled="isLoading" 
+                <UButton type="submit" :loading="isLoading" :disabled="isLoading"
                   class="inline-flex items-center justify-center w-full px-4 py-4 text-base font-semibold text-white transition-all duration-200 bg-blue-600 border border-transparent rounded-md focus:outline-none hover:bg-blue-700 focus:bg-blue-700">
                   <span v-if="!isLoading">Log in</span>
-                  <span v-else>Logging in...</span> 
+                  <span v-else>Logging in...</span>
                 </UButton>
               </div>
             </div>
@@ -50,7 +45,8 @@
           <img class="w-[400px] mx-auto" src="../assets/loginve.avif" alt="" />
           <div class="w-full max-w-md mx-auto xl:max-w-xl">
             <h3 class="text-2xl font-bold text-center text-blue-500">Root Foundation</h3>
-            <p class="leading-relaxed text-center text-gray-500 mt-2.5">Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis.</p>
+            <p class="leading-relaxed text-center text-gray-500 mt-2.5">Amet minim mollit non deserunt ullamco est sit
+              aliqua dolor do amet sint. Velit officia consequat duis.</p>
           </div>
         </div>
       </div>
@@ -70,7 +66,7 @@ const state = reactive({
   userName: ''
 });
 
-const isLoading = ref(false);  
+const isLoading = ref(false);
 
 const validate = (state: any): FormError[] => {
   const errors = [];
@@ -90,7 +86,7 @@ async function onSubmit(event: FormSubmitEvent<any>) {
     return;
   }
 
-  isLoading.value = true; 
+  isLoading.value = true;
 
   try {
     await memberStore.login({ email: state.email, password: state.password, userName: state.userName });

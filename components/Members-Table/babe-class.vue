@@ -4,7 +4,7 @@
       <UTooltip text="search student ...">
         <UInput
         icon="i-heroicons-magnifying-glass-20-solid"
-        size="sm"
+        size="xl"
         color="white"
         :trailing="false"
         v-model="searchQuery"

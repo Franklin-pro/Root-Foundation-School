@@ -24,15 +24,15 @@ export const useMessageStore = defineStore('messages', () => {
     }
   };
 
-  const fetchMessage = async (id: string): Promise<Message> => {
-    try {
-      const response = await axios.get<ApiResponse<Message>>(`http://localhost:3030/v1/messages/${id}`);
-      return response.data.datas;
-    } catch (error) {
-      console.error('Failed to fetch message', error);
-      throw error;
-    }
-  };
+  // const fetchMessage = async (id: string): Promise<Message> => {
+  //   try {
+  //     const response = await axios.get<ApiResponse<Message>>(`http://localhost:3030/v1/messages/${id}`);
+  //     return response.data.datas;
+  //   } catch (error) {
+  //     console.error('Failed to fetch message', error);
+  //     throw error;
+  //   }
+  // };
 
   const createMessage = async (data: MessageFormState) => {
     try {
@@ -45,20 +45,20 @@ export const useMessageStore = defineStore('messages', () => {
   };
 
   // Update an existing message by ID
-  const updateMessage = async (id: string, data: MessageFormState) => {
-    try {
-      const response = await axios.put<ApiResponse<Message>>(`http://localhost:3030/v1/messages/${id}`, data);
-      const index = messages.value.findIndex(message => message.id === id);
-      if (index !== -1) {
-        messages.value[index] = response.data.data;
-      }
-      alert(response.data.message);
-    } catch (error) {
-      console.error('Failed to update message', error);
-    }
-  };
+  // const updateMessage = async (id: string, data: MessageFormState) => {
+  //   try {
+  //     const response = await axios.put<ApiResponse<Message>>(`http://localhost:3030/v1/messages/${id}`, data);
+  //     const index = messages.value.findIndex(message => message.id === id);
+  //     if (index !== -1) {
+  //       messages.value[index] = response.data.data;
+  //     }
+  //     alert(response.data.message);
+  //   } catch (error) {
+  //     console.error('Failed to update message', error);
+  //   }
+  // };
 
-  // Delete a message by ID
+  
   const deleteMessage = async (id: string) => {
     try {
       const response = await axios.delete<ApiResponse<null>>(`http://localhost:3030/v1/messages/${id}`);
@@ -69,5 +69,5 @@ export const useMessageStore = defineStore('messages', () => {
     }
   };
 
-  return { messages, currentMessage, fetchMessages, fetchMessage, createMessage, updateMessage, deleteMessage };
+  return { messages, currentMessage, fetchMessages, createMessage, deleteMessage };
 });

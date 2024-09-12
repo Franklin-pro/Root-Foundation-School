@@ -3,7 +3,7 @@
 <section class="py-10 bg-gray-100 sm:py-16 lg:py-24">
     <div class="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
         <div class="max-w-2xl mx-auto text-center">
-            <h2 class="text-3xl font-bold leading-tight text-gray-900 sm:text-4xl lg:text-5xl">Contact us</h2>
+            <h2 class="text-3xl font-bold leading-tight text-blue-500 sm:text-4xl lg:text-5xl">Contact us</h2>
             <p class="max-w-xl mx-auto mt-4 text-base leading-relaxed text-gray-500">Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis.</p>
         </div>
 
@@ -19,8 +19,8 @@
                                 d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
                             />
                         </svg>
-                        <p class="mt-6 text-lg font-medium text-gray-900">+1-316-555-0116</p>
-                        <p class="mt-1 text-lg font-medium text-gray-900">+1-446-526-0117</p>
+                        <p class="mt-6 text-lg font-medium text-gray-900">+250-783-446-449</p>
+                        <p class="mt-1 text-lg font-medium text-gray-900">+250-790-019-543</p>
                     </div>
                 </div>
 
@@ -29,8 +29,7 @@
                         <svg class="flex-shrink-0 w-10 h-10 mx-auto text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                         </svg>
-                        <p class="mt-6 text-lg font-medium text-gray-900">contact@example.com</p>
-                        <p class="mt-1 text-lg font-medium text-gray-900">hr@example.com</p>
+                        <p class="mt-6 text-lg font-medium text-gray-900">franklinprogrammer@gmail.com</p>
                     </div>
                 </div>
 
@@ -47,7 +46,7 @@
 
             <div class="mt-6 overflow-hidden bg-white rounded-xl">
                 <div class="px-6 py-12 sm:p-12">
-                    <h3 class="text-3xl font-semibold text-center text-gray-900">Send us a message</h3>
+                    <h3 class="text-3xl font-semibold  text-center text-gray-900">Send us a message</h3>
 
                     <form @submit.prevent="onSubmit" class="mt-14">
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-4">
@@ -106,20 +105,18 @@
   import { reactive } from 'vue';
   import { useMessageStore } from '~/stores/messages';
   import type { MessageFormState } from '~/type';
-  
-  // State for the form
+
   const state = reactive<MessageFormState>({
     fullName: '',
     email: '',
     phoneNumber: '',
     campanyName: '',
     message: '',
+
   });
-  
-  // Pinia store for messages
+
   const messageStore = useMessageStore();
-  
-// Validate function
+
 const validate = (state: MessageFormState): boolean => {
   return (
     state.fullName.trim() !== '' &&
@@ -130,8 +127,6 @@ const validate = (state: MessageFormState): boolean => {
   );
 };
 
-  
-  // Submit handler
   const onSubmit = async () => {
     if (!validate(state)) {
       alert('Please fill in all fields.');
@@ -140,7 +135,6 @@ const validate = (state: MessageFormState): boolean => {
   
     try {
       await messageStore.createMessage(state);
-      alert('Message sent successfully!');
     } catch (error) {
       console.error('Error sending message:', error);
     }

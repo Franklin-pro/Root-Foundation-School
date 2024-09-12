@@ -64,34 +64,40 @@ const attachmentName = computed(() => {
   </div>
   <div class="flex justify-center">
     <UCard class="w-[50%] ">
-    <div class="relative flex flex-col items-center space-y-4">
+    <div class="relative flex flex-col text-blue-500 items-center space-y-4">
       <label for="file-upload" class="flex flex-col items-center cursor-pointer">
+        <UIcon name="i-heroicons-arrow-up-on-square-stack" class="text-4xl"/>
         <span class="text-lg font-medium">Upload Report</span>
-        <span class="text-gray-500">{{ attachmentName }}</span>
+        <!-- <span class="text-gray-500">{{ attachmentName }}</span> -->
       </label>
       <input id="file-upload" name="studentReport" type="file" class="hidden" @change="onFileChange" />
     </div>
 
     <UForm :validate="validate" :state="state" class="space-y-4" @submit="onSubmit">
-      <UFormGroup label="FirstName" name="firstname">
-        <UInput v-model="state.firstName" placeholder="FirstName" />
-      </UFormGroup>
+      <div class="mt-2.5 relative">
+          <input type="text" name="" id="" placeholder="What Your FirstName?" v-model="state.firstName"
+            class="block w-full px-4 py-4 placeholder-gray-500 transition-all duration-200 border border-gray-200 rounded-xl focus:outline-none focus:border-blue-600 caret-blue-600" />
+        </div>
 
-      <UFormGroup label="LastName" name="lastname">
-        <UInput v-model="state.lastName" placeholder="LastName" />
-      </UFormGroup>
+        <div class="mt-2.5 relative">
+          <input type="text" name="" id="" placeholder="What Your LastName?" v-model="state.lastName"
+            class="block w-full px-4 py-4 placeholder-gray-500 transition-all duration-200 border border-gray-200 rounded-xl focus:outline-none focus:border-blue-600 caret-blue-600" />
+        </div>
 
-      <UFormGroup label="Date of Birth" name="dateOfBirth">
-        <UInput v-model="state.age" type="text" />
-      </UFormGroup>
+        <div class="mt-2.5 relative">
+          <input type="text" name="" id="" placeholder="How Old Are You?" v-model="state.age"
+            class="block w-full px-4 py-4 placeholder-gray-500 transition-all duration-200 border border-gray-200 rounded-xl focus:outline-none focus:border-blue-600 caret-blue-600" />
+        </div>
 
-      <UFormGroup label="Sex" name="sex">
-        <UInput v-model="state.sex" type="text" />
-      </UFormGroup>
+        <div class="mt-2.5 relative">
+          <input type="text" name="" id="" placeholder="Your Gender" v-model="state.sex"
+            class="block w-full px-4 py-4 placeholder-gray-500 transition-all duration-200 border border-gray-200 rounded-xl focus:outline-none focus:border-blue-600 caret-blue-600" />
+        </div>
 
-      <UFormGroup label="Class" name="class">
-        <UInput v-model="state.grade"/>
-      </UFormGroup>
+        <div class="mt-2.5 relative">
+          <input type="text" name="" id="" placeholder="Which Class" v-model="state.grade"
+            class="block w-full px-4 py-4 placeholder-gray-500 transition-all duration-200 border border-gray-200 rounded-xl focus:outline-none focus:border-blue-600 caret-blue-600" />
+        </div>
     
       <button type="submit" class="w-[50%] bg-orange-500 text-white py-2 rounded hover:bg-orange-600">
           Upload Student

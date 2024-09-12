@@ -2,7 +2,7 @@
 import { reactive, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { useMemberStore } from '~/stores/members';
-import icons from '~/assets/iconx.png';
+import icons from '~/assets/iconxx.png';
 import type { FormError, FormSubmitEvent } from '#ui/types';
 import type { MemberFormState } from '~/type';
 
@@ -64,42 +64,46 @@ const imagePreview = computed(() => {
   </div>
   <div class="flex justify-center">
     <UCard class="w-[50%]">
-      <div class="relative flex justify-center items-center">
+      <div class="relative flex flex-col justify-center items-center">
         <div class="relative">
           <img :src="imagePreview" alt="User Image" class="w-20 h-20 rounded-full object-cover bg-gray-200" />
-          <label
-            for="image-upload"
-            class="absolute inset-0 flex justify-center items-center text-3xl text-white bg-black bg-opacity-50 rounded-full cursor-pointer opacity-0 hover:opacity-100 transition-opacity duration-300"
-          >
+          <label for="image-upload"
+            class="absolute inset-0 flex justify-center items-center text-3xl text-white bg-black bg-opacity-50 rounded-full cursor-pointer opacity-0 hover:opacity-100 transition-opacity duration-300">
             <UIcon name="heroicons-camera" />
           </label>
         </div>
         <input id="image-upload" type="file" class="hidden" @change="onFileChange" accept="image/*" />
+        <span class="text-orange-500">Upload Image Profile</span>
       </div>
 
       <UForm :validate="validate" :state="state" class="space-y-4" @submit="onSubmit">
-        <UFormGroup label="Email" name="email">
-          <UInput v-model="state.email" />
-        </UFormGroup>
+        <div class="mt-2.5 relative">
+          <input type="email" name="" id="" placeholder="Enter Email Address" v-model="state.email"
+            class="block w-full px-4 py-4 placeholder-gray-500 transition-all duration-200 border border-gray-400 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600" />
+        </div>
 
-        <UFormGroup label="Username" name="username">
-          <UInput v-model="state.userName" />
-        </UFormGroup>
+        <div class="mt-2.5 relative">
+          <input type="text" name="" id="" placeholder="Enter UserName" v-model="state.userName"
+            class="block w-full px-4 py-4 placeholder-gray-500 transition-all duration-200 border border-gray-400 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600" />
+        </div>
 
-        <UFormGroup label="Course" name="course">
-          <UInput v-model="state.course" />
-        </UFormGroup>
+        <div class="mt-2.5 relative">
+          <input type="text" name="" id="" placeholder="Enter Course" v-model="state.course"
+            class="block w-full px-4 py-4 placeholder-gray-500 transition-all duration-200 border border-gray-400 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600" />
+        </div>
 
-        <UFormGroup label="Password" name="password">
-          <UInput v-model="state.password" type="password" />
-        </UFormGroup>
+        <div class="mt-2.5 relative">
+          <input type="password" name="" id="" placeholder="Enter Password" v-model="state.password"
+            class="block w-full px-4 py-4 placeholder-gray-500 transition-all duration-200 border border-gray-400 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600" />
+        </div>
 
-        <UFormGroup label="Role" name="role">
-          <UInput v-model="state.role" />
-        </UFormGroup>
+        <div class="mt-2.5 relative">
+          <input type="text" name="" id="" placeholder="Enter Role of User" v-model="state.role"
+            class="block w-full px-4 py-4 placeholder-gray-500 transition-all duration-200 border border-gray-400 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600" />
+        </div>
 
         <button type="submit" class=" w-[50%] bg-orange-500 text-white py-2 rounded hover:bg-orange-600">
-         Create Member
+          Create Member
         </button>
       </UForm>
     </UCard>

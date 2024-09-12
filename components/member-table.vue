@@ -5,7 +5,7 @@
       <UTooltip text="search member...">
         <UInput
         icon="i-heroicons-magnifying-glass-20-solid"
-        size="sm"
+        size="xl"
         color="white"
         :trailing="false"
         placeholder="Search..."

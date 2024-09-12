@@ -4,7 +4,7 @@ export interface CreateMemberData {
     course: string;
     password: string;
     role: string;
-    image?: File | null; // Optional field for file upload
+    image?: File | null; 
   }
   
   export interface CreateMember {
@@ -23,6 +23,7 @@ export interface CreateMemberData {
     id: string;
     fullName: string;
     email: string;
+    sentAt:Date;
     phoneNumber: string;
     campanyName: string;
     message: string;
@@ -51,7 +52,7 @@ export interface CreateMemberData {
     id: string;
     email: string;
     username: string;
-    role: string; // Adjust as per your application's role definition
+    role: string; 
   }
   export interface StudentFormState {
     firstName: string;
