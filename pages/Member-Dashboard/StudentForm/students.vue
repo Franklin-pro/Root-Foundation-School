@@ -85,7 +85,7 @@ const attachmentName = computed(() => {
         </div>
 
         <div class="mt-2.5 relative">
-          <input type="text" name="" id="" placeholder="How Old Are You?" v-model="state.age"
+          <input type="text" name="" id="" placeholder="type age like (21-july-2019)" v-model="state.age"
             class="block w-full px-4 py-4 placeholder-gray-500 transition-all duration-200 border border-gray-200 rounded-xl focus:outline-none focus:border-blue-600 caret-blue-600" />
         </div>
 
