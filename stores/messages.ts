@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import { useRouter } from 'vue-router';
 import axios from 'axios';
-import type{ Message,MessageFormState } from '~/type';
+import type{ Chat, ChatFormState, Message,MessageFormState } from '~/type';
 
 
 interface ApiResponse<T> {
@@ -12,6 +12,7 @@ interface ApiResponse<T> {
 
 export const useMessageStore = defineStore('messages', () => {
   const messages = ref<Message[]>([]);
+  const chats = ref<Chat[]>([]);
   const currentMessage = ref<Message | null>(null);
   const router = useRouter();
 
@@ -43,6 +44,33 @@ export const useMessageStore = defineStore('messages', () => {
       console.error('Failed to create message', error);
     }
   };
+  const createChat = async (data: ChatFormState) => {
+    try {
+      const response = await axios.post<ApiResponse<Chat>>('http://localhost:3030/v1/chats', data);
+      chats.value.push(response.data.datas);
+      alert(response.data.message);
+    } catch (error) {
+      console.error('Failed to create message', error);
+    }
+  };
+
+  const fetchChats = async () => {
+    try {
+      const response = await axios.get<ApiResponse<Chat[]>>('http://localhost:3030/v1/chats');
+      chats.value = response.data.datas;
+    } catch (error) {
+      console.error('Failed to fetch messages', error);
+    }
+  };
+  const deleteChat = async (id: string) => {
+    try {
+      const response = await axios.delete<ApiResponse<null>>(`http://localhost:3030/v1/chats/${id}`);
+      chats.value = chats.value.filter(message => message.id !== id);
+      alert(response.data.message);
+    } catch (error) {
+      console.error('Failed to delete message', error);
+    }
+  };
 
   // Update an existing message by ID
   // const updateMessage = async (id: string, data: MessageFormState) => {
@@ -69,5 +97,5 @@ export const useMessageStore = defineStore('messages', () => {
     }
   };
 
-  return { messages, currentMessage, fetchMessages, createMessage, deleteMessage };
+  return { messages,chats, currentMessage,createChat, fetchMessages,fetchChats,deleteChat, createMessage, deleteMessage };
 });

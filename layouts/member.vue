@@ -1,8 +1,9 @@
 <template>
- 
+
   <div class="flex flex-col md:flex-row">
     <!-- Sidebar -->
-      <div class="sidebar md:w-64 w-full fixed md:h-screen h-screen shadow-xl flex flex-col justify-between" :class="colorMode === 'dark' ? 'bg-gray-600' : 'bg-gray-50'">
+    <div class="sidebar md:w-64 w-full fixed md:h-screen h-screen shadow-xl flex flex-col justify-between"
+      :class="colorMode === 'dark' ? 'bg-gray-600' : 'bg-gray-50'">
       <div>
         <h1 class="p-4 text-blue-600 font-extrabold text-3xl text-center md:text-center">ROOT FOUND</h1>
         <NuxtLink to="/Member-Dashboard/member" class="bg-blue-400 text-white font-bold flex p-2 items-center gap-4">
@@ -27,7 +28,9 @@
 
           <!-- Dropdown Links -->
           <ul v-if="dropdownOpen" class="flex flex-col">
-            <NuxtLink to="/Member-Dashboard/StudentForm/students" class="py-1 px-4 hover:text-blue-400">Create new Student
+            <NuxtLink to="/Member-Dashboard/StudentForm/students"
+              class="py-1 px-4 flex items-center gap-3 hover:text-blue-400">
+              <UIcon name="i-heroicons-plus-circle" /> new Student
             </NuxtLink>
           </ul>
         </div>
@@ -48,15 +51,20 @@
             </span>
           </div>
           <ul v-if="dropdownOpenx" class="flex flex-col">
-            <NuxtLink to="/Member-Dashboard/View-Students/students" class="py-1 px-4 hover:text-blue-400">Student List
+            <NuxtLink to="/Member-Dashboard/View-Students/students"
+              class="py-1 px-4 flex justify-between items-center hover:text-blue-400"><span>
+                <UIcon name="i-heroicons-document" /> Student List
+              </span>
+              <span class="bg-orange-500 px-1.5 rounded-full text-sm">{{ studentStore.students.length }}</span>
             </NuxtLink>
           </ul>
         </div>
-        <NuxtLink
-          :to="`/member-dashboard/Profile/${memberId}`"
-          class="font-semibold flex p-2 items-center gap-4 hover:bg-blue-200"
-        >
-          <UIcon name="i-ic-round-person-2"/> Profile
+        <NuxtLink :to="`/member-dashboard/Profile/${memberId}`"
+          class="font-semibold flex p-2 items-center gap-4 hover:bg-blue-200">
+          <UIcon name="i-ic-round-person-2" /> Profile
+        </NuxtLink>
+        <NuxtLink :to="`/member-dashboard/chats/`" class="font-semibold flex p-2 items-center gap-4 hover:bg-blue-200">
+          <UIcon name="i-heroicons-chat-bubble-oval-left-ellipsis" /> Chats
         </NuxtLink>
       </div>
 
@@ -69,45 +77,45 @@
 
 
     <div class="w-full md:ml-64 relative">
-<!-- <UCard class="rounded-none"> -->
-  <div   class="
+      <!-- <UCard class="rounded-none"> -->
+      <div class="
     'w-full sticky top-0 z-50 flex shadow-sm p-3 justify-between items-center'
-  "
-  :class="colorMode === 'dark' ? 'bg-gray-600 text-white' : 'bg-gray-50 text-black'">
+  " :class="colorMode === 'dark' ? 'bg-gray-600 text-white' : 'bg-gray-50 text-black'">
         <h1 class="text-center md:text-left font-extrabold text-blue-500 text-xl">Member</h1>
         <div class="flex items-center gap-4">
-            <NuxtLink :to="`/member-dashboard/Profile/${memberId}`" class=" relative flex items-center gap-4">
-              <UChip position="bottom-right" class="absolute z-50 top-2 right-1">
-              </UChip>
-              <UTooltip text="profile setting">
-                <img :src="memberImage || defaultImage" alt="Profile Image"
-                  class="h-10 w-10 border border-gray-500 object-contain rounded-full" />
-              </UTooltip>
-
-            </NuxtLink>
-            <UTooltip text="change theme">
-
-              <button @click="toggleTheme"
-                class="p-3 flex items-center border border-gray-200 dark:bg-gray-800 rounded-full">
-                <UIcon :name="colorMode === 'dark' ? 'i-heroicons-moon' : 'i-heroicons-sun'" class="text-xl " />
-              </button>
+          <NuxtLink :to="`/member-dashboard/Profile/${memberId}`" class=" relative flex items-center gap-4">
+            <UChip position="bottom-right" class="absolute z-50 top-2 right-1">
+            </UChip>
+            <UTooltip text="profile setting">
+              <img :src="memberImage || defaultImage" alt="Profile Image"
+                class="h-10 w-10 border border-gray-500 object-contain rounded-full" />
             </UTooltip>
 
-          </div>
+          </NuxtLink>
+          <UTooltip text="change theme">
+
+            <button @click="toggleTheme"
+              class="p-3 flex items-center border border-gray-200 dark:bg-gray-800 rounded-full">
+              <UIcon :name="colorMode === 'dark' ? 'i-heroicons-moon' : 'i-heroicons-sun'" class="text-xl " />
+            </button>
+          </UTooltip>
+
+        </div>
       </div>
-<!-- </UCard> -->
- 
+      <!-- </UCard> -->
+
 
       <div class="pt-4 mb-6 min-h-screen px-4">
         <slot />
       </div>
 
-      <div class="w-full p-3 sticky bottom-0 mb-0  shadow-xl" :class="colorMode === 'dark' ? 'bg-gray-600' : 'bg-gray-50'">
+      <div class="w-full p-3 sticky bottom-0 mb-0  shadow-xl"
+        :class="colorMode === 'dark' ? 'bg-gray-600' : 'bg-gray-50'">
         <h1 class="text-center md:text-center font-semibold text-md">
-         &copy; {{ new Date().getFullYear() }} All rights reserved
+          &copy; {{ new Date().getFullYear() }} All rights reserved
         </h1>
       </div>
- 
+
     </div>
   </div>
 </template>
@@ -123,6 +131,7 @@ const dropdownOpen = ref(false)
 const dropdownOpenx = ref(false)
 
 const memberStore = useMemberStore()
+const studentStore = useStudentStore()
 const memberId = ref<string>('')
 
 const isClient = typeof window !== 'undefined'
@@ -162,15 +171,15 @@ const toggleTheme = () => {
 
 
 const logout = () => {
- memberStore.logout()
+  memberStore.logout()
 }
 
 onMounted(() => {
   if (isClient) {
     const userInfo = JSON.parse(localStorage.getItem("user") || '{}')
-    console.log('User Info:', userInfo) 
+    console.log('User Info:', userInfo)
     memberId.value = userInfo._id || ''
-    
+
     memberStore.fetchMember(memberId.value)
       .then(() => {
       })

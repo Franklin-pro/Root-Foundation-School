@@ -1,7 +1,7 @@
 <template>
   <div class="p-5">
     <div class="flex items-center justify-between py-5">
-      <h1 class="font-bold text-2xl text-primary">Members List</h1>
+      <h1 class="font-bold text-2xl text-primary">Blogs List</h1>
       <UTooltip text="search member...">
         <UInput
         icon="i-heroicons-magnifying-glass-20-solid"
@@ -14,7 +14,7 @@
       </UTooltip>
         <button class=" w-[20%] bg-orange-500 text-white py-2 rounded hover:bg-orange-600">
           <UTooltip text="create new member">
-            <a href="/Dashboard/members/createMember">Create New</a>
+            <a href="/Dashboard/Blogs/createBlogs">Create New</a>
           </UTooltip>
 
         </button>
@@ -62,7 +62,7 @@
       </div>
 
       <div v-if="showForm" class="w-1/2 px-4">
-        <UpdateMember :member="selectedMember" v-if="selectedMember" @close="closeCard" />
+        <!-- <UpdateMember :blog="selectedMember" v-if="selectedMember" @close="closeCard" /> -->
       </div>
     </div>
   </div>
@@ -70,8 +70,8 @@
 
 <script lang="ts" setup>
 import { ref, computed, onMounted } from 'vue';
-import { useMemberStore } from '../stores/members'; 
-import type { Member } from '~/type';
+import { useBlogStore } from '~/stores/blogs'; 
+import type { Blogs } from '~/type';
 
 definePageMeta({
   layout: 'dashboard'
@@ -80,7 +80,7 @@ definePageMeta({
 const items = (row: any) => [
   [
     {
-      label: 'Edit member',
+      label: 'Edit Blog',
       icon: 'i-heroicons-pencil-square-20-solid',
       click: () => {
         selectedMember.value = row;
@@ -88,15 +88,15 @@ const items = (row: any) => [
       }
     },
     {
-      label: 'Delete member',
+      label: 'Delete Blog',
       icon: 'i-heroicons-trash',
       click: async () => {
         try {
-          const confirmation = confirm('Are you sure you want to delete this member?');
+          const confirmation = confirm('Are you sure you want to delete this blog?');
           if (confirmation) {
-            const voice = new SpeechSynthesisUtterance('member already deleted');
+            const voice = new SpeechSynthesisUtterance('blog already deleted');
             window.speechSynthesis.speak(voice);
-            await memberStore.deleteMember(row._id);
+            await blogStore.deleteBlog(row._id);
             window.location.reload();
           }
         } catch (error) {
@@ -109,21 +109,19 @@ const items = (row: any) => [
 ];
 
 const columns = [
-  { key: 'memberImage', label: 'User Image' },
-  { key: 'userName', label: 'User Name' },
-  { key: 'email', label: 'Email Address' },
-  { key: 'course', label: 'Course' },
-  { key: 'role', label: 'Role' },
+  { key: 'blogName', label: 'Blog Name' },
+  { key: 'blogStatus', label: 'BlogStatus' },
+  { key: 'blogDescription', label: 'Blog Description' },
   { key: 'actions', label: 'Action' }
 ];
 
 const searchQuery = ref('');
 const showForm = ref(false);
-const selectedMember = ref<Member | null>(null); 
-const memberStore = useMemberStore(); 
+const selectedMember = ref<Blogs | null>(null); 
+const blogStore = useBlogStore(); 
 
-const selectMember = (member: Member) => {
-  selectedMember.value = member;
+const selectMember = (blog: Blogs) => {
+  selectedMember.value = blog;
 };
 
 function closeCard() {
@@ -137,17 +135,16 @@ const itemsPerPage = ref(5);
 
 
 const totalPages = computed(() => {
-  return Math.ceil(filteredMembers.value.length / itemsPerPage.value);
+  return Math.ceil(filteredBlog.value.length / itemsPerPage.value);
 });
 
-const filteredMembers = computed(() => {
-  if (!memberStore.members) return [];
-  return memberStore.members.filter(member => {
+const filteredBlog = computed(() => {
+  if (!blogStore.blogs) return [];
+  return blogStore.blogs.filter(blog => {
     return (
-      member.userName.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-      member.course.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-      member.email.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-      member.role.toLowerCase().includes(searchQuery.value.toLowerCase())
+      blog.blogName.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
+      blog.blogDescription.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
+      blog.blogStatus.toLowerCase().includes(searchQuery.value.toLowerCase())
     )
     
   })
@@ -157,7 +154,7 @@ const filteredMembers = computed(() => {
 const paginatedMembers = computed(() => {
   const start = (currentPage.value - 1) * itemsPerPage.value;
   const end = start + itemsPerPage.value;
-  return filteredMembers.value.slice(start, end);
+  return filteredBlog.value.slice(start, end);
 });
 
 function nextPage() {
@@ -173,7 +170,7 @@ function prevPage() {
 }
 
 onMounted(async () => {
-  await memberStore.fetchMembers(); 
+  await blogStore.fetchBlogs(); 
 });
 </script>
 

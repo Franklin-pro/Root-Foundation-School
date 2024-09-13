@@ -13,55 +13,37 @@
         </div>
 
         <div class="justify-between">
-          <div class="pb-2 flex flex-col">
-            <span class="flex items-center gap-3 text-primary font-medium pb-2">
-              <UIcon name="i-heroicons-image"/>Profile Image:
-            </span>
-            <input type="file" accept="image/*" @change="handleImageUpload"/>
-            <div class="pt-2">
-              <!-- Display selected image preview if needed -->
-              <img v-if="selectedImage" :src="selectedImage" alt="Profile Image" class="w-24 h-24"/>
-            </div>
-          </div>
           <div class="grid gap-3 lg:grid-cols-2">
-            <p class="pb-2 flex flex-col">
-              <span class="flex items-center text-primary gap-3 font-medium pb-2">
-                <UIcon name="i-heroicons-user-circle"/>First Name:
-              </span>
-              <UInput v-model="student.firstName" type="text"/>
-            </p>
-            <p class="pb-2 flex flex-col">
-              <span class="flex items-center gap-3 text-primary font-medium pb-2">
-                <UIcon name="i-heroicons-swatch"/>Last Name:
-              </span>
-              <UInput v-model="student.lastName" type="text"/>
-            </p>
-            <p class="pb-2 flex flex-col">
-              <span class="flex items-center gap-3 text-primary font-medium pb-2">
-                <UIcon name="i-heroicons-book-open"/>Age:
-              </span>
-              <UInput v-model="student.age" type="text"/>
-            </p>
-            <p class="pb-2 flex flex-col">
-              <span class="flex items-center gap-3 text-primary font-medium pb-2">
-                <UIcon name="i-heroicons-envelope"/>Class:
-              </span>
-              <UInput v-model="student.grade" type="text"/>
-            </p>
-            <p class="pb-2 flex flex-col">
-              <span class="flex items-center gap-3 text-primary font-medium pb-2">
-                <UIcon name="i-heroicons-envelope"/>Class:
-              </span>
-              <UInput v-model="student.sex" type="text"/>
-            </p>
+            <div class="mt-2.5 relative">
+          <input type="text" name="" id="" placeholder="Email Address" v-model="student.firstName"
+            class="block w-full p-3 placeholder-gray-500 transition-all duration-200 border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600" />
+        </div>
+            <div class="mt-2.5 relative">
+          <input type="text" name="" id="" placeholder="Email Address" v-model="student.lastName"
+            class="block w-full p-3 placeholder-gray-500 transition-all duration-200 border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600" />
+        </div>
+            <div class="mt-2.5 relative">
+          <input type="text" name="" id="" placeholder="Email Address" v-model="student.age"
+            class="block w-full p-3 placeholder-gray-500 transition-all duration-200 border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600" />
+        </div>
+            <div class="mt-2.5 relative">
+          <input type="text" name="" id="" placeholder="Email Address" v-model="student.grade"
+            class="block w-full p-3 placeholder-gray-500 transition-all duration-200 border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600" />
+        </div>
+            <div class="mt-2.5 relative">
+          <input type="text" name="" id="" placeholder="Email Address" v-model="student.sex"
+            class="block w-full p-3 placeholder-gray-500 transition-all duration-200 border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600" />
+        </div>
           </div>
         </div>
       </div>
       <div class="pt-2 flex gap-3">
-        <UButton color="primary" variant="solid" icon="i-heroicons-pencil-square-16-solid"
-          type="button" @click="updateStudent">Update</UButton>
-        <UButton color="red" variant="outline" icon="i-heroicons-x-mark-16-solid" label="Cancel"
-          @click="closeCard"/>
+        <button type="button" @click="updateStudent" class="w-full bg-blue-500  flex items-center gap-3 justify-center text-white py-2 rounded hover:bg-blue-600">
+         <UIcon name="i-heroicons-pencil-square-16-solid" class="text-2xl"/> Update Member
+        </button>
+        <button type="button" @click="closeCard" class="w-full flex items-center gap-3 justify-center bg-red-500 text-white py-2 rounded hover:bg-red-600">
+         <UIcon name="i-heroicons-x-mark-16-solid" class="text-2xl"/> Cancel Action
+        </button>
       </div>
     </UCard>
   </div>
@@ -83,7 +65,6 @@ const student = ref<Students>({
   age: '',
   grade: '',
   sex: '',
-  studentReport: ''
 });
 
 const selectedImage = ref<string | null>(null);
@@ -97,18 +78,7 @@ watch(() => props.student, (newStudent) => {
 
 const studentStore = useStudentStore();
 
-const handleImageUpload = (event: Event) => {
-  const target = event.target as HTMLInputElement;
-  if (target.files && target.files[0]) {
-    const file = target.files[0];
-    const reader = new FileReader();
-    reader.onload = () => {
-      selectedImage.value = reader.result as string;
-      // Handle file upload logic here if needed
-    };
-    reader.readAsDataURL(file);
-  }
-};
+
 
 const updateStudent = async () => {
   if (student.value) {

@@ -2,10 +2,12 @@
     <div>
         <section class="py-10 bg-white sm:py-16 lg:py-24">
             <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-                <div class="max-w-2xl mx-auto text-center">
-                    <h2 class="text-2xl font-bold text-blue-600 sm:text-4xl sm:leading-tight">Trusted by world class
-                        companies, Root Foundation</h2>
-                </div>
+                <div class="flex items-end justify-between">
+            <div class="flex-1 text-center lg:text-left py-4">
+                <h2 class="text-3xl font-bold leading-tight text-blue-500 sm:text-4xl lg:text-5xl">Campanies Trusted Root Foundation</h2>
+                <p class="max-w-xl mx-auto mt-4 text-base leading-relaxed text-gray-600 lg:mx-0">Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis.</p>
+            </div>
+        </div>
 
                 <div
                     class="grid items-center max-w-4xl grid-cols-2 mx-auto mt-12 md:mt-20 md:grid-cols-4 gap-x-10 gap-y-16">

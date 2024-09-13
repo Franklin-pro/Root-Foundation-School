@@ -23,7 +23,6 @@ export interface CreateMemberData {
     id: string;
     fullName: string;
     email: string;
-    sentAt:Date;
     phoneNumber: string;
     campanyName: string;
     message: string;
@@ -34,6 +33,18 @@ export interface CreateMemberData {
     email: string;
     phoneNumber: string;
     campanyName: string;
+    message: string;
+  }
+  export interface ChatFormState {
+    fullName: string;
+    className: string;
+    message: string;
+  }
+  export interface Chat {
+    _id:string;
+    id: string;
+    fullName: string;
+    className: string;
     message: string;
   }
   export interface Login {
@@ -83,7 +94,6 @@ export interface UpdateStudent{
   age: string;
   sex: string;
   grade: string;
-  studentReport: File | null;
 }
 
  // ~/type.ts
@@ -99,7 +109,7 @@ export interface UpdateMember {
   email: string;
   course: string;
   role: string;
-  memberImage?: File | string; // Adjust this based on how the image is handled
+  memberImage?: File | string; 
 }
 
 export interface Member extends UpdateMember {
@@ -114,6 +124,32 @@ export interface Member extends UpdateMember {
     course: string;
     role: string;
     url:string;
-    memberImage?: string; // Assuming image is a URL or similar
+    memberImage?: string;
   }
-  
+  export interface BlogImage {
+    url:string;
+  }
+  export interface Blogs {
+    _id:string;
+    id: string;
+    blogName: string;
+    blogDescription: string;
+    blogStatus: string;
+    url:string;
+    blogImage?: BlogImage; 
+  }
+  export interface BlogFormState {
+    blogName: string;
+    blogDescription: string;
+    blogStatus: string;
+    url:string;
+    blogImage: File | null;
+  }
+  export interface UpdateBlog {
+    id: string;
+    blogName: string;
+    blogDescription: string;
+    blogStatus: string;
+    url:string;
+    blogImage?: File | string; 
+  }

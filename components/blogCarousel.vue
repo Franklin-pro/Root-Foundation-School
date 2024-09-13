@@ -9,12 +9,11 @@
         :key="item.id"
         class="carousel-item w-full lg:w-1/3 flex-shrink-0 p-4"
       >
-        <img :src="item.image" class="w-full h-60 object-cover rounded-lg" draggable="false" />
+        <img :src="item.blogImage?.url" class="w-full h-60 object-cover rounded-lg" draggable="false" />
         <div class="carousel-content p-4 bg-white">
-          <span class="carousel-status text-gray-500 text-xs uppercase">{{ item.status }}</span>
-          <span class="carousel-date block text-gray-400 text-xs">{{ item.date }}</span>
-          <h3 class="carousel-heading text-lg font-bold mt-2">{{ item.heading }}</h3>
-          <p class="carousel-description text-sm text-gray-600">{{ item.description }}</p>
+          <span class="carousel-status text-gray-500 text-xs uppercase">{{ item.blogStatus }}</span>
+          <h3 class=" text-lg text-black font-bold mt-2">{{ item.blogName}}</h3>
+          <p class="carousel-description text-sm truncate text-gray-600">{{ item.blogDescription}}</p>
         </div>
       </div>
     </div>
@@ -27,63 +26,29 @@
 <script lang="ts" setup>
 import { ref, computed } from 'vue';
 
-const items = ref([
-  {
-    id: 1,
-    image: "https://cdn.rareblocks.xyz/collection/celebration/images/blog/2/blog-post-3.jpg",
-    status: "LIFESTYLE",
-    date: '21-march-2023',
-    heading: "How to build coffee inside your home in 5 minutes",
-    description: "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit."
-  },
-  {
-    id: 2,
-    image: "https://cdn.rareblocks.xyz/collection/celebration/images/blog/2/blog-post-2.jpg",
-    status: "MARKETING",
-    date: '21-march-2020',
-    heading: "7 Tips to run your remote team faster and better.",
-    description: "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit."
-  },
-  {
-    id: 3,
-    image: "https://cdn.rareblocks.xyz/collection/celebration/images/blog/2/blog-post-1.jpg",
-    status: "PRODUCTIVITY",
-    date: 'April 04, 2020',
-    heading: "5 Productivity tips to write faster in the morning.",
-    description: "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit."
-  },
-  {
-    id: 4,
-    image: "https://cdn.rareblocks.xyz/collection/celebration/images/blog/2/blog-post-3.jpg",
-    status: "LIFESTYLE",
-    date: '22-April-2023',
-    heading: "How to stay productive at home.",
-    description: "Tips for maintaining productivity while working from home."
-  },
-  {
-    id: 5,
-    image: "https://cdn.rareblocks.xyz/collection/celebration/images/blog/2/blog-post-2.jpg",
-    status: "MARKETING",
-    date: '30-march-2020',
-    heading: "Strategies to enhance your marketing efforts.",
-    description: "Effective marketing tips for growing your business."
-  },
-  {
-    id: 6,
-    image: "https://cdn.rareblocks.xyz/collection/celebration/images/blog/2/blog-post-1.jpg",
-    status: "PRODUCTIVITY",
-    date: 'April 10, 2020',
-    heading: "Morning routines for peak productivity.",
-    description: "Create a morning routine that boosts productivity."
-  }
-]);
+const searchQuery = ref('');
+const blogStore = useBlogStore()
+const filteredBlogs = computed(() => {
+  if (!blogStore.blogs) return [];
+  return blogStore.blogs
+    .filter(blogs => {
+      return (
+        blogs.blogName.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
+        blogs.blogStatus.toLowerCase().includes(searchQuery.value.toLowerCase())
+      );
+    })
+    .reverse()
+});
 
+onMounted(async () => {
+  await blogStore.fetchBlogs();
+});
 const itemsPerPage = 3;
-const totalPages = computed(() => Math.ceil(items.value.length / itemsPerPage));
+const totalPages = computed(() => Math.ceil(filteredBlogs.value.length / itemsPerPage));
 
 const activeIndex = ref(0);
 
-const paginatedItems = computed(() => items.value.slice(activeIndex.value * itemsPerPage, (activeIndex.value + 1) * itemsPerPage));
+const paginatedItems = computed(() => filteredBlogs.value.slice(activeIndex.value * itemsPerPage, (activeIndex.value + 1) * itemsPerPage));
 
 const nextSlide = () => {
   if (activeIndex.value < totalPages.value - 1) {

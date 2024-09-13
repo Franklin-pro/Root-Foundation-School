@@ -13,54 +13,41 @@
         </div>
 
         <div class="justify-between">
-          <div class="pb-2 flex flex-col">
-              <span class="flex items-center gap-3 text-primary font-medium pb-2">
-                <UIcon name="i-heroicons-image"/>Profile Image:
-              </span>
-              <input type="file"  accept="image/*"/>
-              <div  class="pt-2">
-              </div>
-            </div>
-          <div class="grid gap-3 lg:grid-cols-2">
-            <p class="pb-2 flex flex-col">
-              <span class="flex items-center text-primary gap-3 font-medium pb-2">
-                <UIcon name="i-heroicons-user-circle"/>User Name:
-              </span>
-              <UInput v-model="member.userName" type="text"/>
-            </p>
-            <p class="pb-2 flex flex-col">
-              <span class="flex items-center gap-3 text-primary font-medium pb-2">
-                <UIcon name="i-heroicons-swatch"/>Role:
-              </span>
-              <UInput v-model="member.role" type="text"/>
-            </p>
-            <p class="pb-2 flex flex-col">
-              <span class="flex items-center gap-3 text-primary font-medium pb-2">
-                <UIcon name="i-heroicons-book-open"/>Course:
-              </span>
-              <UInput v-model="member.course" type="text"/>
-            </p>
-            <p class="pb-2 flex flex-col">
-              <span class="flex items-center gap-3 text-primary font-medium pb-2">
-                <UIcon name="i-heroicons-envelope"/>Email Address:
-              </span>
-              <UInput v-model="member.email" type="text"/>
-            </p>
+
+          <div class="grid gap-3 lg:grid-cols-2 pb-6">
+            <div class="mt-2.5 relative">
+          <input type="text" name="" id="" placeholder="userName" v-model="member.userName"
+            class="block w-full p-3 placeholder-gray-500 transition-all duration-200 border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600" />
+        </div>
+        <div class="mt-2.5 relative">
+          <input type="text" name="" id="" placeholder="Role" v-model="member.role"
+            class="block w-full p-3 placeholder-gray-500 transition-all duration-200 border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600" />
+        </div>
+               <div class="mt-2.5 relative">
+          <input type="text" name="" id="" placeholder="Course" v-model="member.course"
+            class="block w-full p-3 placeholder-gray-500 transition-all duration-200 border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600" />
+        </div>
+        <div class="mt-2.5 relative">
+          <input type="text" name="" id="" placeholder="Email Address" v-model="member.email"
+            class="block w-full p-3 placeholder-gray-500 transition-all duration-200 border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600" />
+        </div>
           </div>
         </div>
       </div>
       <div class="pt-2 flex gap-3">
-        <UButton color="primary" variant="solid" icon="i-heroicons-pencil-square-16-solid"
-          type="button" @click="updateMember">Update</UButton>
-        <UButton color="red" variant="outline" icon="i-heroicons-x-mark-16-solid" label="Cancel"
-          @click="closeCard"/>
+        <button type="button" @click="updateMember" class="w-full bg-blue-500  flex items-center gap-3 justify-center text-white py-2 rounded hover:bg-blue-600">
+         <UIcon name="i-heroicons-pencil-square-16-solid" class="text-2xl"/> Update Member
+        </button>
+        <button type="button" @click="closeCard" class="w-full flex items-center gap-3 justify-center bg-red-500 text-white py-2 rounded hover:bg-red-600">
+         <UIcon name="i-heroicons-x-mark-16-solid" class="text-2xl"/> Cancel Action
+        </button>
       </div>
     </UCard>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { useMemberStore } from '~/stores/members'; // Adjust the import path as necessary
+import { useMemberStore } from '~/stores/members';
 import type { Member, UpdateMember as UpdateMemberType } from '~/type';
 
 const props = defineProps<{ member: Member | null }>();
@@ -79,7 +66,7 @@ const member = ref<Member>({
 
 watch(() => props.member, (newMember) => {
   if (newMember) {
-    member.value = { ...newMember }; // Create a copy of the new member object
+    member.value = { ...newMember };
   }
 }, { immediate: true });
 const memberStore = useMemberStore();

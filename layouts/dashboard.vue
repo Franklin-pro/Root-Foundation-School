@@ -1,121 +1,169 @@
 <template>
   <div class="flex flex-col md:flex-row">
-    <!-- Sidebar -->
-    <div 
-      :class="colorMode === 'dark' ? 'bg-gray-700 text-white' : 'bg-gray-100 text-black'"
-      class="sidebar md:w-64 w-full fixed md:h-screen h-screen shadow-xl flex flex-col justify-between transition-colors duration-700 ease-in-out"
-    >
+    <div :class="colorMode === 'dark' ? 'bg-gray-700 text-white' : 'bg-gray-100 text-black'"
+      class="sidebar md:w-64 w-full fixed md:h-screen h-screen shadow-xl flex flex-col justify-between transition-colors duration-700 ease-in-out">
       <div>
-        <h1 class="p-4 text-primary font-bold text-center text-3xl md:text-left transition-colors duration-700 ease-in-out">ROOT FOUND</h1>
-
-        <!-- Dashboard Link -->
-        <NuxtLink 
-          to="/Dashboard/admin" 
-          class="bg-green-400 text-white font-bold flex p-2 items-center gap-4 transition-colors duration-700 ease-in-out"
-        >
+        <h1
+          class="p-4 text-primary font-bold text-center text-3xl md:text-left transition-colors duration-700 ease-in-out">
+          ROOT FOUND</h1>
+        <NuxtLink to="/Dashboard/admin"
+          class="bg-green-400 text-white font-bold flex p-2 items-center gap-4 transition-colors duration-700 ease-in-out">
           <UIcon name="i-ic-baseline-dashboard" /> Dashboard
         </NuxtLink>
-
-        <!-- Members Dropdown -->
         <div>
           <div @click="toggleDropdown" class="cursor-pointer py-2">
-            <span 
+            <span
               class="font-semibold py-1 px-2 flex items-center justify-between w-full transition-colors duration-700 ease-in-out"
-              :class="colorMode === 'light' ? 'hover:bg-gray-200' : 'hover:bg-gray-500'"
-            >
+              :class="colorMode === 'light' ? 'hover:bg-gray-200' : 'hover:bg-gray-500'">
               <span class="flex items-center gap-4">
                 <UIcon name="heroicons-user-group" /> Members
               </span>
-              <svg 
-                xmlns="http://www.w3.org/2000/svg" 
-                class="h-5 w-5 transform transition-transform duration-700"
-                :class="{ 'rotate-180': dropdownOpen }" 
-                viewBox="0 0 20 20" fill="currentColor"
-              >
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transform transition-transform duration-700"
+                :class="{ 'rotate-180': dropdownOpen }" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd"
                   d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 011.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                  clip-rule="evenodd" 
-                />
+                  clip-rule="evenodd" />
               </svg>
             </span>
           </div>
-
-          <!-- Dropdown Links -->
           <ul v-if="dropdownOpen" class="flex flex-col">
-            <NuxtLink to="/Dashboard/members/createMember" class="py-1 px-4 hover:text-primary transition-colors duration-700 ease-in-out">Create Members</NuxtLink>
-            <NuxtLink to="/Dashboard/members/view-members" class="py-1 px-4 hover:text-primary transition-colors duration-700 ease-in-out">View Members</NuxtLink>
+            <NuxtLink to="/Dashboard/members/createMember"
+              class="py-1 px-4 flex items-center gap-3 hover:text-primary transition-colors duration-700 ease-in-out">
+              <UIcon name="i-heroicons-plus-circle" /> Create Members
+            </NuxtLink>
+            <NuxtLink to="/Dashboard/members/view-members"
+              class="py-1 px-4 flex items-center justify-between gap-3 hover:text-primary transition-colors duration-700 ease-in-out">
+              <span class="flex items-center gap-2">
+                <UIcon name="i-heroicons-document" />View Members
+              </span><span class="bg-orange-500 px-1.5 rounded-full text-sm">{{ memberStore.members.length }}</span>
+            </NuxtLink>
           </ul>
         </div>
-
-        <!-- Students Dropdown -->
         <div>
           <div @click="toggleDrop" class="cursor-pointer py-2">
-            <span 
+            <span
               class="font-semibold py-1 px-2 flex items-center justify-between w-full transition-colors duration-700 ease-in-out"
-              :class="colorMode === 'light' ? 'hover:bg-gray-200' : 'hover:bg-gray-500'"
-            >
+              :class="colorMode === 'light' ? 'hover:bg-gray-200' : 'hover:bg-gray-500'">
               <span class="flex items-center gap-4">
                 <UIcon name="i-ic-baseline-people-alt" /> Students
               </span>
-              <svg 
-                xmlns="http://www.w3.org/2000/svg" 
-                class="h-5 w-5 transform transition-transform duration-700"
-                :class="{ 'rotate-180': dropdownOpenx }" 
-                viewBox="0 0 20 20" fill="currentColor"
-              >
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transform transition-transform duration-700"
+                :class="{ 'rotate-180': dropdownOpenx }" viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd"
                   d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 011.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                  clip-rule="evenodd" 
-                />
+                  clip-rule="evenodd" />
               </svg>
             </span>
           </div>
 
           <ul v-if="dropdownOpenx" class="flex flex-col">
-            <NuxtLink to="/Dashboard/Students/students" class="py-1 px-4 hover:text-primary transition-colors duration-700 ease-in-out">Student List</NuxtLink>
+            <NuxtLink to="/Dashboard/Students/students"
+              class="py-1 px-4 hover:text-primary transition-colors duration-700 ease-in-out">Student List</NuxtLink>
           </ul>
         </div>
 
-        <!-- Profile Link -->
-        <NuxtLink 
-          :to="`/Dashboard/Profile/${memberId}`" 
+
+        <div>
+          <div @click="toggleDroping" class="cursor-pointer py-2">
+            <span
+              class="font-semibold py-1 px-2 flex items-center justify-between w-full transition-colors duration-700 ease-in-out"
+              :class="colorMode === 'light' ? 'hover:bg-gray-200' : 'hover:bg-gray-500'">
+              <span class="flex items-center gap-4">
+                <UIcon name="i-heroicons-chat-bubble-oval-left-ellipsis" /> Messages
+              </span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transform transition-transform duration-700"
+                :class="{ 'rotate-180': dropdownOpens }" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd"
+                  d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 011.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                  clip-rule="evenodd" />
+              </svg>
+            </span>
+          </div>
+          <ul v-if="dropdownOpens" class="flex flex-col">
+            <NuxtLink to="/Dashboard/chats/"
+              class="py-1 px-4 hover:text-primary flex justify-between items-center gap-3 transition-colors duration-700 ease-in-out">
+              <span class="flex items-center gap-3">
+                <UIcon name="i-heroicons-chat-bubble-bottom-center-text" />Message Teachers
+              </span> <span class="bg-orange-500 px-1.5 rounded-full text-sm">{{ messageStore.chats.length }}</span>
+            </NuxtLink>
+            <NuxtLink to="/Dashboard/messages/"
+              class="py-1 px-4 hover:text-primary flex justify-between items-center gap-3 transition-colors duration-700 ease-in-out">
+              <span class="flex items-center gap-3">
+                <UIcon name="i-heroicons-chat-bubble-left-ellipsis" />Message Clients
+              </span><span class="bg-orange-500 px-1.5 rounded-full text-sm">{{ messageStore.messages.length }}</span>
+            </NuxtLink>
+          </ul>
+        </div>
+        <NuxtLink :to="`/Dashboard/Profile/${memberId}`"
           class="font-semibold flex p-2 items-center gap-4 transition-colors duration-700 ease-in-out"
-          :class="colorMode === 'light' ? 'hover:bg-gray-200' : 'hover:bg-gray-500'"
-        >
+          :class="colorMode === 'light' ? 'hover:bg-gray-200' : 'hover:bg-gray-500'">
           <UIcon name="i-ic-round-person-2" /> Profile
         </NuxtLink>
+        <div>
+          <div @click="toggleBlogs" class="cursor-pointer py-2">
+            <span
+              class="font-semibold py-1 px-2 flex items-center justify-between w-full transition-colors duration-700 ease-in-out"
+              :class="colorMode === 'light' ? 'hover:bg-gray-200' : 'hover:bg-gray-500'">
+              <span class="flex items-center gap-4">
+                <UIcon name="i-heroicons-chat-bubble-left-ellipsis" /> Blogs
+              </span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transform transition-transform duration-700"
+                :class="{ 'rotate-180': dropdownBlog }" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd"
+                  d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 011.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                  clip-rule="evenodd" />
+              </svg>
+            </span>
+          </div>
+          <ul v-if="dropdownBlog" class="flex flex-col">
+            <NuxtLink to="/Dashboard/Blogs/createBlogs"
+              class="py-1 px-4 hover:text-primary flex justify-between items-center gap-3 transition-colors duration-700 ease-in-out">
+              <span class="flex items-center gap-3">
+                <UIcon name="i-heroicons-plus-circle" />Create Blogs
+              </span>
+            </NuxtLink>
+            <NuxtLink to="/Dashboard/Blogs/viewBlogs"
+              class="py-1 px-4 hover:text-primary flex justify-between items-center gap-3 transition-colors duration-700 ease-in-out">
+              <span class="flex items-center gap-3">
+                <UIcon name="i-heroicons-chat-bubble-left-ellipsis" />View Blogs
+              </span><span class="bg-orange-500 px-1.5 rounded-full text-sm">{{ messageStore.messages.length }}</span>
+            </NuxtLink>
+          </ul>
+        </div>
       </div>
 
       <div class="p-4 flex flex-col gap-4">
-        <button @click="logout" class="w-full bg-orange-500 text-white py-2 rounded hover:bg-orange-600 transition-colors duration-700 ease-in-out">
+        <button @click="logout"
+          class="w-full bg-orange-500 text-white py-2 rounded hover:bg-orange-600 transition-colors duration-700 ease-in-out">
           Logout
         </button>
       </div>
     </div>
-
-    <!-- Main Content Area -->
     <div class="w-full md:ml-64 relative transition-colors duration-700 ease-in-out">
-      <div 
-        :class="colorMode === 'dark' ? 'bg-gray-600 text-white' : 'bg-gray-100 text-black'"
-        class="w-full sticky top-0 z-50 shadow-md p-4 flex justify-between items-center transition-colors duration-700 ease-in-out"
-      >
-        <h1 class="text-center md:text-left font-bold text-xl transition-colors duration-700 ease-in-out" :class="colorMode === 'dark' ? ' text-green-100' : ' text-orange-500'">Dashboard</h1>
+      <div :class="colorMode === 'dark' ? 'bg-gray-600 text-white' : 'bg-gray-100 text-black'"
+        class="w-full sticky top-0 z-50 shadow-md p-4 flex justify-between items-center transition-colors duration-700 ease-in-out">
+        <h1 class="text-center md:text-left font-bold text-xl transition-colors duration-700 ease-in-out"
+          :class="colorMode === 'dark' ? ' text-green-100' : ' text-orange-500'">Dashboard</h1>
         <div>
           <div class="flex items-center gap-4">
             <UTooltip text="messages">
               <NuxtLink to="/Dashboard/messages" class="border-gray-200 border p-2 rounded-full flex items-center">
-                <UIcon name="i-heroicons-envelope" class="text-2xl transition-colors duration-700 ease-in-out" :class="colorMode === 'dark' ? ' text-green-100' : ' text-orange-500'" />
+                <UIcon name="i-heroicons-envelope" class="text-2xl transition-colors duration-700 ease-in-out"
+                  :class="colorMode === 'dark' ? ' text-green-100' : ' text-orange-500'" />
               </NuxtLink>
             </UTooltip>
             <NuxtLink :to="`/Dashboard/Profile/${memberId}`" class="relative flex items-center gap-4">
               <UChip position="bottom-right" class="absolute z-50 top-2 right-1"></UChip>
               <UTooltip text="profile setting">
-                <img :src="memberImage || defaultImage" alt="Profile Image" class="h-10 w-10 border border-gray-200 object-contain rounded-full transition-transform duration-700 ease-in-out" />
+                <img :src="memberImage || defaultImage" alt="Profile Image"
+                  class="h-10 w-10 border border-gray-200 object-contain rounded-full transition-transform duration-700 ease-in-out" />
               </UTooltip>
             </NuxtLink>
             <UTooltip text="change theme">
-              <button @click="toggleTheme" class="p-3 flex items-center border border-gray-200 dark:bg-gray-800 rounded-full transition-colors duration-700 ease-in-out">
-                <UIcon :name="colorMode === 'dark' ? 'i-heroicons-moon' : 'i-heroicons-sun'" class="text-xl transition-colors duration-700 ease-in-out" />
+              <button @click="toggleTheme"
+                class="p-3 flex items-center border border-gray-200 dark:bg-gray-800 rounded-full transition-colors duration-700 ease-in-out">
+                <UIcon :name="colorMode === 'dark' ? 'i-heroicons-moon' : 'i-heroicons-sun'"
+                  class="text-xl transition-colors duration-700 ease-in-out" />
               </button>
             </UTooltip>
           </div>
@@ -126,10 +174,8 @@
         <slot />
       </div>
 
-      <div 
-        :class="colorMode === 'dark' ? 'bg-gray-600 text-white' : 'bg-gray-100 text-black'"
-        class="w-full p-3 sticky bottom-0 mb-0 text-primary shadow-xl transition-colors duration-700 ease-in-out"
-      >
+      <div :class="colorMode === 'dark' ? 'bg-gray-600 text-white' : 'bg-gray-100 text-black'"
+        class="w-full p-3 sticky bottom-0 mb-0 text-primary shadow-xl transition-colors duration-700 ease-in-out">
         <h1 class="text-center font-semibold text-md">
           &copy; {{ new Date().getFullYear() }} All rights reserved
         </h1>
@@ -148,8 +194,11 @@ import defaultImage from '../assets/icons.png'
 
 const dropdownOpen = ref(false)
 const dropdownOpenx = ref(false)
+const dropdownOpens = ref(false)
+const dropdownBlog = ref(false)
 
 const memberStore = useMemberStore()
+const messageStore = useMessageStore()
 const memberId = ref<string>('')
 
 const isClient = typeof window !== 'undefined'
@@ -179,6 +228,12 @@ const toggleDropdown = () => {
 const toggleDrop = () => {
   dropdownOpenx.value = !dropdownOpenx.value
 }
+const toggleDroping = () => {
+  dropdownOpens.value = !dropdownOpens.value
+}
+const toggleBlogs = () =>{
+  dropdownBlog.value = !dropdownBlog.value
+}
 
 
 const colorMode = useColorMode()
@@ -205,10 +260,8 @@ onMounted(() => {
         console.error('Failed to fetch members', error)
       })
   }
+
 })
 </script>
 
-<style scoped>
-
-</style>
-
+<style scoped></style>

@@ -1,11 +1,7 @@
 <template>
   <div>
-    <Navbar/>
+    <ContactUs/>
   </div>
-  <div>
-    <slot />
-  </div>
-  <Footer/>
 </template>
 
 <script lang="ts" setup>

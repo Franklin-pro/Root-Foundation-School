@@ -10,7 +10,7 @@
           <div class="hidden lg:flex lg:items-center lg:ml-auto lg:space-x-10">
             <div v-for="item in items" class="flow-root">
               <div class="flex flex-col px-6 -my-2 space-y-1">
-                <a href="/" title=""
+                <a :href="item.path" title=""
                   class="inline-flex py-2 text-base font-medium text-black transition-all duration-200 hover:text-blue-600 focus:text-blue-600">
                   {{ item.label }} </a>
               </div>
@@ -50,19 +50,23 @@ const items = ref([
   {
     label: "Home",
     icon: "i-heroicons-home",
+    path:"/"
   },
   {
     label: "About Us",
     icon: "i-heroicons-book-open",
+    path:"/abouts"
   },
   {
     label: "Contact Us",
     icon: "i-heroicons-chat-bubble-left-ellipsis",
+    path:"/contacts"
   },
 
   {
     label: "Blogs",
     icon: "i-heroicons-bookmark",
+    path:"/blogs"
   },
 ]);
 </script>

@@ -6,7 +6,6 @@
       <Blogs/>
       <Partnership/>
       <ContactUs/>
-      <Footer/>
     </div>
   </div>
 </template>
