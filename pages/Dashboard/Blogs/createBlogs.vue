@@ -10,7 +10,8 @@ const state = reactive<BlogFormState>({
   blogName: '',
   blogStatus: '',
   blogDescription: '',
-  blogImage: '',
+  blogImage: null,
+  url:''
 });
 
 definePageMeta({

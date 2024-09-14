@@ -94,11 +94,7 @@
             </NuxtLink>
           </ul>
         </div>
-        <NuxtLink :to="`/Dashboard/Profile/${memberId}`"
-          class="font-semibold flex p-2 items-center gap-4 transition-colors duration-700 ease-in-out"
-          :class="colorMode === 'light' ? 'hover:bg-gray-200' : 'hover:bg-gray-500'">
-          <UIcon name="i-ic-round-person-2" /> Profile
-        </NuxtLink>
+  
         <div>
           <div @click="toggleBlogs" class="cursor-pointer py-2">
             <span
@@ -130,6 +126,11 @@
             </NuxtLink>
           </ul>
         </div>
+        <NuxtLink :to="`/Dashboard/Profile/${memberId}`"
+          class="font-semibold flex p-2 items-center gap-4 transition-colors duration-700 ease-in-out"
+          :class="colorMode === 'light' ? 'hover:bg-gray-200' : 'hover:bg-gray-500'">
+          <UIcon name="i-ic-round-person-2" /> Profile
+        </NuxtLink>
       </div>
 
       <div class="p-4 flex flex-col gap-4">

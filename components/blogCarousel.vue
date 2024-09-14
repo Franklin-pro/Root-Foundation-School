@@ -2,10 +2,10 @@
   <div class="carousel-container relative overflow-hidden rounded-lg">
     <div
       class="carousel-wrapper flex transition-transform duration-500"
-      :style="{ transform: `translateX(-${activeIndex * 100 / itemsPerPage}%)` }"
+      :style="{ transform: `translateX(-${activeIndex * 100}%)` }" <!-- Slide by 1 card per click -->
     >
       <div
-        v-for="(item, index) in paginatedItems"
+        v-for="(item, index) in filteredBlogs"
         :key="item.id"
         class="carousel-item w-full lg:w-1/3 flex-shrink-0 p-4"
       >
@@ -23,11 +23,13 @@
   </div>
 </template>
 
+
 <script lang="ts" setup>
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 
 const searchQuery = ref('');
 const blogStore = useBlogStore()
+
 const filteredBlogs = computed(() => {
   if (!blogStore.blogs) return [];
   return blogStore.blogs
@@ -37,35 +39,40 @@ const filteredBlogs = computed(() => {
         blogs.blogStatus.toLowerCase().includes(searchQuery.value.toLowerCase())
       );
     })
-    .reverse()
+    .reverse();
 });
 
 onMounted(async () => {
   await blogStore.fetchBlogs();
 });
-const itemsPerPage = 3;
-const totalPages = computed(() => Math.ceil(filteredBlogs.value.length / itemsPerPage));
 
+// Active index to control the current slide
 const activeIndex = ref(0);
 
-const paginatedItems = computed(() => filteredBlogs.value.slice(activeIndex.value * itemsPerPage, (activeIndex.value + 1) * itemsPerPage));
+// Calculate the total number of slides based on filtered blogs
+const totalItems = computed(() => filteredBlogs.value.length);
+const itemsPerPage = 1; // Slide one card at a time
+const totalPages = computed(() => Math.ceil(totalItems.value / itemsPerPage));
 
+// Move to the next slide
 const nextSlide = () => {
-  if (activeIndex.value < totalPages.value - 1) {
+  if (activeIndex.value < totalItems.value - 1) {
     activeIndex.value++;
   } else {
-    activeIndex.value = 0;
+    activeIndex.value = 0; // Reset to the first slide if at the end
   }
 };
 
+// Move to the previous slide
 const prevSlide = () => {
   if (activeIndex.value > 0) {
     activeIndex.value--;
   } else {
-    activeIndex.value = totalPages.value - 1;
+    activeIndex.value = totalItems.value - 1; // Go to the last slide if at the beginning
   }
 };
 </script>
+
 
 <style scoped>
 .carousel-container {

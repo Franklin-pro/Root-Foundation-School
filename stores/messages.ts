@@ -18,26 +18,16 @@ export const useMessageStore = defineStore('messages', () => {
 
   const fetchMessages = async () => {
     try {
-      const response = await axios.get<ApiResponse<Message[]>>('http://localhost:3030/v1/messages');
+      const response = await axios.get<ApiResponse<Message[]>>('https://root-found-bn.onrender.com/v1/messages');
       messages.value = response.data.datas;
     } catch (error) {
       console.error('Failed to fetch messages', error);
     }
   };
 
-  // const fetchMessage = async (id: string): Promise<Message> => {
-  //   try {
-  //     const response = await axios.get<ApiResponse<Message>>(`http://localhost:3030/v1/messages/${id}`);
-  //     return response.data.datas;
-  //   } catch (error) {
-  //     console.error('Failed to fetch message', error);
-  //     throw error;
-  //   }
-  // };
-
   const createMessage = async (data: MessageFormState) => {
     try {
-      const response = await axios.post<ApiResponse<Message>>('http://localhost:3030/v1/messages', data);
+      const response = await axios.post<ApiResponse<Message>>('https://root-found-bn.onrender.com/v1/messages', data);
       messages.value.push(response.data.datas);
       alert(response.data.message);
     } catch (error) {
@@ -46,7 +36,7 @@ export const useMessageStore = defineStore('messages', () => {
   };
   const createChat = async (data: ChatFormState) => {
     try {
-      const response = await axios.post<ApiResponse<Chat>>('http://localhost:3030/v1/chats', data);
+      const response = await axios.post<ApiResponse<Chat>>('https://root-found-bn.onrender.com/v1/chats', data);
       chats.value.push(response.data.datas);
       alert(response.data.message);
     } catch (error) {
@@ -56,7 +46,7 @@ export const useMessageStore = defineStore('messages', () => {
 
   const fetchChats = async () => {
     try {
-      const response = await axios.get<ApiResponse<Chat[]>>('http://localhost:3030/v1/chats');
+      const response = await axios.get<ApiResponse<Chat[]>>('https://root-found-bn.onrender.com/v1/chats');
       chats.value = response.data.datas;
     } catch (error) {
       console.error('Failed to fetch messages', error);
@@ -64,7 +54,7 @@ export const useMessageStore = defineStore('messages', () => {
   };
   const deleteChat = async (id: string) => {
     try {
-      const response = await axios.delete<ApiResponse<null>>(`http://localhost:3030/v1/chats/${id}`);
+      const response = await axios.delete<ApiResponse<null>>(`https://root-found-bn.onrender.com/v1/chats/${id}`);
       chats.value = chats.value.filter(message => message.id !== id);
       alert(response.data.message);
     } catch (error) {
@@ -72,24 +62,9 @@ export const useMessageStore = defineStore('messages', () => {
     }
   };
 
-  // Update an existing message by ID
-  // const updateMessage = async (id: string, data: MessageFormState) => {
-  //   try {
-  //     const response = await axios.put<ApiResponse<Message>>(`http://localhost:3030/v1/messages/${id}`, data);
-  //     const index = messages.value.findIndex(message => message.id === id);
-  //     if (index !== -1) {
-  //       messages.value[index] = response.data.data;
-  //     }
-  //     alert(response.data.message);
-  //   } catch (error) {
-  //     console.error('Failed to update message', error);
-  //   }
-  // };
-
-  
   const deleteMessage = async (id: string) => {
     try {
-      const response = await axios.delete<ApiResponse<null>>(`http://localhost:3030/v1/messages/${id}`);
+      const response = await axios.delete<ApiResponse<null>>(`https://root-found-bn.onrender.com/v1/messages/${id}`);
       messages.value = messages.value.filter(message => message.id !== id);
       alert(response.data.message);
     } catch (error) {

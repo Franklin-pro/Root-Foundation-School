@@ -1,7 +1,7 @@
 <template>
   <div class="p-5">
     <div class="flex items-center justify-between py-5">
-      <h1 class="font-bold text-2xl text-primary">Blogs List</h1>
+      <h1 class="font-bold text-5xl text-primary">Blogs List</h1>
       <UTooltip text="search member...">
         <UInput
         icon="i-heroicons-magnifying-glass-20-solid"
@@ -62,7 +62,8 @@
       </div>
 
       <div v-if="showForm" class="w-1/2 px-4">
-        <!-- <UpdateMember :blog="selectedMember" v-if="selectedMember" @close="closeCard" /> -->
+        <UpdateBlogs :blog="selectedMember" v-if="selectedMember" @close="closeCard"/>
+    
       </div>
     </div>
   </div>

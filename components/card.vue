@@ -65,7 +65,7 @@ onMounted(async () => {
       number: teacherCount,
       view : "veiw messages",
       path: "/Dashboard/chats"
-    },
+    }
 
   ];
 });

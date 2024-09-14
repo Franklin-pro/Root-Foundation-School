@@ -127,24 +127,27 @@ export interface Member extends UpdateMember {
     memberImage?: string;
   }
   export interface BlogImage {
-    url:string;
+    url: string;
   }
+  
   export interface Blogs {
-    _id:string;
+    _id: string;
     id: string;
     blogName: string;
     blogDescription: string;
     blogStatus: string;
-    url:string;
-    blogImage?: BlogImage; 
+    url: string;
+    blogImage?: BlogImage | undefined; // Optional BlogImage object
   }
+  
   export interface BlogFormState {
     blogName: string;
     blogDescription: string;
     blogStatus: string;
-    url:string;
-    blogImage: File | null;
+    url: string;
+    blogImage: File | null; // blogImage is for handling the file upload
   }
+  
   export interface UpdateBlog {
     id: string;
     blogName: string;
