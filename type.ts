@@ -109,7 +109,7 @@ export interface UpdateMember {
   email: string;
   course: string;
   role: string;
-  memberImage?: File | string; 
+  memberImage?:BlogImage | undefined;
 }
 
 export interface Member extends UpdateMember {
@@ -124,7 +124,7 @@ export interface Member extends UpdateMember {
     course: string;
     role: string;
     url:string;
-    memberImage?: string;
+    memberImage?:BlogImage | undefined;
   }
   export interface BlogImage {
     url: string;

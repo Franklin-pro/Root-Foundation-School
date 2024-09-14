@@ -61,7 +61,7 @@ const member = ref<Member>({
   url:'',
   course: '',
   email: '',
-  memberImage:''
+  memberImage:undefined
 });
 
 watch(() => props.member, (newMember) => {

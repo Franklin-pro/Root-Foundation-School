@@ -87,11 +87,15 @@
                                 </div>
                             </div>
 
-                            <div class="sm:col-span-2">
-                                <button type="submit" class="inline-flex items-center justify-center w-full px-4 py-4 mt-2 text-base font-semibold text-white transition-all duration-200 bg-blue-600 border border-transparent rounded-md focus:outline-none hover:bg-blue-700 focus:bg-blue-700">
-                                    Send
+                            <div>
+                                <div class="sm:col-span-2">
+                                <button :loading="isLoading" :disabled="isLoading" type="submit" class="inline-flex items-center justify-center w-full px-4 py-4 mt-2 text-base font-semibold text-white transition-all duration-200 bg-blue-600 border border-transparent rounded-md focus:outline-none hover:bg-blue-700 focus:bg-blue-700">
+                                    <span v-if="!isLoading">Send</span>
+                                    <span v-else>Sending ...</span>
                                 </button>
                             </div>
+         
+              </div>
                         </div>
                     </form>
                 </div>
@@ -116,6 +120,7 @@
     message: '',
 
   });
+const isLoading =ref(false)
 
   const messageStore = useMessageStore();
 
@@ -134,11 +139,15 @@ const validate = (state: MessageFormState): boolean => {
       alert('Please fill in all fields.');
       return;
     }
-  
+  isLoading.value =true
     try {
       await messageStore.createMessage(state);
     } catch (error) {
       console.error('Error sending message:', error);
+    }
+    finally{
+        isLoading.value =false;
+        window.location.reload()
     }
   };
   </script>

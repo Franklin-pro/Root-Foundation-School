@@ -6,21 +6,21 @@
           <div class="flex items-center justify-between gap-5 lg:text-left py-4">
             <div>
               <h2 class="text-3xl font-bold leading-tight text-blue-500 sm:text-4xl lg:text-5xl">Our Blogs</h2>
-            <p class="max-w-xl mx-auto mt-4 text-base leading-relaxed text-gray-600 lg:mx-0">Amet minim mollit non
-              deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis.</p>
+              <p class="max-w-xl mx-auto mt-4 text-base leading-relaxed text-gray-600 lg:mx-0">Amet minim mollit non
+                deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis.</p>
             </div>
-         <div>
-          <div class="mt-2.5 relative">
-          <input type="text" name="" id="" placeholder="Search..." v-model="searchQuery"
-            class="block w-full px-4 py-4 placeholder-gray-500 transition-all duration-200 border border-gray-400 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600" />
-        </div>
-         </div>
+            <div>
+              <div class="mt-2.5 relative">
+                <input type="text" placeholder="Search..." v-model="searchQuery"
+                  class="block w-full px-4 py-4 placeholder-gray-500 transition-all duration-200 border border-gray-400 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600" />
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="  lg:max-w-full">
-          <div class="overflow-hidden grid lg:grid-cols-3 gap-4  rounded">
-            <div v-for="item in filteredBlogs" :key="item.id">
+        <div class="lg:max-w-full">
+          <div class="overflow-hidden grid lg:grid-cols-3 gap-4 rounded">
+            <div v-if="filteredBlogs.length > 0" v-for="item in filteredBlogs" :key="item.id">
               <div class="p-5 bg-white rounded-xl">
                 <div class="relative">
                   <a href="#" title="" class="block aspect-w-4 aspect-h-3">
@@ -32,12 +32,11 @@
                       class="px-4 py-2 text-xs font-semibold tracking-widest text-gray-900 uppercase bg-white rounded-full">{{ item.blogStatus }}</span>
                   </div>
                 </div>
-                <!-- <span class="block mt-6 text-sm font-semibold tracking-widest text-gray-500 uppercase"> {{ item.date }} </span> -->
                 <p class="mt-5 text-2xl font-semibold">
                   <a href="#" title="" class="text-black">{{ item.blogName }}</a>
                 </p>
                 <p class="mt-4 text-base truncate text-gray-600">{{ item.blogDescription }}</p>
-                <a href="#" title=""
+                <a :href="item._id" title=""
                   class="inline-flex items-center justify-center pb-0.5 mt-5 text-base font-semibold text-blue-600 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600">
                   Continue Reading
                   <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -48,7 +47,19 @@
                 </a>
               </div>
             </div>
-
+            <template v-else>
+              <div v-for="n in 6" :key="n" class="p-5 bg-white rounded-xl">
+                <div class="relative lg:mb-12">
+                  <USkeleton class="h-[300px] w-[400px]" :ui="{ rounded: 'rounded-md' }" />
+                </div>
+                <div class="space-y-4">
+                  <USkeleton class="h-8 w-[300px]" />
+                  <USkeleton class="h-4 w-[250px]" />
+                  <USkeleton class="h-4 w-[280px]" />
+                  <USkeleton class="h-4 w-[120px]" />
+                </div>
+              </div>
+            </template>
           </div>
         </div>
 
@@ -71,25 +82,25 @@
         </div>
       </div>
     </section>
-
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 
 const searchQuery = ref('');
-const blogStore = useBlogStore()
+const blogStore = useBlogStore();
+
 const filteredBlogs = computed(() => {
   if (!blogStore.blogs) return [];
   return blogStore.blogs
-    .filter(blogs => {
+    .filter((blog) => {
       return (
-        blogs.blogName.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-        blogs.blogStatus.toLowerCase().includes(searchQuery.value.toLowerCase())
+        blog.blogName.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
+        blog.blogStatus.toLowerCase().includes(searchQuery.value.toLowerCase())
       );
     })
-    .reverse()
+    .reverse();
 });
 
 onMounted(async () => {

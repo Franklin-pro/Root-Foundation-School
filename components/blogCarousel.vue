@@ -2,9 +2,10 @@
   <div class="carousel-container relative overflow-hidden rounded-lg">
     <div
       class="carousel-wrapper flex transition-transform duration-500"
-      :style="{ transform: `translateX(-${activeIndex * 100}%)` }" <!-- Slide by 1 card per click -->
+      :style="{ transform: `translateX(-${activeIndex * 100}%)` }" 
     >
       <div
+      v-if="filteredBlogs.length > 0"
         v-for="(item, index) in filteredBlogs"
         :key="item.id"
         class="carousel-item w-full lg:w-1/3 flex-shrink-0 p-4"
@@ -16,6 +17,19 @@
           <p class="carousel-description text-sm truncate text-gray-600">{{ item.blogDescription}}</p>
         </div>
       </div>
+      <template v-else>
+              <div v-for="n in 6" :key="n" class="p-5 bg-white rounded-xl">
+                <div class="relative lg:mb-12">
+                  <USkeleton class="h-[300px] w-[400px]" :ui="{ rounded: 'rounded-md' }" />
+                </div>
+                <div class="space-y-4">
+                  <USkeleton class="h-8 w-[300px]" />
+                  <USkeleton class="h-4 w-[250px]" />
+                  <USkeleton class="h-4 w-[280px]" />
+                  <USkeleton class="h-4 w-[120px]" />
+                </div>
+              </div>
+            </template>
     </div>
     <!-- Previous and Next buttons -->
     <UButton @click="prevSlide" icon="i-heroicons-chevron-left" class="absolute left-0 top-1/2 transform -translate-y-1/2 text-2xl p-2 text-white bg-black/30 hover:bg-black/50"/>
