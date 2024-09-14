@@ -2,13 +2,15 @@
 
   <div class="flex flex-col md:flex-row">
     <!-- Sidebar -->
-    <div class="sidebar md:w-64 w-full fixed md:h-screen h-screen shadow-xl flex flex-col justify-between"
+    <div class="sidebar md:w-64 w-full fixed md:h-screen h-screen shadow-xl px-3 py-2 flex flex-col justify-between"
       :class="colorMode === 'dark' ? 'bg-gray-600' : 'bg-gray-50'">
       <div>
         <h1 class="p-4 text-blue-600 font-extrabold text-3xl text-center md:text-center">ROOT FOUND</h1>
-        <NuxtLink to="/Member-Dashboard/member" class="bg-blue-400 text-white font-bold flex p-2 items-center gap-4">
+
+          <NuxtLink to="/Member-Dashboard/member" class="bg-blue-400 rounded-lg text-white font-bold flex p-2 items-center gap-4">
           <UIcon name="i-ic-baseline-dashboard" />Dashboard
         </NuxtLink>
+
 
         <!-- Members Dropdown -->
         <div>

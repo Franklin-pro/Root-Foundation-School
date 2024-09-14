@@ -1,13 +1,13 @@
 <template>
   <div class="flex flex-col md:flex-row">
     <div :class="colorMode === 'dark' ? 'bg-gray-700 text-white' : 'bg-gray-100 text-black'"
-      class="sidebar md:w-64 w-full fixed md:h-screen h-screen shadow-xl flex flex-col justify-between transition-colors duration-700 ease-in-out">
+      class="sidebar md:w-64 w-full fixed md:h-screen px-3 py-2 h-screen shadow-xl flex flex-col justify-between transition-colors duration-700 ease-in-out">
       <div>
         <h1
           class="p-4 text-primary font-bold text-center text-3xl md:text-left transition-colors duration-700 ease-in-out">
           ROOT FOUND</h1>
         <NuxtLink to="/Dashboard/admin"
-          class="bg-green-400 text-white font-bold flex p-2 items-center gap-4 transition-colors duration-700 ease-in-out">
+          class="bg-green-400 text-white font-bold flex p-2 rounded-lg items-center gap-4 transition-colors duration-700 ease-in-out">
           <UIcon name="i-ic-baseline-dashboard" /> Dashboard
         </NuxtLink>
         <div>
