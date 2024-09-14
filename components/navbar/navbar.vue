@@ -23,7 +23,7 @@
         <nav class="pt-4 pb-6 bg-white border border-gray-200 rounded-md shadow-md lg:hidden">
           <div v-for="item in items" class="flow-root">
             <div class="flex flex-col px-6 -my-2 space-y-1">
-              <a href="#" title=""
+              <a :href="item.path" title=""
                 class="inline-flex py-2 text-base font-medium text-black transition-all duration-200 hover:text-blue-600 focus:text-blue-600">
                 {{ item.label }} </a>
 
