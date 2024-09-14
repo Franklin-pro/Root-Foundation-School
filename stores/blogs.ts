@@ -27,7 +27,7 @@ export const useBlogStore = defineStore('blogs', () => {
 
   const fetchBlogs = async () => {
     try {
-      const response = await axios.get<ApiResponse<Blogs[]>>('https://root-foundation-school.vercel.app/v1/blogs');
+      const response = await axios.get<ApiResponse<Blogs[]>>('https://root-found-bn.onrender.com/v1/blogs');
       blogs.value = response.data.datas;
     } catch (error) {
       console.error('Failed to fetch blogs', error);
@@ -36,7 +36,7 @@ export const useBlogStore = defineStore('blogs', () => {
 
   const fetchBlog = async (id: string): Promise<Blogs> => {
     try {
-      const response = await axios.get<ApiResponse<Blogs>>(`https://root-foundation-school.vercel.app/v1/blogs/${id}`);
+      const response = await axios.get<ApiResponse<Blogs>>(`http://localhost:3030/v1/blogs/${id}`);
      
       return response.data.datas; 
     } catch (error) {
