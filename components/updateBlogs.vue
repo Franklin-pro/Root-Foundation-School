@@ -16,17 +16,17 @@
 
           <div class="grid gap-3 lg:grid-cols-2 pb-6">
             <div class="mt-2.5 relative">
-              <input type="text" name="" id="" placeholder="userName" v-model="blogs.blogName"
+              <input type="text" name="" id="" placeholder="Blog Name" v-model="blogs.blogName"
                 class="block w-full p-3 placeholder-gray-500 transition-all duration-200 border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600" />
             </div>
             <div class="mt-2.5 relative">
-              <input type="text" name="" id="" placeholder="Role" v-model="blogs.blogStatus"
+              <input type="text" name="" id="" placeholder="Blog Status" v-model="blogs.blogStatus"
                 class="block w-full p-3 placeholder-gray-500 transition-all duration-200 border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600" />
             </div>
             <div class="sm:col-span-2">
               <label for="" class="text-base font-medium text-gray-900"> Message </label>
               <div class="mt-2.5 relative">
-                <textarea name="" id="" placeholder="Message..." v-model="blogs.blogDescription"
+                <textarea name="" id="" placeholder="Blog Description ..." v-model="blogs.blogDescription"
                   class="block w-full px-4 py-4 placeholder-gray-500 transition-all duration-200 border border-gray-200 rounded-md resize-y focus:outline-none focus:border-blue-600 caret-blue-600"
                   rows="4"></textarea>
               </div>

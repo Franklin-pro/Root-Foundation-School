@@ -29,7 +29,7 @@ export const useMessageStore = defineStore('messages', () => {
     try {
       const response = await axios.post<ApiResponse<Message>>('https://root-found-bn.onrender.com/v1/messages', data);
       messages.value.push(response.data.datas);
-      alert(response.data.message);
+      // alert(response.data.message);
     } catch (error) {
       console.error('Failed to create message', error);
     }

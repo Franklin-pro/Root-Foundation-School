@@ -11,11 +11,9 @@
           <UIcon name="i-ic-baseline-dashboard" />Dashboard
         </NuxtLink>
 
-
-        <!-- Members Dropdown -->
         <div>
           <div @click="toggleDropdown" class="cursor-pointer duration-500 py-2">
-            <span class="font-semibold py-1 px-2 flex items-center justify-between w-full hover:bg-gray-300">
+            <span class="font-semibold py-1 px-2 flex rounded-lg duration-500 items-center justify-between w-full hover:bg-gray-500">
               <span class="flex items-center gap-4">
                 <UIcon name="heroicons-user-group" /> Create Students
               </span>
@@ -40,7 +38,7 @@
         <!-- Students Dropdown -->
         <div>
           <div @click="toggleDrop" class="cursor-pointer duration-300 py-2">
-            <span class="font-semibold py-1 px-2 flex items-center justify-between w-full hover:bg-gray-300">
+            <span class="font-semibold py-1 px-2 flex rounded-lg duration-500 items-center justify-between w-full hover:bg-gray-500">
               <span class="flex items-center gap-4">
                 <UIcon name="i-ic-baseline-people-alt" />View Students
               </span>
@@ -61,12 +59,12 @@
             </NuxtLink>
           </ul>
         </div>
-        <NuxtLink :to="`/member-dashboard/Profile/${memberId}`"
-          class="font-semibold flex p-2 items-center gap-4 hover:bg-blue-200">
-          <UIcon name="i-ic-round-person-2" /> Profile
-        </NuxtLink>
-        <NuxtLink :to="`/member-dashboard/chats/`" class="font-semibold flex p-2 items-center gap-4 hover:bg-blue-200">
+        <NuxtLink :to="`/member-dashboard/chats/`" class="font-semibold rounded-lg duration-500 flex p-2 items-center gap-4 hover:bg-gray-500">
           <UIcon name="i-heroicons-chat-bubble-oval-left-ellipsis" /> Chats
+        </NuxtLink>
+        <NuxtLink :to="`/member-dashboard/Profile/${memberId}`"
+          class="font-semibold flex p-2 items-center rounded-lg duration-500 gap-4 hover:bg-gray-500">
+          <UIcon name="i-ic-round-person-2" /> Profile
         </NuxtLink>
       </div>
 

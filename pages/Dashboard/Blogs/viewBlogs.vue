@@ -4,21 +4,19 @@
       <h1 class="font-bold text-5xl text-primary">Blogs List</h1>
       <UTooltip text="search member...">
         <UInput
-        icon="i-heroicons-magnifying-glass-20-solid"
-        size="xl"
-        color="white"
-        :trailing="false"
-        placeholder="Search..."
-        v-model="searchQuery"
-      />
+          icon="i-heroicons-magnifying-glass-20-solid"
+          size="xl"
+          color="white"
+          :trailing="false"
+          placeholder="Search..."
+          v-model="searchQuery"
+        />
       </UTooltip>
-        <button class=" w-[20%] bg-orange-500 text-white py-2 rounded hover:bg-orange-600">
-          <UTooltip text="create new member">
-            <a href="/Dashboard/Blogs/createBlogs">Create New</a>
-          </UTooltip>
-
-        </button>
-
+      <button class="w-[20%] bg-orange-500 text-white py-2 rounded hover:bg-orange-600">
+        <UTooltip text="create new member">
+          <a href="/Dashboard/Blogs/createBlogs">Create New</a>
+        </UTooltip>
+      </button>
     </div>
 
     <div class="flex gap-4" :class="{ 'flex-col': !showForm, 'flex-row': showForm }">
@@ -26,7 +24,12 @@
         <UCard>
           <UTable :columns="columns" :rows="paginatedMembers">
             <template #memberImage-data="{ row }">
-              <img :src="row.memberImage.url" alt="Product Image" class="h-10 w-10 object-cover rounded-full" />
+              <img :src="row.memberImage.url" alt="Blog Image" class="h-10 w-10 object-cover rounded-full" />
+            </template>
+
+            <!-- Blog Description with Tailwind truncate class -->
+            <template #blogDescription-data="{ row }">
+              <span class="truncate block w-48">{{ row.blogDescription }}</span>
             </template>
 
             <template #actions-data="{ row }">
@@ -35,39 +38,24 @@
               </UDropdown>
             </template>
           </UTable>
+
           <div class="flex justify-between items-center mt-4">
-
-     
-          <span class="text-gray-500">Page {{ currentPage }} of {{ totalPages }}</span>
-          <div class="flex gap-3 items-center">
-              <UButton
-            @click="prevPage"
-            :disabled="currentPage === 1"
-            class="px-4 py-2 bg-gray-300 rounded-md"
-            icon="i-heroicons-chevron-left"
-            color="orange"
-          />
-
-          <UButton
-            @click="nextPage"
-            :disabled="currentPage === totalPages"
-            class="px-4 py-2 bg-gray-300 rounded-md"
-          icon="i-heroicons-chevron-right"
-          color="orange"
-          />
+            <span class="text-gray-500">Page {{ currentPage }} of {{ totalPages }}</span>
+            <div class="flex gap-3 items-center">
+              <UButton @click="prevPage" :disabled="currentPage === 1" class="px-4 py-2 bg-gray-300 rounded-md" icon="i-heroicons-chevron-left" color="orange" />
+              <UButton @click="nextPage" :disabled="currentPage === totalPages" class="px-4 py-2 bg-gray-300 rounded-md" icon="i-heroicons-chevron-right" color="orange" />
             </div>
-        </div>
+          </div>
         </UCard>
-    
       </div>
 
       <div v-if="showForm" class="w-1/2 px-4">
-        <UpdateBlogs :blog="selectedMember" v-if="selectedMember" @close="closeCard"/>
-    
+        <UpdateBlogs :blog="selectedMember" v-if="selectedMember" @close="closeCard" />
       </div>
     </div>
   </div>
 </template>
+
 
 <script lang="ts" setup>
 import { ref, computed, onMounted } from 'vue';

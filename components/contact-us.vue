@@ -49,7 +49,7 @@
             <div class="mt-6 overflow-hidden bg-white rounded-xl">
                 <div class="px-6 py-12 sm:p-12">
                     <h3 class="text-3xl font-semibold  text-center text-gray-900">Send us a message</h3>
-
+                    <h2 class="text-xl text-green-600">{{ alertMessage }}</h2>
                     <form @submit.prevent="onSubmit" class="mt-14">
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-4">
                             <div>
@@ -121,7 +121,7 @@
 
   });
 const isLoading =ref(false)
-
+const alertMessage = ref()
   const messageStore = useMessageStore();
 
 const validate = (state: MessageFormState): boolean => {
@@ -142,12 +142,16 @@ const validate = (state: MessageFormState): boolean => {
   isLoading.value =true
     try {
       await messageStore.createMessage(state);
+      alertMessage.value="message sent"
+      setTimeout(()=>{
+        alertMessage.value=null
+      },3000)
+      window.location.reload()
     } catch (error) {
       console.error('Error sending message:', error);
     }
     finally{
         isLoading.value =false;
-        window.location.reload()
     }
   };
   </script>

@@ -12,10 +12,10 @@
                             <h1 class="text-4xl font-bold text-black sm:text-6xl xl:text-7xl">with Our <br />Root Foundation</h1>
                             <p class="mt-6 text-base text-black sm:text-xl">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque, culpa rem autem doloremque exercitationem eius, quasi animi, iusto at dolores voluptas.</p>
                             <div class="">
-                                <button  type="submit" class="inline-flex items-center justify-center px-4 py-4 mt-2 text-base font-semibold text-white transition-all duration-200 bg-blue-600 border border-transparent rounded-md focus:outline-none hover:bg-blue-700 focus:bg-blue-700">
+                                <UButton to="/contacts" type="submit" class="inline-flex items-center justify-center px-4 py-4 mt-2 text-base font-semibold text-white transition-all duration-200 bg-blue-600 border border-transparent rounded-md focus:outline-none hover:bg-blue-700 focus:bg-blue-700">
                                    Let's Work Together
                                   
-                                </button>
+                                </UButton>
                             </div>
                         </div>
 

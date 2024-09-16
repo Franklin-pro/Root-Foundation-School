@@ -138,7 +138,7 @@ export const useMemberStore = defineStore('members', () => {
         if (result.data?.user) {
           setUser(result.data.user);
 
-          alert('Login successful ✔️');
+          // alert('Login successful ✔️');
 
           const redirectPath = result.data.user.role === 'admin' ? '/Dashboard/admin/' : '/member-dashboard/member';
           await router.replace(redirectPath);
@@ -150,7 +150,7 @@ export const useMemberStore = defineStore('members', () => {
         throw new Error('Token not found in response');
       }
     } catch (error) {
-      alert('Login failed. Please check your credentials and try again. ❌');
+      // alert('Login failed. Please check your credentials and try again. ❌');
     }
   };
 

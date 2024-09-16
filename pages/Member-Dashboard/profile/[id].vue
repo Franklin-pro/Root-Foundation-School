@@ -1,11 +1,10 @@
 <template>
   <div>
     <div>
-      <h1 class="font-black pb-5 text-3xl text-primary"> Profile Setting</h1>
+      <h1 class="font-black pb-5 text-3xl text-blue-500"> Profile Setting</h1>
     </div>
-    <div class="flex items-center justify-center w-full">
-      <div class="w-[50%]">
-        <UCard>
+    <div class="flex items-center py-7 justify-center w-full">
+      <div class="w-[70%]">
           <div class=" flex justify-center flex-col items-center">
             <div class="relative flex justify-center items-center">
               <UChip position="bottom-right" size="2xl" class="absolute bottom-3 right-3" >
@@ -18,19 +17,20 @@
 
             <h1 class="py-2 font-semibold text-orange-400 text-xl">{{ member?.userName }}</h1>
           </div>
-          <div class="flex gap-4 mb-3 p-4 border border-gray-500 rounded-xl justify-between">
-            <div class="text-xl font-semibold text-primary">Email Address:</div>
+          <hr>
+          <div class="flex gap-4 mb-3 p-4 rounded-xl justify-between">
+            <div class="text-xl font-semibold text-blue-500">Email Address:</div>
+            <hr>
             <div class="text-xl font-light">{{ member?.email }}</div>
           </div>
-          <div class="flex gap-4 mb-4 p-4 border border-gray-500 rounded-xl justify-between">
-            <div class="text-xl font-semibold text-primary">Username:</div>
+          <div class="flex gap-4 mb-4 p-4 rounded-xl justify-between">
+            <div class="text-xl font-semibold text-blue-500">Username:</div>
             <div class="text-xl font-light">{{ member?.userName }}</div>
           </div>
-          <div class="flex mb-4 gap-4 border border-gray-500 rounded-xl p-4 justify-between">
-            <div class="text-xl font-semibold text-primary">Role:</div>
+          <div class="flex mb-4 gap-4 rounded-xl p-4 justify-between">
+            <div class="text-xl font-semibold text-blue-500">Role:</div>
             <div class="text-xl font-light">{{ member?.role }}</div>
           </div>
-        </UCard>
       </div>
     </div>
   </div>

@@ -14,7 +14,7 @@
           <div @click="toggleDropdown" class="cursor-pointer py-2">
             <span
               class="font-semibold py-1 px-2 flex items-center justify-between w-full transition-colors duration-700 ease-in-out"
-              :class="colorMode === 'light' ? 'hover:bg-gray-200' : 'hover:bg-gray-500'">
+              :class="colorMode === 'light' ? 'hover:bg-gray-200 rounded-lg' : 'hover:bg-gray-500'">
               <span class="flex items-center gap-4">
                 <UIcon name="heroicons-user-group" /> Members
               </span>
@@ -43,7 +43,7 @@
           <div @click="toggleDrop" class="cursor-pointer py-2">
             <span
               class="font-semibold py-1 px-2 flex items-center justify-between w-full transition-colors duration-700 ease-in-out"
-              :class="colorMode === 'light' ? 'hover:bg-gray-200' : 'hover:bg-gray-500'">
+              :class="colorMode === 'light' ? 'hover:bg-gray-200 rounded-lg' : 'hover:bg-gray-500'">
               <span class="flex items-center gap-4">
                 <UIcon name="i-ic-baseline-people-alt" /> Students
               </span>
@@ -67,7 +67,7 @@
           <div @click="toggleDroping" class="cursor-pointer py-2">
             <span
               class="font-semibold py-1 px-2 flex items-center justify-between w-full transition-colors duration-700 ease-in-out"
-              :class="colorMode === 'light' ? 'hover:bg-gray-200' : 'hover:bg-gray-500'">
+              :class="colorMode === 'light' ? 'hover:bg-gray-200 rounded-lg' : 'hover:bg-gray-500'">
               <span class="flex items-center gap-4">
                 <UIcon name="i-heroicons-chat-bubble-oval-left-ellipsis" /> Messages
               </span>
@@ -99,7 +99,7 @@
           <div @click="toggleBlogs" class="cursor-pointer py-2">
             <span
               class="font-semibold py-1 px-2 flex items-center justify-between w-full transition-colors duration-700 ease-in-out"
-              :class="colorMode === 'light' ? 'hover:bg-gray-200' : 'hover:bg-gray-500'">
+              :class="colorMode === 'light' ? 'hover:bg-gray-200 rounded-lg' : 'hover:bg-gray-500'">
               <span class="flex items-center gap-4">
                 <UIcon name="i-heroicons-chat-bubble-left-ellipsis" /> Blogs
               </span>
@@ -122,13 +122,13 @@
               class="py-1 px-4 hover:text-primary flex justify-between items-center gap-3 transition-colors duration-700 ease-in-out">
               <span class="flex items-center gap-3">
                 <UIcon name="i-heroicons-chat-bubble-left-ellipsis" />View Blogs
-              </span><span class="bg-orange-500 px-1.5 rounded-full text-sm">{{ messageStore.messages.length }}</span>
+              </span><span class="bg-orange-500 px-1.5 rounded-full text-sm">{{ blogStore.blogs.length }}</span>
             </NuxtLink>
           </ul>
         </div>
         <NuxtLink :to="`/Dashboard/Profile/${memberId}`"
           class="font-semibold flex p-2 items-center gap-4 transition-colors duration-700 ease-in-out"
-          :class="colorMode === 'light' ? 'hover:bg-gray-200' : 'hover:bg-gray-500'">
+          :class="colorMode === 'light' ? 'hover:bg-gray-200 rounded-lg' : 'hover:bg-gray-500'">
           <UIcon name="i-ic-round-person-2" /> Profile
         </NuxtLink>
       </div>
@@ -200,6 +200,7 @@ const dropdownBlog = ref(false)
 
 const memberStore = useMemberStore()
 const messageStore = useMessageStore()
+const blogStore = useBlogStore()
 const memberId = ref<string>('')
 
 const isClient = typeof window !== 'undefined'

@@ -7,7 +7,8 @@
             <h2 class="text-3xl font-bold leading-tight text-blue-500 sm:text-4xl">Login to Your Account</h2>
             <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
           </div>
-
+          <span class="text-red-500">{{ errorMesage}}</span>
+          <span class="text-green-500">{{ successMessage}}</span>
           <UForm :validate="validate" :state="state" class="space-y-4" @submit="onSubmit">
             <div class="space-y-5">
               <div>
@@ -67,6 +68,8 @@ const state = reactive({
 });
 
 const isLoading = ref(false);
+const errorMesage = ref()
+const successMessage = ref()
 
 const validate = (state: any): FormError[] => {
   const errors = [];
@@ -89,7 +92,17 @@ async function onSubmit(event: FormSubmitEvent<any>) {
   isLoading.value = true;
 
   try {
-    await memberStore.login({ email: state.email, password: state.password, userName: state.userName });
+  if (  await memberStore.login({ email: state.email, password: state.password, userName: state.userName })) {
+      successMessage.value = "Login successful ✔️";
+      setTimeout(()=>{
+        successMessage.value=null
+      },3000)
+  } else {
+    errorMesage.value = "fail to login plz check your cridential and try again ❌";
+    setTimeout(()=>{
+        errorMesage.value=null
+      },3000)
+  }
 
   } catch (error) {
     console.error('Login failed:', error);
